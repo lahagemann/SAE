@@ -42,13 +42,15 @@ public class ValidateLoginServlet extends HttpServlet {
             Employee user = service.login(email, password);
             if(user instanceof Admin) {
                 HttpSession session = request.getSession();
-                session.setAttribute("user", user);
+                session.setAttribute("userID", user.getIdentifier());
+                session.setAttribute("userRoomID", user.getWorkRoomID());
                 session.setAttribute("name", user.getName());
                 session.setAttribute("isAdmin", true);
                 request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);
             } else if(user instanceof Employee) {
                 HttpSession session = request.getSession();
-                session.setAttribute("user", user);
+                session.setAttribute("userID", user.getIdentifier());
+                session.setAttribute("userRoomID", user.getWorkRoomID());
                 session.setAttribute("name", user.getName());
                 session.setAttribute("isAdmin", false);
                 request.getRequestDispatcher("/EmployeeHome.jsp").forward(request, response);

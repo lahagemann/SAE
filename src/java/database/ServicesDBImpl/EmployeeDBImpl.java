@@ -206,25 +206,38 @@ public class EmployeeDBImpl implements EmployeeDB {
 		connect();
 		resultset = statement.executeQuery(query);
 		resultset.next();
+                
+                String name = resultset.getString("name");
+		int identifier = resultset.getInt("identifier"); 
+		String cpf = resultset.getString("cpf");
+		String mail = resultset.getString("email");
+		String password = resultset.getString("password");
+		int room = resultset.getInt("idRoom");
+		int isAdmin = resultset.getInt("isAdmin");
+                
+                if(isAdmin == 0)
+                    employee = new Employee(name, identifier, cpf, mail, password, room, isAdmin);
+                else
+                    employee = new Admin(name, identifier, cpf, mail, password, room, isAdmin);
 
-		if(resultset.getInt("isAdmin") == 0){
-			employee = new Employee(resultset.getString("name"),
-					resultset.getInt("identifier"), 
-					resultset.getString("cpf"),
-					resultset.getString("email"),
-					resultset.getString("password"),
-					resultset.getInt("idRoom"),
-					resultset.getInt("isAdmin"));
-		}
-		else{
-			employee = new Admin(resultset.getString("name"),
-					resultset.getInt("identifier"), 
-					resultset.getString("cpf"),
-					resultset.getString("email"),
-					resultset.getString("password"),
-					resultset.getInt("idRoom"),
-					resultset.getInt("isAdmin"));
-		}
+//		if(resultset.getInt("isAdmin") == 0){
+//			employee = new Employee(resultset.getString("name"),
+//					resultset.getInt("identifier"), 
+//					resultset.getString("cpf"),
+//					resultset.getString("email"),
+//					resultset.getString("password"),
+//					resultset.getInt("idRoom"),
+//					resultset.getInt("isAdmin"));
+//		}
+//		else{
+//			employee = new Admin(resultset.getString("name"),
+//					resultset.getInt("identifier"), 
+//					resultset.getString("cpf"),
+//					resultset.getString("email"),
+//					resultset.getString("password"),
+//					resultset.getInt("idRoom"),
+//					resultset.getInt("isAdmin"));
+//		}
 
 		disconnect();
 

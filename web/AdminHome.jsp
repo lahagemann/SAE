@@ -4,6 +4,7 @@
     Author     : Luiza
 --%>
 
+<%@page import="application.Domain.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,7 +37,7 @@
         <br>
         <br>
 
-        <h2 align="center">Olá, <%= session.getAttribute("name")%></h2>
+        <h2 align="center">Olá, <%= session.getAttribute("name")%> <%= (Integer) session.getAttribute("userID") %> </h2>
 
         <!-- /container -->
         <div class="container">

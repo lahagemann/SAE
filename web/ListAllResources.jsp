@@ -4,6 +4,7 @@
     Author     : Luiza
 --%>
 
+<%@page import="application.Domain.Employee"%>
 <%@page import="application.Impl.AdminServiceImpl"%>
 <%@page import="application.Interface.AdminService"%>
 <%@page import="application.Domain.Room"%>

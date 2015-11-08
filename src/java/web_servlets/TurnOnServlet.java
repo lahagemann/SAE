@@ -37,7 +37,7 @@ public class TurnOnServlet extends HttpServlet{
         String id = request.getParameter("id");
         AdminService service = new AdminServiceImpl();
         try {
-            service.turnOnResource(Integer.parseInt(id),e.getIdentifier());            
+            service.turnOnResource(Integer.parseInt(id),6);            
         } catch (SQLException s) {
             s.printStackTrace();
         } catch (ConnectionException s) {
