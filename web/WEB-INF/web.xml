@@ -6,7 +6,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>AdminHome.jsp</welcome-file>
+        <welcome-file>Login.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>turn_on</servlet-name>
@@ -55,5 +55,13 @@
     <servlet-mapping>
         <servlet-name>manage_resource</servlet-name>
         <url-pattern>/manage_resource</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>list_resources</servlet-name>
+        <servlet-class>web_servlets.AdminListAllResourcesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>list_resources</servlet-name>
+        <url-pattern>/list_resources</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -46,8 +46,7 @@
         <br>
         
         <%
-            AdminService service = new AdminServiceImpl();
-            List<Room> rooms = service.listAllRooms();
+            List<Room> rooms = (List<Room>) request.getAttribute("roomList");
         %>
         
         <% for(Room room : rooms) { %>

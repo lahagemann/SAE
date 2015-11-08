@@ -51,8 +51,8 @@
                                 <button type="button" class="btn btn-danger" id="btn"><b>Meu consumo</b></button>
                             </td>
                             <td>
-                                <form action="ListAllResources.jsp">
-                                    <input type="submit" class="btn btn-danger" id="btn" value="Ligar/Desligar recurso">
+                                <form method="post" action="./list_resources">
+                                    <button type="submit" class="btn btn-warning" id="btn"><b>Ligar/Desligar recurso</b></button>
                                 </form>
                             </td>
                         </tr>
@@ -61,7 +61,10 @@
                                 <button type="button" class="btn btn-danger" id="btn"><b>Gerar relatório de consumo do dia</b></button>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" id="btn"><b>Ações personalizadas</b></button>
+                                <form action="ManageCustomAction.jsp">
+                                    <button type="submit" class="btn btn-danger" id="btn"><b>Ações personalizadas</b></button>
+                                </form>
+                                
                             </td>
                         </tr>
                         <tr>
