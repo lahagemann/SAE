@@ -37,7 +37,7 @@
         <br>
         <br>
 
-        <h2 align="center">Olá, <%= session.getAttribute("name")%> <%= (Integer) session.getAttribute("userID") %> </h2>
+        <h2 align="center">Olá, ${name}</h2>
 
         <!-- /container -->
         <div class="container">

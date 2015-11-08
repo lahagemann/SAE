@@ -134,26 +134,22 @@ public class EmployeeDBImpl implements EmployeeDB {
 		connect();
 		resultset = statement.executeQuery(query);
 		resultset.next();
-		if(resultset.getInt("isAdmin") == 0){
-			aux = new Employee(resultset.getString("name"),
-					resultset.getInt("identifier"), 
-					resultset.getString("cpf"),
-					resultset.getString("email"),
-					resultset.getString("password"),
-					resultset.getInt("idRoom"),
-					resultset.getInt("isAdmin"));
-		}
-		else{
-			aux = new Admin(resultset.getString("name"),
-					resultset.getInt("identifier"), 
-					resultset.getString("cpf"),
-					resultset.getString("email"),
-					resultset.getString("password"),
-					resultset.getInt("idRoom"),
-					resultset.getInt("isAdmin"));
-
-		}
-		disconnect();
+                
+                String name = resultset.getString("name");
+		int identifier = resultset.getInt("identifier"); 
+		String cpf = resultset.getString("cpf");
+		String email = resultset.getString("email");
+		String password = resultset.getString("password");
+		int room = resultset.getInt("idRoom");
+		int isAdmin = resultset.getInt("isAdmin");
+                
+                
+                if(isAdmin == 0)
+                    aux = new Employee(name, identifier, cpf, email, password, room, isAdmin);
+                else
+                    aux = new Admin(name, identifier, cpf, email, password, room, isAdmin);
+		
+                disconnect();
 
 		return aux;
 
@@ -168,27 +164,22 @@ public class EmployeeDBImpl implements EmployeeDB {
 		connect();
 		resultset = statement.executeQuery(query);
 		resultset.next();
+                
+                String name = resultset.getString("name");
+		int identifier = resultset.getInt("identifier"); 
+		String cpf = resultset.getString("cpf");
+		String email = resultset.getString("email");
+		String password = resultset.getString("password");
+		int room = resultset.getInt("idRoom");
+		int isAdmin = resultset.getInt("isAdmin");
 
 		while (resultset.next()) {
 			Employee aux;
-			if(resultset.getInt("isAdmin") == 0){
-				aux = new Employee(resultset.getString("name"),
-						resultset.getInt("identifier"), 
-						resultset.getString("cpf"),
-						resultset.getString("email"),
-						resultset.getString("password"),
-						resultset.getInt("idRoom"),
-						resultset.getInt("isAdmin"));
-			}
-			else{
-				aux = new Admin(resultset.getString("name"),
-						resultset.getInt("identifier"), 
-						resultset.getString("cpf"),
-						resultset.getString("email"),
-						resultset.getString("password"),
-						resultset.getInt("idRoom"),
-						resultset.getInt("isAdmin"));
-			}
+			if(isAdmin == 0)
+                            aux = new Employee(name, identifier, cpf, email, password, room, isAdmin);
+			else
+                            aux = new Admin(name, identifier, cpf, email, password, room, isAdmin);
+                        
 			results.add(aux);
 		}
 		disconnect();
@@ -219,25 +210,6 @@ public class EmployeeDBImpl implements EmployeeDB {
                     employee = new Employee(name, identifier, cpf, mail, password, room, isAdmin);
                 else
                     employee = new Admin(name, identifier, cpf, mail, password, room, isAdmin);
-
-//		if(resultset.getInt("isAdmin") == 0){
-//			employee = new Employee(resultset.getString("name"),
-//					resultset.getInt("identifier"), 
-//					resultset.getString("cpf"),
-//					resultset.getString("email"),
-//					resultset.getString("password"),
-//					resultset.getInt("idRoom"),
-//					resultset.getInt("isAdmin"));
-//		}
-//		else{
-//			employee = new Admin(resultset.getString("name"),
-//					resultset.getInt("identifier"), 
-//					resultset.getString("cpf"),
-//					resultset.getString("email"),
-//					resultset.getString("password"),
-//					resultset.getInt("idRoom"),
-//					resultset.getInt("isAdmin"));
-//		}
 
 		disconnect();
 

@@ -32,12 +32,11 @@ public class TurnOnServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Employee e = (Employee) session.getAttribute("user");
         
         String id = request.getParameter("id");
         AdminService service = new AdminServiceImpl();
         try {
-            service.turnOnResource(Integer.parseInt(id),6);            
+            service.turnOnResource(Integer.parseInt(id),(int) session.getAttribute("userID"));            
         } catch (SQLException s) {
             s.printStackTrace();
         } catch (ConnectionException s) {
