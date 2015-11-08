@@ -46,7 +46,8 @@
         <br>
         
         <%
-            List<Room> rooms = (List<Room>) request.getAttribute("roomList");
+            AdminService service = new AdminServiceImpl();
+            List<Room> rooms = service.listAllRooms();
         %>
         
         <% for(Room room : rooms) { %>
@@ -68,7 +69,7 @@
                         <%  for(Resource r : room.getResourceList()) { %>
                             <tr>
                                 <td>
-                                    <%= r.getName() %>
+                                    <%= r.getName() %> 
                                 </td>
                                 <td>
                                     <%= r.getType() %>

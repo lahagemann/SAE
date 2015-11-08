@@ -5,6 +5,7 @@
  */
 package web_servlets;
 
+import application.Domain.Employee;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
 import application.Interface.LicenceException;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,11 +31,13 @@ public class TurnOnServlet extends HttpServlet{
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        Employee e = (Employee) session.getAttribute("user");
+        
         String id = request.getParameter("id");
         AdminService service = new AdminServiceImpl();
         try {
-            service.turnOnResource(Integer.parseInt(id),1);
+            service.turnOnResource(Integer.parseInt(id),e.getIdentifier());            
         } catch (SQLException s) {
             s.printStackTrace();
         } catch (ConnectionException s) {
