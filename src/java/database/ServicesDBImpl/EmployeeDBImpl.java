@@ -162,19 +162,17 @@ public class EmployeeDBImpl implements EmployeeDB {
 		String query = "SELECT * FROM employee WHERE idRoom = " + idroom + ";";
 
 		connect();
-		resultset = statement.executeQuery(query);
-		resultset.next();
-                
-                String name = resultset.getString("name");
-		int identifier = resultset.getInt("identifier"); 
-		String cpf = resultset.getString("cpf");
-		String email = resultset.getString("email");
-		String password = resultset.getString("password");
-		int room = resultset.getInt("idRoom");
-		int isAdmin = resultset.getInt("isAdmin");
+		resultset = statement.executeQuery(query);                
 
 		while (resultset.next()) {
 			Employee aux;
+			String name = resultset.getString("name");
+			int identifier = resultset.getInt("identifier"); 
+			String cpf = resultset.getString("cpf");
+			String email = resultset.getString("email");
+			String password = resultset.getString("password");
+			int room = resultset.getInt("idRoom");
+			int isAdmin = resultset.getInt("isAdmin");
 			if(isAdmin == 0)
                             aux = new Employee(name, identifier, cpf, email, password, room, isAdmin);
 			else
