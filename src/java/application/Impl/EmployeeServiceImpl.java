@@ -24,92 +24,95 @@ import database.ServicesDBImpl.EmployeeDBImpl;
 import database.ServicesDBImpl.ReportOnOffDBImpl;
 import database.ServicesDBImpl.ResourceDBImpl;
 import database.ServicesDBImpl.RoomDBImpl;
+
 /**
  *
  * @author Luiza
  */
-public class EmployeeServiceImpl implements EmployeeService{
-	
-	public EmployeeServiceImpl() {
-		super();
-	}
+public class EmployeeServiceImpl implements EmployeeService {
 
-	@Override
-	public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException{
-		ResourceDB resourceDB = new ResourceDBImpl();
-		EmployeeDB employeeDB = new EmployeeDBImpl();
-		Resource resource = resourceDB.findResourceByID(resourceID);
-		Employee employee = employeeDB.findEmployeeByID(employeeID);
-                
-		if(checkLicense(resource, employee)){
-			createTurnOnReport( resource ) ;
-                        resourceDB.updateResource(resource);
-		}
-		else throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");                
-	}
-        
-        @Override
-        public void turnOnResource(int resourceID) throws SQLException, ConnectionException {
-            ResourceDB resourceDB = new ResourceDBImpl();
-            Resource resource = resourceDB.findResourceByID(resourceID);
-            resource.turnOn();
+    public EmployeeServiceImpl() {
+        super();
+    }
+
+    @Override
+    public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException {
+        ResourceDB resourceDB = new ResourceDBImpl();
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+        Resource resource = resourceDB.findResourceByID(resourceID);
+        Employee employee = employeeDB.findEmployeeByID(employeeID);
+
+        if (checkLicense(resource, employee)) {
+            createTurnOnReport(resource);
             resourceDB.updateResource(resource);
+        } else {
+            throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
         }
+    }
 
-	@Override
-	public void turnOffResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException{
-		
-		ResourceDB resourceDB = new ResourceDBImpl();
-		EmployeeDB employeeDB = new EmployeeDBImpl();
-		
-		Resource resource = resourceDB.findResourceByID(resourceID);
-		Employee employee = employeeDB.findEmployeeByID(employeeID);
-		
-		if(checkLicense(resource, employee)){
-                      createTurnOffReport( resource ) ;
-                      resourceDB.updateResource(resource);
-		}
-		else throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
-	}
-        
-        @Override
-        public void turnOffResource(int resourceID) throws SQLException, ConnectionException {
-            ResourceDB resourceDB = new ResourceDBImpl();
-            Resource resource = resourceDB.findResourceByID(resourceID);
-            RoomDB roomDB = new RoomDBImpl();
-            Room resourceRoom = roomDB.findRoomByID( resource.getLocationID() );
-            resource.turnOff();
-            float consuption = resource.turnOff();
-            resourceRoom.expendCredits( consuption );
-            roomDB.updateRoom(resourceRoom);
-            resourceDB.updateResource(resource);          
+    @Override
+    public void turnOnResource(int resourceID) throws SQLException, ConnectionException {
+        ResourceDB resourceDB = new ResourceDBImpl();
+        Resource resource = resourceDB.findResourceByID(resourceID);
+        resource.turnOn();
+        resourceDB.updateResource(resource);
+    }
+
+    @Override
+    public void turnOffResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException {
+
+        ResourceDB resourceDB = new ResourceDBImpl();
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+
+        Resource resource = resourceDB.findResourceByID(resourceID);
+        Employee employee = employeeDB.findEmployeeByID(employeeID);
+
+        if (checkLicense(resource, employee)) {
+            createTurnOffReport(resource);
+            resourceDB.updateResource(resource);
+        } else {
+            throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
         }
+    }
 
-	@Override
-	public void warnFlawResource(int resourceID) {
+    @Override
+    public void turnOffResource(int resourceID) throws SQLException, ConnectionException {
+        ResourceDB resourceDB = new ResourceDBImpl();
+        Resource resource = resourceDB.findResourceByID(resourceID);
+        RoomDB roomDB = new RoomDBImpl();
+        Room resourceRoom = roomDB.findRoomByID(resource.getLocationID());
+        resource.turnOff();
+        float consuption = resource.turnOff();
+        resourceRoom.expendCredits(consuption);
+        roomDB.updateRoom(resourceRoom);
+        resourceDB.updateResource(resource);
+    }
+
+    @Override
+    public void warnFlawResource(int resourceID) {
 //		Resource resource = database.getResourceID(resourceID); // função da interface do application com o database
 //		resource.warnFlaw();
 //              database.update( resource );
 //              database.save( new StatusReport(resourceID) ) ) ;
-                return ;
-	}
-	
-	@Override
-	public List<Resource> listResorcesWorkRoom(int employeeID){
+        return;
+    }
+
+    @Override
+    public List<Resource> listResorcesWorkRoom(int employeeID) {
 //		Employee employee = database.getEmployeeID(employeeID); // retorna o empregado que está logado no momento
 //		return employee.getWorkRoom().getResourceList();
-                return null;
-	}
-	
-	@Override
-	public List<CustomAction> listCustomActions(int employeeID) {
+        return null;
+    }
+
+    @Override
+    public List<CustomAction> listCustomActions(int employeeID) {
 //		Employee employee = database.getEmployeeID(employeeID); // retorna o empregado que está logado no momento
 //		return employee.getCustomActionList();
-                return null;
-	}
+        return null;
+    }
 
-	@Override
-	public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction {
+    @Override
+    public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction {
 //		Employee employee = database.getEmployeeID(employeeID); // retorna o empregado que está logado no momento
 //		List<CustomAction> listCustomActions = employee.getCustomActionList();
 //		List<TurnOnReport> listTurnOnReports = new ArrayList<TurnOnReport>();
@@ -129,11 +132,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 //		}
 //		return ;
 //                
-                return ;
-	}
-	
-	@Override
-	public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction{
+        return;
+    }
+
+    @Override
+    public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction {
 //		Employee employee = database.getEmployeeID(employeeID); // retorna o empregado que está logado no momento
 //		List<CustomAction> listCustomActions = employee.getCustomActionList();
 //		List<TurnOffReport> listTurnOffReports = new ArrayList<TurnOffReport>();
@@ -150,48 +153,51 @@ public class EmployeeServiceImpl implements EmployeeService{
 //		}
 //		return ;
 //                
-                return;
-	}
-	
-	private static boolean checkLicense(Resource resource, Employee employee){ // retorna true se é um admin ou se workroom é igual a location
-		if(employee instanceof Admin){
-			return true;
-		}
-		if(employee.getWorkRoomID() == resource.getLocationID()) return true;
-		return false;
-	}
-	
-	private static void createTurnOnReport(Resource resource) throws SQLException, ConnectionException{ // Liga o recurso e cria o relatorio
-		resource.turnOn();
-		ReportOnOffDB reportDB = new ReportOnOffDBImpl();
-		reportDB.insertReportOn(resource.getIdentifier() , new Date());
-        return ;
-	}
-	
-	private static void createTurnOffReport(Resource resource) throws SQLException, ConnectionException{  // Desliga, gasta os créditos da sala e cria o relatorio
-		RoomDB roomDB = new RoomDBImpl();
-		ReportOnOffDB reportDB = new ReportOnOffDBImpl();
-		Room resourceRoom = roomDB.findRoomByID( resource.getLocationID() );
-		float consuption = resource.turnOff();
-		resourceRoom.expendCredits( consuption );
-		roomDB.updateRoom(resourceRoom);
-		reportDB.insertReportOff(resource.getIdentifier() , new Date());
-        return ;
-	}
+        return;
+    }
 
-	@Override
-	public Employee login(String email, String password) throws InvalidUserException, ConnectionException{
-		EmployeeDB employeeDB = new EmployeeDBImpl();
-		Employee employee;
-		try {
-			employee = employeeDB.findEmployeeByEmail(email);
-		} catch (SQLException e) {
-			throw new InvalidUserException("Email não registrado");
-		}
-		if(!employee.getPassword().equals(password)) throw new InvalidUserException("Senha inválida");
-		else{
-			return employee;
-		}
-	}
+    private static boolean checkLicense(Resource resource, Employee employee) { // retorna true se é um admin ou se workroom é igual a location
+        if (employee instanceof Admin) {
+            return true;
+        }
+        if (employee.getWorkRoomID() == resource.getLocationID()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static void createTurnOnReport(Resource resource) throws SQLException, ConnectionException { // Liga o recurso e cria o relatorio
+        resource.turnOn();
+        ReportOnOffDB reportDB = new ReportOnOffDBImpl();
+        reportDB.insertReportOn(resource.getIdentifier(), new Date());
+        return;
+    }
+
+    private static void createTurnOffReport(Resource resource) throws SQLException, ConnectionException {  // Desliga, gasta os créditos da sala e cria o relatorio
+        RoomDB roomDB = new RoomDBImpl();
+        ReportOnOffDB reportDB = new ReportOnOffDBImpl();
+        Room resourceRoom = roomDB.findRoomByID(resource.getLocationID());
+        float consuption = resource.turnOff();
+        resourceRoom.expendCredits(consuption);
+        roomDB.updateRoom(resourceRoom);
+        reportDB.insertReportOff(resource.getIdentifier(), new Date());
+        return;
+    }
+
+    @Override
+    public Employee login(String email, String password) throws InvalidUserException, ConnectionException {
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+        Employee employee;
+        try {
+            employee = employeeDB.findEmployeeByEmail(email);
+        } catch (SQLException e) {
+            throw new InvalidUserException("Email não registrado");
+        }
+        if (!employee.getPassword().equals(password)) {
+            throw new InvalidUserException("Senha inválida");
+        } else {
+            return employee;
+        }
+    }
 
 }

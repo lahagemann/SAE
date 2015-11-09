@@ -102,7 +102,6 @@
                                     <button type="button" class="btn btn-warning"><b>Solicitar</b></button>
                                 </td>
                             </tr>
-                        </form>
                         <% } %>
                 </table>
             </div>

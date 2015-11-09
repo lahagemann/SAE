@@ -64,4 +64,20 @@
         <servlet-name>list_resources</servlet-name>
         <url-pattern>/list_resources</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>modify_employee_form</servlet-name>
+        <servlet-class>web_servlets.ModifyEmployeeFormServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modify_employee_form</servlet-name>
+        <url-pattern>/modify_employee_form</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>modify_employee</servlet-name>
+        <servlet-class>web_servlets.ModifyEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modify_employee</servlet-name>
+        <url-pattern>/modify_employee</url-pattern>
+    </servlet-mapping>
 </web-app>

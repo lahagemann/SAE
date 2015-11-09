@@ -30,4 +30,5 @@ public interface ResourceDB {
     
     public List<Resource> findResourceByRoom(int room) throws SQLException, ConnectionException;
     
+    public List<Resource> getAllResources() throws SQLException, ConnectionException;
 }
