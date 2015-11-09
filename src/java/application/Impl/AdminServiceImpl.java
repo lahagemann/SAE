@@ -145,6 +145,12 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
     }
     
     @Override
+    public Room findRoom(int id) throws SQLException, ConnectionException {
+        RoomDB roomDB = new RoomDBImpl();
+        return roomDB.findRoomByID(id);
+    }
+    
+    @Override
     public void updateResource(Resource r) throws SQLException, ConnectionException {
         ResourceDB resourceDB = new ResourceDBImpl();
         resourceDB.updateResource(r);

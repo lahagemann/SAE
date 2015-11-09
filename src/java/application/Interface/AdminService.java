@@ -55,6 +55,8 @@ public interface AdminService extends EmployeeService {
     
     Resource findResource(int id) throws SQLException, ConnectionException;
     
+    Room findRoom(int id) throws SQLException, ConnectionException;
+    
     void updateResource(Resource r) throws SQLException, ConnectionException;
 
 }

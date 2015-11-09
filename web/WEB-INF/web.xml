@@ -96,4 +96,12 @@
         <servlet-name>modify_resource</servlet-name>
         <url-pattern>/modify_resource</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>list_by_room</servlet-name>
+        <servlet-class>web_servlets.ListRoomResourcesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>list_by_room</servlet-name>
+        <url-pattern>/list_by_room</url-pattern>
+    </servlet-mapping>
 </web-app>
