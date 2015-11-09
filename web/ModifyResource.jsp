@@ -17,12 +17,13 @@
         <br>
         <br>
         <% Resource r = (Resource) request.getAttribute("resource"); %>
+        
         <form class="form-horizontal" role="form" method="post" action="./modify_resource">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Nome:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" placeholder="Digitar o nome identificador do recurso (ex.: LMP00001)" name="name" value="<%= r.getName() %>">
-                    <input type="hidden" name="id" value="<%= r.getIdentifier() %>"
+                    <input type="hidden" name="id" value="<%= r.getIdentifier() %>">
                 </div>
             </div>
             <div class="form-group">

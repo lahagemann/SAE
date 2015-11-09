@@ -120,4 +120,28 @@
         <servlet-name>delete_employee</servlet-name>
         <url-pattern>/delete_employee</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>delete_resource</servlet-name>
+        <servlet-class>web_servlets.DeleteResourceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete_resource</servlet-name>
+        <url-pattern>/delete_resource</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>delete_room</servlet-name>
+        <servlet-class>web_servlets.DeleteRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete_room</servlet-name>
+        <url-pattern>/delete_room</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>delete_goal</servlet-name>
+        <servlet-class>web_servlets.DeleteGoalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete_goal</servlet-name>
+        <url-pattern>/delete_goal</url-pattern>
+    </servlet-mapping>
 </web-app>

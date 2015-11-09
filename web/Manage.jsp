@@ -47,7 +47,7 @@
                     <div class="btn-group" align="center">
                         <a href="AddRoom.jsp" class="btn btn-primary"><b>Adicionar</b></a>
                         <a href="#" class="btn btn-primary"><b>Alterar</b></a>
-                        <a href="#" class="btn btn-primary"><b>Excluir</b></a>
+                        <a href="DeleteRoom.jsp" class="btn btn-primary"><b>Excluir</b></a>
                     </div>
             </div>
             <div align="center" id="block">
@@ -55,7 +55,7 @@
                     <div class="btn-group" align="center">
                         <a href="AddResource.jsp" class="btn btn-primary"><b>Adicionar</b></a>
                         <a href="ModifyResourceList.jsp" class="btn btn-primary"><b>Alterar</b></a>
-                        <a href="#" class="btn btn-primary"><b>Excluir</b></a>
+                        <a href="DeleteResource.jsp" class="btn btn-primary"><b>Excluir</b></a>
                     </div>
             </div>
             <div align="center" id="block">
