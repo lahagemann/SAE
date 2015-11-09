@@ -132,10 +132,22 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
         return employeeDB.findEmployeeByID(id);
     }
     
+    @Override
     public void updateEmployee(Employee e) throws SQLException, ConnectionException {
         EmployeeDB employeeDB = new EmployeeDBImpl();
         employeeDB.updateEmployee(e);
-        return;
+    }
+    
+    @Override
+    public Resource findResource(int id) throws SQLException, ConnectionException {
+        ResourceDB resourceDB = new ResourceDBImpl();
+        return resourceDB.findResourceByID(id);
+    }
+    
+    @Override
+    public void updateResource(Resource r) throws SQLException, ConnectionException {
+        ResourceDB resourceDB = new ResourceDBImpl();
+        resourceDB.updateResource(r);
     }
 
 }

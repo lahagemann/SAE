@@ -52,5 +52,9 @@ public interface AdminService extends EmployeeService {
     boolean deleteGoal(int goalID) throws SQLException, ConnectionException;
     
     Employee findEmployee(int id) throws SQLException, ConnectionException;
+    
+    Resource findResource(int id) throws SQLException, ConnectionException;
+    
+    void updateResource(Resource r) throws SQLException, ConnectionException;
 
 }

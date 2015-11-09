@@ -80,4 +80,20 @@
         <servlet-name>modify_employee</servlet-name>
         <url-pattern>/modify_employee</url-pattern>
     </servlet-mapping>
+        <servlet>
+        <servlet-name>modify_resource_form</servlet-name>
+        <servlet-class>web_servlets.ModifyResourceFormServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modify_resource_form</servlet-name>
+        <url-pattern>/modify_resource_form</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>modify_resource</servlet-name>
+        <servlet-class>web_servlets.ModifyResourceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modify_resource</servlet-name>
+        <url-pattern>/modify_resource</url-pattern>
+    </servlet-mapping>
 </web-app>
