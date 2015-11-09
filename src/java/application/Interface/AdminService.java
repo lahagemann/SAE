@@ -21,7 +21,7 @@ import database.Connection.ConnectionException;
  */
 public interface AdminService extends EmployeeService {
 
-    public void warnRepairResource(int resourceID);
+	public void warnFlawResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException;
 
     public List<Room> listAllRooms() throws SQLException, ConnectionException;
 

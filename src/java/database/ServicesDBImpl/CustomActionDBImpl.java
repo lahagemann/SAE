@@ -17,13 +17,13 @@ import database.Connection.ConnectionFactory;
 import database.ServicesDB.CustomActionDB;
 import database.ServicesDB.ResourceDB;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.PreparedStatement;
 
 /**
  *
@@ -153,7 +153,6 @@ public class CustomActionDBImpl implements CustomActionDB{
 
 	}
 
-	// busca identifiers das acoes personalizadas relacionadas ao empregado
 	public List<CustomAction> findCustomActionByEmployee(int idEmployee) throws SQLException, ConnectionException {
 
 		ResultSet resultset = null;

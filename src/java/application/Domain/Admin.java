@@ -5,6 +5,8 @@
  */
 package application.Domain;
 
+import java.util.List;
+
 /**
  *
  * @author Luiza
@@ -17,8 +19,10 @@ public class Admin extends Employee {
 	}
 
 	public Admin(String name, int identifier, String cpf, String email,
-			String password, int wordRoomID, int isAdmin) {
-            super(name,identifier,cpf,email,password,wordRoomID, isAdmin);
+			String password, int workRoomID,
+			List<CustomAction> customActionList, int isAdmin) {
+		super(name, identifier, cpf, email, password, workRoomID, customActionList,
+				isAdmin);
 	}
 	
 }
