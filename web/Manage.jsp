@@ -37,15 +37,15 @@
             <div align="center" id="block">
                     <h3>Funcionário</h3>
                     <div class="btn-group" align="center">
-                        <a href="EmployeeForm.jsp" class="btn btn-primary"><b>Adicionar</b></a>
+                        <a href="AddEmployee.jsp" class="btn btn-primary"><b>Adicionar</b></a>
                         <a href="ModifyEmployeeList.jsp" class="btn btn-primary"><b>Alterar</b></a>
-                        <a href="#" class="btn btn-primary"><b>Excluir</b></a>
+                        <a href="DeleteEmployee.jsp" class="btn btn-primary"><b>Excluir</b></a>
                     </div>
             </div>
             <div align="center" id="block">
                     <h3>Sala</h3>
                     <div class="btn-group" align="center">
-                        <a href="RoomForm.jsp" class="btn btn-primary"><b>Adicionar</b></a>
+                        <a href="AddRoom.jsp" class="btn btn-primary"><b>Adicionar</b></a>
                         <a href="#" class="btn btn-primary"><b>Alterar</b></a>
                         <a href="#" class="btn btn-primary"><b>Excluir</b></a>
                     </div>
@@ -53,7 +53,7 @@
             <div align="center" id="block">
                     <h3>Recurso</h3>
                     <div class="btn-group" align="center">
-                        <a href="ResourceForm.jsp" class="btn btn-primary"><b>Adicionar</b></a>
+                        <a href="AddResource.jsp" class="btn btn-primary"><b>Adicionar</b></a>
                         <a href="ModifyResourceList.jsp" class="btn btn-primary"><b>Alterar</b></a>
                         <a href="#" class="btn btn-primary"><b>Excluir</b></a>
                     </div>
@@ -61,7 +61,7 @@
             <div align="center" id="block">
                     <h3>Meta</h3>
                     <div class="btn-group" align="center">
-                        <a href="GoalForm.jsp" class="btn btn-primary"><b>Adicionar</b></a>
+                        <a href="AddGoal.jsp" class="btn btn-primary"><b>Adicionar</b></a>
                         <a href="#" class="btn btn-primary"><b>Alterar</b></a>
                         <a href="#" class="btn btn-primary"><b>Excluir</b></a>
                     </div>

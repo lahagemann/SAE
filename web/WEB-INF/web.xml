@@ -112,4 +112,12 @@
         <servlet-name>employee_resources</servlet-name>
         <url-pattern>/employee_resources</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>delete_employee</servlet-name>
+        <servlet-class>web_servlets.DeleteEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete_employee</servlet-name>
+        <url-pattern>/delete_employee</url-pattern>
+    </servlet-mapping>
 </web-app>
