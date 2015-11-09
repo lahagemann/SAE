@@ -98,10 +98,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Resource> listResorcesWorkRoom(int employeeID) {
-//		Employee employee = database.getEmployeeID(employeeID); // retorna o empregado que está logado no momento
-//		return employee.getWorkRoom().getResourceList();
-        return null;
+    public List<Resource> listResorcesWorkRoom(int employeeID) throws SQLException, ConnectionException {
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+        Employee e = employeeDB.findEmployeeByID(employeeID);
+        
+        ResourceDB resourceDB = new ResourceDBImpl();
+        return resourceDB.findResourceByRoom(e.getWorkRoomID());
     }
 
     @Override

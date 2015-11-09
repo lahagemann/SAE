@@ -30,7 +30,7 @@ public interface EmployeeService {
 	
 	public void warnFlawResource(int resourceID);
 	
-	public List<Resource> listResorcesWorkRoom(int employeeID);
+	public List<Resource> listResorcesWorkRoom(int employeeID) throws SQLException, ConnectionException;
 	
 	public List<CustomAction> listCustomActions(int employeeID);
 	

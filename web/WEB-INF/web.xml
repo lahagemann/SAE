@@ -104,4 +104,12 @@
         <servlet-name>list_by_room</servlet-name>
         <url-pattern>/list_by_room</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>employee_resources</servlet-name>
+        <servlet-class>web_servlets.EmployeeListResourcesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>employee_resources</servlet-name>
+        <url-pattern>/employee_resources</url-pattern>
+    </servlet-mapping>
 </web-app>

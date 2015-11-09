@@ -52,7 +52,7 @@
                                 <button type="button" class="btn btn-danger" id="btn1"><b>Meu consumo</b></button>
                             </td>
                             <td>
-                                <form method="post" action="ListAllResources.jsp">
+                                <form method="post" action="./employee_resources">
                                     <input type="submit" class="btn btn-danger" id="btn2" value="Ligar/Desligar recurso">
                                 </form>
                             </td>

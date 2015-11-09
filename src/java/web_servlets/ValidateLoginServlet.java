@@ -42,8 +42,7 @@ public class ValidateLoginServlet extends HttpServlet {
             Employee user = service.login(email, password);
             if(user instanceof Admin) {
                 HttpSession session = request.getSession();
-                session.setAttribute("userID", user.getIdentifier());
-                session.setAttribute("userRoomID", user.getWorkRoomID());
+                session.setAttribute("user", user);
                 session.setAttribute("name", user.getName());
                 session.setAttribute("isAdmin", true);
 //                request.setAttribute("userID", user.getIdentifier());
@@ -53,8 +52,7 @@ public class ValidateLoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);
             } else if(user instanceof Employee) {
                 HttpSession session = request.getSession();
-                session.setAttribute("userID", user.getIdentifier());
-                session.setAttribute("userRoomID", user.getWorkRoomID());
+                session.setAttribute("user", user);
                 session.setAttribute("name", user.getName());
                 session.setAttribute("isAdmin", false);
 //                request.setAttribute("userID", user.getIdentifier());
