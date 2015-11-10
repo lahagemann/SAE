@@ -94,6 +94,25 @@ public class CustomActionDBImpl implements CustomActionDB{
 
 		disconnect();
 	}
+	
+	public void deleteAllCustomActionOfEmployee(int employeeID) throws SQLException, ConnectionException {
+		
+		List<CustomAction> listCA = findCustomActionByEmployee(employeeID);
+		String query;
+		
+		connect();
+		
+		for(int i = 0; i < listCA.size(); i++){
+			query = "DELETE FROM caresource WHERE idCustomAction = " + listCA.get(i).getIdentifier() + ";";
+			statement.executeUpdate(query);
+			query = "DELETE FROM customaction WHERE identifier = " + listCA.get(i).getIdentifier() + ";";
+			statement.executeUpdate(query);
+		}
+
+		
+
+		disconnect();
+	}
 
 	public void deleteAllResourcesFromCA(int customActionID) throws SQLException, ConnectionException {
 

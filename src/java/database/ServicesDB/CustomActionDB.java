@@ -32,6 +32,8 @@ public interface CustomActionDB {
 	public void deleteAllResourcesFromCA(int customActionID) throws SQLException, ConnectionException;
 	
 	public void deleteResourceFromCA(int customActionID, int resourceID) throws SQLException, ConnectionException;
+	
+	public void deleteAllCustomActionOfEmployee(int employeeID) throws SQLException, ConnectionException;
     
     public CustomAction findCustomActionByID(int idCustomAction) throws SQLException, ConnectionException;
     

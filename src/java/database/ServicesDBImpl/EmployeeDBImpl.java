@@ -57,17 +57,25 @@ public class EmployeeDBImpl implements EmployeeDB {
 		
 		connect();
 		statement.executeUpdate(query);
+		CustomActionDB caDB = new CustomActionDBImpl();
+		List<CustomAction> listCustomAction = e.getCustomActionList();
+		
+		for(int i = 0; i < listCustomAction.size(); i++){
+			caDB.insertCustomAction( listCustomAction.get(i) );
+		}
+		
 		disconnect();
-
 	}
 
 	@Override
 	public void deleteEmployee(int employeeID) throws SQLException, ConnectionException {
 		String query = "DELETE FROM employee WHERE identifier = " + employeeID + ";";
-
+		CustomActionDB caDB = new CustomActionDBImpl();
 		connect();
 		statement.executeUpdate(query);
-
+		
+		caDB.deleteAllCustomActionOfEmployee(employeeID);
+		
 		disconnect();
 
 	}

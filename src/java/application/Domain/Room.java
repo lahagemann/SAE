@@ -135,99 +135,65 @@ public class Room {
 		return false;
 	}
 
-//        public static void main(String args[]) {
-//            RoomDB roomdb = new RoomDBImpl();
-//            List<Room> rooms = new ArrayList<>();
-//            try {
-//                System.out.println("First");
-//                rooms.add(roomdb.findRoomByID(1));
-//                System.out.println("Second");
-//                rooms.add(roomdb.findRoomByID(2));
-//                System.out.println("Third");
-//                rooms.add(roomdb.findRoomByID(3));
-//            } catch (SQLException ex) {
-//                System.out.println("not found");
-//            } catch (ConnectionException ex) {
-//                System.out.println("not found");
-//            }
-//            
-//            System.out.println("");
-//            System.out.println("List size: "+rooms.size());
-//            
-//            for (Room room : rooms) {
-//                System.out.println(room.getIdentifier() + " " + room.getCreditAmount());
-//            }
-//            
-//            
-//            try {
-//                Room r = roomdb.findRoomByID(3);
-//                System.out.println(r.getIdentifier()+ " "+r.getCreditAmount());
-//            } catch (SQLException ex) {
-//                System.out.println("not found");
-//            } catch (ConnectionException ex) {
-//                System.out.println("not found");
-//            }
-//            
-////            
-////            
-////            
-////            
-////            
-////            
-////            EmployeeDB db1 = new EmployeeDBImpl();
-////            ResourceDB db2 = new ResourceDBImpl();
-////            RoomDB db3 = new RoomDBImpl();
-////            GoalDB db4 = new GoalDBImpl();
-////            CustomActionDB db5 = new CustomActionDBImpl();
-////            Employee b = new Employee("Gustavo","12345678910", "gvdambros", "1234",1, 0);
-////            Resource c = new Resource("Ar do Gustavo", "Ar Condicionado", (float) 10000.5,1);
-////            Room d = new Room(13);
-////            Goal e = new Goal(new Date(), 80);
-////            EmployeeService s = new EmployeeServiceImpl();
-////            //Admin f = new Admin("Gustavo 2","12345678910", "gvdambros", "1234",1);
-////            //Employee g = new Admin("Gustavo 3","12345678910", "gvdambros", "1234",1);
-////            List<Resource> listOfResources = new ArrayList<Resource>();
-////            try{
-////                //listOfResources.addAll(db2.findResourceByRoom(1));
-////                CustomAction h = new CustomAction(1, listOfResources);
-////                //System.out.println("Aqui");
-////                //db1.insertEmployee(f);
-////                //db1.insertEmployee(g);
-////                //db3.insertRoom(d);
-////                //db2.insertResource(c);
-////                //db3.deleteRoom(1);
-////                //s.login("gvdambros","b");
-////                //db4.insertGoal(e);
-////                List<CustomAction> l = db5.findCustomActionByEmployee(1);
-////                
-////                //db1.promoteEmployee(1);
-////                //db4.insertGoal(e);
-////                //db3.insertRoom(d);
-////                
-////                Goal test;
-////                
-////                //test  = db4.findGoal(2);
-//////                test.setValue(45);
-////                //db4.deleteGoal(2);
-////                
-////                Room sala;
-////                sala = db3.findRoomByID(13);
-////              
-////                //sala.setDailyGoal(test);
-////                //db3.updateRoom(sala);
-////                
-////                System.out.println(sala);
-////               // System.out.println(test.getIdentifier());
-////                
-////                //for(int i = 0; i < l.size(); i++){
-////                	//System.out.println(l.get(i).toString());
-////                //}
-////                //System.out.println("Aqui");
-////                
-////            }
-////            catch(Exception exp){
-////                System.out.println(exp.getClass().toString() + " " + exp.getMessage());
-////            }
-//        }
+        public static void main(String args[]) {
+
+    
+            
+            EmployeeDB db1 = new EmployeeDBImpl();
+            ResourceDB db2 = new ResourceDBImpl();
+            RoomDB db3 = new RoomDBImpl();
+            GoalDB db4 = new GoalDBImpl();
+            CustomActionDB db5 = new CustomActionDBImpl();
+            Employee b = new Employee("Gustavo","12345678910", "gvdambros", "1234",1, 0);
+            Resource c = new Resource("Ar do Gustavo", "Ar Condicionado", (float) 10000.5,1);
+            Room d = new Room(13);
+            Goal e = new Goal(new Date(), 80);
+            EmployeeService s = new EmployeeServiceImpl();
+            //Admin f = new Admin("Gustavo 2","12345678910", "gvdambros", "1234",1);
+            //Employee g = new Admin("Gustavo 3","12345678910", "gvdambros", "1234",1);
+            List<Resource> listOfResources = new ArrayList<Resource>();
+            try{
+                listOfResources.addAll(db2.findResourceByRoom(1));
+                CustomAction h = new CustomAction(1, listOfResources);
+                db5.deleteAllCustomActionOfEmployee(1);
+                //System.out.println("Aqui");
+                //db1.insertEmployee(f);
+                //db1.insertEmployee(g);
+                //db3.insertRoom(d);
+                //db2.insertResource(c);
+                //db3.deleteRoom(1);
+                //s.login("gvdambros","b");
+                //db4.insertGoal(e);
+                List<CustomAction> l = db5.findCustomActionByEmployee(1);
+                
+                //db1.promoteEmployee(1);
+                //db4.insertGoal(e);
+                //db3.insertRoom(d);
+                
+                Goal test;
+                
+                //test  = db4.findGoal(2);
+                //test.setValue(45);
+                //db4.deleteGoal(2);
+                
+                Room sala;
+                sala = db3.findRoomByID(13);
+              
+                //sala.setDailyGoal(test);
+                //db3.updateRoom(sala);
+                
+                System.out.println(sala);
+               // System.out.println(test.getIdentifier());
+                
+                //for(int i = 0; i < l.size(); i++){
+                	//System.out.println(l.get(i).toString());
+                //}
+                //System.out.println("Aqui");
+                
+            }
+            catch(Exception exp){
+                System.out.println(exp.getClass().toString() + " " + exp.getMessage());
+            }
+        }
         
 }
