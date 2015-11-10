@@ -40,16 +40,21 @@ public class ModifyEmployeeServlet extends HttpServlet {
         if(request.getParameter("type").equals("admin"))
             isAdmin = 1;
         
-        Employee e;
-        if(isAdmin == 1)
-            e = new Admin(name, id, cpf, email, password, roomNumber, isAdmin);
-        else
-            e = new Employee(name, id, cpf, email, password, roomNumber, isAdmin);
-        
         AdminService service = new AdminServiceImpl();
         
         try {
+            Employee e = service.findEmployee(id);
+            e.setCpf(cpf);
+            e.setEmail(email);
+            e.setName(name);
+            e.setPassword(password);
+            e.setWorkRoomID(roomNumber);
+            
             service.updateEmployee(e);
+            
+            if(isAdmin == 1)
+                service.promoteEmployee(id);
+            
         } catch (SQLException s) {
             s.printStackTrace();
         } catch (ConnectionException s) {
