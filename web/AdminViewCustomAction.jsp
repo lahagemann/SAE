@@ -70,7 +70,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;Recursos nesta ação:</a>
+                                    <a data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;Recursos nesta ação:</a>
                                 </h4>
                             </div>
                             <div id="collapse1" class="panel-collapse collapse">
@@ -79,10 +79,19 @@
                                         <li class="list-group-item"><%= r.getName() %> &nbsp;&nbsp; (<%= r.getType() %>)</li>
                                     <% } %>    
                                 </ul>
-
                             </div>
                         </div>
                     </div>
+                </td>
+                <td>
+                    <form action="" method="post">
+                        <input type="hidden" name="id" value="<%= action.getIdentifier() %>">
+                        <button type="button" class="btn btn-success"><b>ON</b></button>
+                    </form>
+                    <form action="" method="post">
+                        <input type="hidden" name="id" value="<%= action.getIdentifier() %>">
+                        <button type="submit" class="btn btn-danger"><b>OFF</b></button>
+                    </form>
                 </td>
             </tr>
             <% } %>

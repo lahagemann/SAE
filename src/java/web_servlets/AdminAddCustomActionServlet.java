@@ -52,7 +52,7 @@ public class AdminAddCustomActionServlet extends HttpServlet {
             }
         }
         
-        CustomAction customAction = new CustomAction(user.getIdentifier(), actionResources);
+        //CustomAction customAction = new CustomAction(user.getIdentifier(), actionResources);
         
         
         
