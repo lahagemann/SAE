@@ -22,6 +22,12 @@ abstract class Transaction  {
 		this.initialTime = new Date();
 	}
 
+    public Transaction(int transactionResourceID, Date initialTime) {
+        this.transactionResourceID = transactionResourceID;
+        this.initialTime = initialTime;
+        this.finalTime = null;
+    }
+	
     public Transaction(int transactionResourceID, Date initialTime, Date finalTime) {
         this.transactionResourceID = transactionResourceID;
         this.initialTime = initialTime;

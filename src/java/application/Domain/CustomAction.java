@@ -16,18 +16,21 @@ public class CustomAction {
 	private List<Resource> resourceList;
 	private final int identifier;
 	private int idEmployee;
+	private String name;
+	
 
-
-	public CustomAction(int idEmployee, List<Resource> resourceList) {
+	public CustomAction(int idEmployee, String name, List<Resource> resourceList) {
 		super();
 		this.identifier = 0;
+		this.name = name;
 		this.idEmployee = idEmployee;
 		this.resourceList = resourceList;
 	}
 
 
-	public CustomAction(int identifier, int idEmployee, List<Resource> resourceList) {
+	public CustomAction(int identifier, String name, int idEmployee, List<Resource> resourceList) {
 		super();
+		this.name = name;
 		this.identifier = identifier;
 		this.idEmployee = idEmployee;
 		this.resourceList = resourceList;
@@ -57,6 +60,14 @@ public class CustomAction {
 		this.idEmployee = idEmployee;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String toString(){
 		String buffer =  "Identifier: " + this.getIdentifier() + "\nEmployee: " + this.getIdEmployee() + "\nResources:";
 		List<Resource> listOfResources = this.getResourceList();

@@ -15,6 +15,7 @@ import application.Domain.Resource;
 import database.Connection.ConnectionException;
 import database.Connection.ConnectionFactory;
 import database.ServicesDB.CustomActionDB;
+import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.ResourceDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,22 +52,16 @@ public class CustomActionDBImpl implements CustomActionDB{
 
 	public void insertCustomAction(CustomAction ca) throws SQLException, ConnectionException {
 
-		String query = "INSERT INTO customaction (idEmployee) VALUES " 
-				+ "('" + ca.getIdEmployee() + "');";
+		String query = "INSERT INTO customaction (name, idEmployee) VALUES " 
+				+ "('"+ ca.getName() + "', " + ca.getIdEmployee() + ");";
 
 		connect();
-	
-        PreparedStatement pstmt = null;
-        pstmt = (PreparedStatement) connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
-        			
+		PreparedStatement pstmt = null;
+		pstmt = (PreparedStatement) connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 		pstmt.executeUpdate();
-	
-        ResultSet rs = pstmt.getGeneratedKeys();
-		
-        rs.next();
-		
-        insertCAResource(ca.getResourceList() ,rs.getInt(1));
-        
+		ResultSet rs = pstmt.getGeneratedKeys();
+		rs.next();
+		insertCAResource(ca.getResourceList() ,rs.getInt(1));
 		disconnect();
 	}
 
@@ -94,22 +89,20 @@ public class CustomActionDBImpl implements CustomActionDB{
 
 		disconnect();
 	}
-	
-	public void deleteAllCustomActionOfEmployee(int employeeID) throws SQLException, ConnectionException {
-		
+
+	public void deleteAllCustomActionOfEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException {
+
 		List<CustomAction> listCA = findCustomActionByEmployee(employeeID);
 		String query;
-		
+
 		connect();
-		
+
 		for(int i = 0; i < listCA.size(); i++){
 			query = "DELETE FROM caresource WHERE idCustomAction = " + listCA.get(i).getIdentifier() + ";";
 			statement.executeUpdate(query);
 			query = "DELETE FROM customaction WHERE identifier = " + listCA.get(i).getIdentifier() + ";";
 			statement.executeUpdate(query);
 		}
-
-		
 
 		disconnect();
 	}
@@ -119,51 +112,58 @@ public class CustomActionDBImpl implements CustomActionDB{
 		String query = "DELETE FROM caresource WHERE idCustomAction = " + customActionID + ";";
 
 		connect();
-		
+
 		statement.executeUpdate(query);
 
 		disconnect();           
 	}
-	
+
 	public void deleteResourceFromCA(int customActionID, int resourceID) throws SQLException, ConnectionException {
 
 		String query = "DELETE FROM caresource WHERE idCustomAction = " + customActionID + " and idResource = " + resourceID + " ;";
 
 		connect();
-		
+
 		statement.executeUpdate(query);
 
 		disconnect();           
 	}
 
-	public CustomAction findCustomActionByID(int idCustomAction) throws SQLException, ConnectionException {
+	public CustomAction findCustomActionByID(int idCustomAction) throws SQLException, ConnectionException, DataNotFoundException {
 
 		ResultSet resultset = null;
 		String query = "SELECT * FROM customaction WHERE identifier = " + idCustomAction + ";";
 		String query2 = "SELECT * FROM caresource WHERE idCustomAction = " + idCustomAction + ";";
 
-		connect(); // nao comentar
-
-		resultset = statement.executeQuery(query);
-		resultset.next();
-
-		int identifier = resultset.getInt("identifier");
-		int idEmployee = resultset.getInt("idEmployee");
+		connect();
+		int identifier, idEmployee;
+		String name;
+		
+		try{
+			resultset = statement.executeQuery(query);
+			resultset.next();
+			identifier = resultset.getInt("identifier");
+			name = resultset.getString("name");
+			idEmployee = resultset.getInt("idEmployee");
+		}
+		catch(SQLException exc){
+			disconnect();
+			throw new DataNotFoundException("A Ação Personalizada não foi encontrada.");
+		}
 
 		ResourceDB rDB = new ResourceDBImpl();
 
-
-		resultset = statement.executeQuery(query2);
-		
 		List<Resource> resourceList = new ArrayList<Resource>();
 
-		while (resultset.next()) {
-			
-			resourceList.add(rDB.findResourceByID(resultset.getInt("idResource")));
+		try{
+			resultset = statement.executeQuery(query2);
+			while (resultset.next()) {
+				resourceList.add(rDB.findResourceByID(resultset.getInt("idResource")));
+			}
+		} catch(SQLException exp){ } //não faz nada pois pode haver uma ação personalizada sem recursos
 
-		}
-		
-		CustomAction aux = new CustomAction(identifier,
+		CustomAction aux = new CustomAction(identifier, 
+				name, 
 				idEmployee,
 				resourceList);
 
@@ -172,19 +172,21 @@ public class CustomActionDBImpl implements CustomActionDB{
 
 	}
 
-	public List<CustomAction> findCustomActionByEmployee(int idEmployee) throws SQLException, ConnectionException {
+	public List<CustomAction> findCustomActionByEmployee(int idEmployee) throws SQLException, ConnectionException, DataNotFoundException {
 
 		ResultSet resultset = null;
 		List<CustomAction> results = new ArrayList<CustomAction>();
 		String query = "SELECT * FROM customaction WHERE idEmployee = " + idEmployee + ";";
-		
+
 		connect();
-
-		resultset = statement.executeQuery(query);
-
-		while (resultset.next()) {
-			
-			results.add( this.findCustomActionByID( resultset.getInt("identifier")) );            
+		try{
+			resultset = statement.executeQuery(query);
+			while (resultset.next()) {
+				results.add( this.findCustomActionByID( resultset.getInt("identifier")) );            
+			}
+		} catch(SQLException exp){
+			disconnect();
+			throw new DataNotFoundException("O funcionário não possui ações personalizadas.");
 		}
 
 		disconnect();

@@ -5,14 +5,27 @@
  */
 package application.Domain;
 
+import java.util.Date;
+
 /**
  *
  * @author Luiza
  */
 public class TurnOnOrOffReport extends Transaction {
 
+	public TurnOnOrOffReport(int transactionResourceID, Date initialTime,
+			Date finalTime) {
+		super(transactionResourceID, initialTime, finalTime);
+	}
+
+	public TurnOnOrOffReport(int transactionResourceID, Date initialTime) {
+		super(transactionResourceID, initialTime);
+	}
+
 	public TurnOnOrOffReport(int transactionResourceID) {
 		super(transactionResourceID);
 	}
+	
+	
 
 }

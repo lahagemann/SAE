@@ -144,18 +144,18 @@ public class Room {
             RoomDB db3 = new RoomDBImpl();
             GoalDB db4 = new GoalDBImpl();
             CustomActionDB db5 = new CustomActionDBImpl();
-            Employee b = new Employee("Gustavo","12345678910", "gvdambros", "1234",1, 0);
+            Employee b = new Employee("Gustavo Dambros","121212121", "gvdambros2", "1234",1, 0);
             Resource c = new Resource("Ar do Gustavo", "Ar Condicionado", (float) 10000.5,1);
             Room d = new Room(13);
-            Goal e = new Goal(new Date(), 80);
+            Goal e = new Goal(new Date(2020,3,3), 80);
             EmployeeService s = new EmployeeServiceImpl();
             //Admin f = new Admin("Gustavo 2","12345678910", "gvdambros", "1234",1);
             //Employee g = new Admin("Gustavo 3","12345678910", "gvdambros", "1234",1);
             List<Resource> listOfResources = new ArrayList<Resource>();
             try{
-                listOfResources.addAll(db2.findResourceByRoom(1));
-                CustomAction h = new CustomAction(1, listOfResources);
-                db5.deleteAllCustomActionOfEmployee(1);
+                //listOfResources.addAll(db2.findResourceByRoom(1)); 
+                CustomAction h = new CustomAction(1, "gustavo legal", listOfResources);
+                db5.insertCustomAction(h);
                 //System.out.println("Aqui");
                 //db1.insertEmployee(f);
                 //db1.insertEmployee(g);
@@ -163,11 +163,12 @@ public class Room {
                 //db2.insertResource(c);
                 //db3.deleteRoom(1);
                 //s.login("gvdambros","b");
-                //db4.insertGoal(e);
-                List<CustomAction> l = db5.findCustomActionByEmployee(1);
+                db4.insertGoal(e);
+                
+                //db1.promoteEmployee(2);
                 
                 //db1.promoteEmployee(1);
-                //db4.insertGoal(e);
+                //System.out.println(db4.findLastGoal().getDay().toString());
                 //db3.insertRoom(d);
                 
                 Goal test;

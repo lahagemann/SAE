@@ -23,17 +23,17 @@ public interface EmployeeDB {
     
     public void insertEmployee(Employee e) throws SQLException, ConnectionException;
     
-    public void deleteEmployee(int employeeID) throws SQLException, ConnectionException;
+    public void deleteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
     
     public void updateEmployee(Employee e) throws SQLException, ConnectionException;
     
-    public List<Employee> getEmployeeList() throws SQLException, ConnectionException;
+    public List<Employee> getEmployeeList() throws SQLException, ConnectionException, DataNotFoundException;
     
-    public Employee findEmployeeByID(int ID) throws SQLException, ConnectionException;
+    public Employee findEmployeeByID(int ID) throws SQLException, ConnectionException, DataNotFoundException;
     
-    public List<Employee> findEmployeeByRoom(int idroom) throws SQLException, ConnectionException;
+    public List<Employee> findEmployeeByRoom(int idroom) throws SQLException, ConnectionException, DataNotFoundException;
 
-	public Employee findEmployeeByEmail(String email) throws SQLException, ConnectionException;
+	public Employee findEmployeeByEmail(String email) throws SQLException, ConnectionException, DataNotFoundException;
 	
-	public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException;
+	public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 }

@@ -11,8 +11,10 @@ import application.Domain.Resource;
 import application.Domain.Room;
 import database.Connection.ConnectionException;
 import database.Connection.ConnectionFactory;
+import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.EmployeeDB;
 import database.ServicesDB.GoalDB;
+import database.ServicesDB.InconsistentDBException;
 import database.ServicesDB.ResourceDB;
 import database.ServicesDB.RoomDB;
 import java.sql.Connection;
@@ -91,7 +93,7 @@ public class RoomDBImpl implements RoomDB {
 	}
 
 	@Override
-	public List<Room> getRoomList() throws SQLException, ConnectionException {
+	public List<Room> getRoomList() throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException {
 
 		ResultSet resultset = null;
 		List<Room> results = new ArrayList<Room>();
@@ -107,13 +109,20 @@ public class RoomDBImpl implements RoomDB {
 			int idGoal = resultset.getInt("idGoal");
 
 			GoalDB gDB = new GoalDBImpl();
-			Goal g = gDB.findGoal(idGoal);
+			Goal g = gDB.findGoalByID(idGoal);
 
 			ResourceDB rDB = new ResourceDBImpl();
-			List<Resource> resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
-
 			EmployeeDB eDB = new EmployeeDBImpl();
-			List<Employee> employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
+			List<Resource> resourceList;
+			List<Employee> employeeList;
+			
+			try{
+				resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
+				employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
+			} catch(DataNotFoundException exp){
+				throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
+			}
+			
 
 			Room aux = new Room(identifier,
 					number,
@@ -129,7 +138,7 @@ public class RoomDBImpl implements RoomDB {
 	}
 
 	@Override
-	public Room findRoomByID(int id) throws SQLException, ConnectionException {
+	public Room findRoomByID(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException {
 
 		ResultSet resultset = null;
 		String query = "SELECT * FROM room WHERE identifier = " + id + ";";
@@ -147,13 +156,19 @@ public class RoomDBImpl implements RoomDB {
                 System.out.println(identifier + " " +number + " " + credit + " " + idGoal);
 
 		GoalDB gDB = new GoalDBImpl();
-		Goal g = gDB.findGoal(idGoal);
+		Goal g = gDB.findGoalByID(idGoal);
 
 		ResourceDB rDB = new ResourceDBImpl();
-		List<Resource> resourceList = rDB.findResourceByRoom(identifier);
-
 		EmployeeDB eDB = new EmployeeDBImpl();
-		List<Employee> employeeList = eDB.findEmployeeByRoom(identifier);
+		List<Resource> resourceList;
+		List<Employee> employeeList;
+		
+		try{
+			resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
+			employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
+		} catch(DataNotFoundException exp){
+			throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
+		}
 
 		Room aux = new Room(identifier,
 				number,

@@ -20,11 +20,17 @@ public interface GoalDB {
     
     public void disconnect() throws SQLException;
     
-    public void insertGoal(Goal g) throws SQLException, ConnectionException;
+    public void insertGoal(Goal g) throws SQLException, ConnectionException, 
+    		InvalidGoalException;
     
     public void deleteGoal(int goalID) throws SQLException, ConnectionException;
     
-    public List<Goal> getListGoal() throws SQLException, ConnectionException;
+    public List<Goal> getListGoal() throws SQLException, ConnectionException, 
+    		DataNotFoundException;
     
-    public Goal findGoal(int idGoal) throws SQLException, ConnectionException;
+    public Goal findGoalByID(int idGoal) throws SQLException, ConnectionException, 
+    		DataNotFoundException;
+
+	Goal findLastGoal() throws SQLException, ConnectionException,
+			DataNotFoundException;
 }

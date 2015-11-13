@@ -19,6 +19,7 @@ import java.util.List;
 import database.Connection.ConnectionException;
 import database.Connection.ConnectionFactory;
 import database.ServicesDB.CustomActionDB;
+import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.EmployeeDB;
 
 /**
@@ -54,28 +55,28 @@ public class EmployeeDBImpl implements EmployeeDB {
 		String query = "INSERT INTO employee (name, cpf, email, password, idRoom, isAdmin) VALUES "
 				+ "('" + e.getName() + "', '" + e.getCpf() + "', '" + e.getEmail() 
 				+ "', '" + e.getPassword() + "', " + e.getWorkRoomID() + " , " + isAdmin + ");";
-		
+
 		connect();
 		statement.executeUpdate(query);
 		CustomActionDB caDB = new CustomActionDBImpl();
 		List<CustomAction> listCustomAction = e.getCustomActionList();
-		
+
 		for(int i = 0; i < listCustomAction.size(); i++){
 			caDB.insertCustomAction( listCustomAction.get(i) );
 		}
-		
+
 		disconnect();
 	}
 
 	@Override
-	public void deleteEmployee(int employeeID) throws SQLException, ConnectionException {
+	public void deleteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException {
 		String query = "DELETE FROM employee WHERE identifier = " + employeeID + ";";
 		CustomActionDB caDB = new CustomActionDBImpl();
 		connect();
 		statement.executeUpdate(query);
-		
+
 		caDB.deleteAllCustomActionOfEmployee(employeeID);
-		
+
 		disconnect();
 
 	}
@@ -99,64 +100,76 @@ public class EmployeeDBImpl implements EmployeeDB {
 	}
 
 	@Override
-	public List<Employee> getEmployeeList() throws SQLException, ConnectionException {
+	public List<Employee> getEmployeeList() throws SQLException, ConnectionException, DataNotFoundException {
 		ResultSet resultset = null;
 		List<Employee> results = new ArrayList<Employee>();
 		String query = "SELECT * FROM employee";
 
 		connect();
-		resultset = statement.executeQuery(query);
 
-		while (resultset.next()) {
-			Employee aux;
-			if(resultset.getInt("isAdmin") == 0){
-				aux = new Employee(resultset.getString("name"),
-						resultset.getInt("identifier"), 
-						resultset.getString("cpf"),
-						resultset.getString("email"),
-						resultset.getString("password"),
-						resultset.getInt("idRoom"),
-						listOfCustomActions( resultset.getInt("identifier") ),
-						resultset.getInt("isAdmin"));
-			}
-			else{
-				aux = new Admin(resultset.getString("name"),
-						resultset.getInt("identifier"), 
-						resultset.getString("cpf"),
-						resultset.getString("email"),
-						resultset.getString("password"),
-						resultset.getInt("idRoom"),
-						listOfCustomActions( resultset.getInt("identifier") ),
-						resultset.getInt("isAdmin"));
-			}
+		try{ 
+			resultset = statement.executeQuery(query);
+			while (resultset.next()) {
+				Employee aux;
+				if(resultset.getInt("isAdmin") == 0){
+					aux = new Employee(resultset.getString("name"),
+							resultset.getInt("identifier"), 
+							resultset.getString("cpf"),
+							resultset.getString("email"),
+							resultset.getString("password"),
+							resultset.getInt("idRoom"),
+							listOfCustomActions( resultset.getInt("identifier") ),
+							resultset.getInt("isAdmin"));
+				}
+				else{
+					aux = new Admin(resultset.getString("name"),
+							resultset.getInt("identifier"), 
+							resultset.getString("cpf"),
+							resultset.getString("email"),
+							resultset.getString("password"),
+							resultset.getInt("idRoom"),
+							listOfCustomActions( resultset.getInt("identifier") ),
+							resultset.getInt("isAdmin"));
+				}
 
-			results.add(aux);
-			
+				results.add(aux);
+
+			}
 		}
+		catch(SQLException exp){
+			disconnect();
+			throw new DataNotFoundException("Não há funcionários cadastrados.");
+		}
+		
 		disconnect();
-
 		return results;
 	}
 
 	@Override
-	public Employee findEmployeeByID(int ID) throws SQLException, ConnectionException {
+	public Employee findEmployeeByID(int ID) throws SQLException, ConnectionException, DataNotFoundException {
 
 		ResultSet resultset = null;
 		String query = "SELECT * FROM employee WHERE identifier = " + ID + ";";
 		Employee aux;
 		connect();
-		resultset = statement.executeQuery(query);
-		resultset.next();
 
-		String name = resultset.getString("name");
-		int identifier = resultset.getInt("identifier"); 
-		String cpf = resultset.getString("cpf");
-		String email = resultset.getString("email");
-		String password = resultset.getString("password");
-		int room = resultset.getInt("idRoom");
-		int isAdmin = resultset.getInt("isAdmin");
+		int identifier, room, isAdmin;
+		String name, cpf, email, password;
 
-		
+		try{
+			resultset = statement.executeQuery(query);
+			resultset.next();
+			name = resultset.getString("name");
+			identifier = resultset.getInt("identifier"); 
+			cpf = resultset.getString("cpf");
+			email = resultset.getString("email");
+			password = resultset.getString("password");
+			room = resultset.getInt("idRoom");
+			isAdmin = resultset.getInt("isAdmin");
+		} catch(SQLException exp){
+			disconnect();
+			throw new DataNotFoundException("O funcionário não foi encontrado.");
+		}
 
 		if(isAdmin == 0){
 			aux = new Employee(name, identifier, cpf, email, password, room, listOfCustomActions(identifier), isAdmin);
@@ -166,104 +179,112 @@ public class EmployeeDBImpl implements EmployeeDB {
 		}
 
 		disconnect();
-
 		return aux;
-
 	}
 
 	@Override
-	public List<Employee> findEmployeeByRoom(int idroom) throws SQLException, ConnectionException {
+	public List<Employee> findEmployeeByRoom(int idroom) throws SQLException, ConnectionException, DataNotFoundException {
 		ResultSet resultset = null;
 		List<Employee> results = new ArrayList<Employee>();
 		String query = "SELECT * FROM employee WHERE idRoom = " + idroom + ";";
 
 		connect();
-		resultset = statement.executeQuery(query);                
 
-		while (resultset.next()) {
-			Employee aux;
-			String name = resultset.getString("name");
-			int identifier = resultset.getInt("identifier"); 
-			String cpf = resultset.getString("cpf");
-			String email = resultset.getString("email");
-			String password = resultset.getString("password");
-			int room = resultset.getInt("idRoom");
-			int isAdmin = resultset.getInt("isAdmin");
-			if(isAdmin == 0){
-				aux = new Employee(name, identifier, cpf, email, password, room, listOfCustomActions(identifier), isAdmin);
+		try{
+			resultset = statement.executeQuery(query);                
+			while (resultset.next()) {
+				Employee aux;
+				String name = resultset.getString("name");
+				int identifier = resultset.getInt("identifier"); 
+				String cpf = resultset.getString("cpf");
+				String email = resultset.getString("email");
+				String password = resultset.getString("password");
+				int room = resultset.getInt("idRoom");
+				int isAdmin = resultset.getInt("isAdmin");
+				if(isAdmin == 0){
+					aux = new Employee(name, identifier, cpf, email, password, room, listOfCustomActions(identifier), isAdmin);
+				}
+				else{
+					aux = new Admin(name, identifier, cpf, email, password, room, listOfCustomActions(identifier), isAdmin);
+				}
+				results.add(aux);
 			}
-			else{
-				aux = new Admin(name, identifier, cpf, email, password, room, listOfCustomActions(identifier), isAdmin);
-			}
-					
-			results.add(aux);
+		} catch(SQLException exp){
+			disconnect();
+			throw new DataNotFoundException("A sala não possui funcionários.");
 		}
+
 		disconnect();
-
 		return results;
-
 	}
 
 	@Override
-	public Employee findEmployeeByEmail(String email) throws SQLException, ConnectionException {
+	public Employee findEmployeeByEmail(String email) throws SQLException, ConnectionException, DataNotFoundException {
 		ResultSet resultset = null;
 		Employee employee;
 		String query = "SELECT * FROM employee WHERE email = '" + email + "';";
-
+		int identifier, room, isAdmin;
+		String name, cpf, password;
 		connect();
-		resultset = statement.executeQuery(query);
-		resultset.next();
+		try{
+			resultset = statement.executeQuery(query);
+			resultset.next();
+			name = resultset.getString("name");
+			identifier = resultset.getInt("identifier"); 
+			cpf = resultset.getString("cpf");
+			password = resultset.getString("password");
+			room = resultset.getInt("idRoom");
+			isAdmin = resultset.getInt("isAdmin");
+		} catch(SQLException exp){
+			disconnect();
+			throw new DataNotFoundException("O funcionário não foi encontrado.");
+		}
 
-		String name = resultset.getString("name");
-		int identifier = resultset.getInt("identifier"); 
-		String cpf = resultset.getString("cpf");
-		String mail = resultset.getString("email");
-		String password = resultset.getString("password");
-		int room = resultset.getInt("idRoom");
-		int isAdmin = resultset.getInt("isAdmin");
-
-		if(isAdmin == 0)
-			employee = new Employee(name, identifier, cpf, mail, password, room, listOfCustomActions(identifier), isAdmin);
-		else
-			employee = new Admin(name, identifier, cpf, mail, password, room, listOfCustomActions(identifier), isAdmin);
-		
+		if(isAdmin == 0){
+			employee = new Employee(name, identifier, cpf, email, password, room, listOfCustomActions(identifier), isAdmin);
+		} else {
+			employee = new Admin(name, identifier, cpf, email, password, room, listOfCustomActions(identifier), isAdmin);
+		}
 		disconnect();
-
 		return employee;
 	}
 
-	public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException{
+	public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException{
 
 		ResultSet resultset = null;
 		String query = "SELECT * FROM employee WHERE identifier = " + employeeID + ";";
 		connect();
 		resultset = statement.executeQuery(query);
 		resultset.next();
-		if(resultset.getInt("isAdmin") == 0){
-			query = "UPDATE employee SET isAdmin = " + 1 + " WHERE identifier = " + employeeID + ";";
-			statement.executeUpdate(query);
-			disconnect();
-			return true;
-		}
-		else{
-			disconnect();
-			return false;
-		}
-	}
-	
-	private static List<CustomAction> listOfCustomActions(int employeeID){
-		CustomActionDB caDB = new CustomActionDBImpl();
-		List<CustomAction> customActionList = new ArrayList<CustomAction>();
-		
+
 		try{
-			customActionList = caDB.findCustomActionByEmployee(employeeID);
+			if(resultset.getInt("isAdmin") == 0){
+				query = "UPDATE employee SET isAdmin = " + 1 + " WHERE identifier = " + employeeID + ";";
+				statement.executeUpdate(query);
+				disconnect();
+				return true;
+			}
+			else{
+				disconnect();
+				return false;
+			}
+		} catch(SQLException exp){
+			disconnect();
+			throw new DataNotFoundException("O funcionário não foi encontrado.");
 		}
-		catch(Exception e){ // exceção que a jessica vai criar
-			// acho que não vai fazer nada, só não vai passar exceção em diante
-		}
-		return customActionList;
-		
 	}
+
+
+private static List<CustomAction> listOfCustomActions(int employeeID){
+	CustomActionDB caDB = new CustomActionDBImpl();
+	List<CustomAction> customActionList = new ArrayList<CustomAction>();
+
+	try{
+		customActionList = caDB.findCustomActionByEmployee(employeeID);
+	}
+	catch(Exception e){ } // empregado pode não ter ações personalizadas
+	return customActionList;
+}
 
 }
 

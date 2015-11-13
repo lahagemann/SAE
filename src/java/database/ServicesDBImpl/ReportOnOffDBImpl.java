@@ -13,7 +13,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import application.Domain.TurnOnOrOffReport;
 /**
  *
  * @author Jessica
@@ -107,5 +111,36 @@ public class ReportOnOffDBImpl implements ReportOnOffDB {
                 return false;  
             
         }
+    
+	public List<TurnOnOrOffReport> findAllReportByDate(Date dayRequested) throws SQLException, ConnectionException{
+
+		ResultSet resultset = null;
+
+		List<TurnOnOrOffReport> results = new ArrayList<TurnOnOrOffReport>();
+		TurnOnOrOffReport aux;
+
+
+		String day = (dayRequested.getYear() + 1900) + "-" + (dayRequested.getMonth() + 1) + "-" + dayRequested.getDate(); 
+
+		String query = "SELECT * FROM reportonoff WHERE initialTime BETWEEN '" +day+ "  00:00:00' AND '"+day+" 23:59:59' OR finalTime BETWEEN '" +day+ "  00:00:00' AND '"+day+" 23:59:59';";
+
+		connect();
+
+		resultset = statement.executeQuery(query);
+		
+		while (resultset.next()) {
+
+			aux = new TurnOnOrOffReport(
+					resultset.getInt("idResource"), 
+					(Date) resultset.getTimestamp("initialTime"), 
+					(Date) resultset.getTimestamp("finalTime") );
+
+			results.add( aux );    
+
+		}
+
+		disconnect();
+		return results;
+	}
     
 }
