@@ -50,9 +50,8 @@ public class RoomDBImpl implements RoomDB {
 
 		// query para inserir novo registro na tabela room
 		// informaçoes de relacionamento do resource e employee eh feita em outra query
-		String query = "INSERT INTO room (number, creditAmount, idGoal) VALUES " 
-				+ "('" + r.getRoomNumber() + "', '" + r.getCreditAmount() + "', '" 
-				+ r.getDailyGoal().getIdentifier() + "');";
+		String query = "INSERT INTO room (number, creditAmount) VALUES " 
+				+ "('" + r.getRoomNumber() + "', '" + r.getCreditAmount() + "');";
 
 		connect();
 		statement.executeUpdate(query);
@@ -98,8 +97,8 @@ public class RoomDBImpl implements RoomDB {
 		ResultSet resultset = null;
 		List<Room> results = new ArrayList<Room>();
 		String query = "SELECT * FROM room";
-
 		connect();
+		
 		resultset = statement.executeQuery(query);
 
 		while (resultset.next()) {

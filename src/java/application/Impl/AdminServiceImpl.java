@@ -10,8 +10,11 @@ import application.Interface.AdminService;
 import application.Interface.LicenceException;
 
 import database.Connection.ConnectionException;
+import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.EmployeeDB;
 import database.ServicesDB.GoalDB;
+import database.ServicesDB.InconsistentDBException;
+import database.ServicesDB.InvalidGoalException;
 import database.ServicesDB.ResourceDB;
 import database.ServicesDB.RoomDB;
 import database.ServicesDBImpl.EmployeeDBImpl;
@@ -30,7 +33,7 @@ import java.util.List;
 public class AdminServiceImpl extends EmployeeServiceImpl implements AdminService {
 
 	@Override
-	public void warnFlawResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException {
+	public void warnRepairResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException {
 
 		ResourceDB resourceDB = new ResourceDBImpl();
 
@@ -43,13 +46,13 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	}
 
 	@Override
-	public List<Room> listAllRooms() throws SQLException, ConnectionException {
+	public List<Room> listAllRooms() throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException {
 		RoomDB roomDB = new RoomDBImpl();
 		return roomDB.getRoomList();
 	}
 
 	@Override
-	public List<Employee> listAllEmployees() throws SQLException, ConnectionException {
+	public List<Employee> listAllEmployees() throws SQLException, ConnectionException, DataNotFoundException {
 		EmployeeDB employeeDB = new EmployeeDBImpl();
 		return employeeDB.getEmployeeList();
 
@@ -79,16 +82,16 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	}
 
 	@Override
-	public boolean createRoom(int roomNumber, float creditAmount, int dailyGoalID) throws SQLException, ConnectionException {
+	public boolean createRoom(int roomNumber, float creditAmount, int dailyGoalID) throws SQLException, ConnectionException, DataNotFoundException {
 		RoomDB roomDB = new RoomDBImpl();
 		GoalDB goalDB = new GoalDBImpl();
-		Room room = new Room(roomNumber, creditAmount, goalDB.findGoal(dailyGoalID));
+		Room room = new Room(roomNumber, creditAmount, goalDB.findLastGoal());
 		roomDB.insertRoom(room);
 		return true;
 	}
 
 	@Override
-	public boolean createGoal(Date day, float value) throws SQLException, ConnectionException {
+	public boolean createGoal(Date day, float value) throws SQLException, ConnectionException, InvalidGoalException {
 		GoalDB goalDB = new GoalDBImpl();
 		Goal goal = new Goal(day, value);
 		goalDB.insertGoal(goal);
@@ -103,7 +106,7 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	}
 
 	@Override
-	public boolean deleteEmployee(int employeeID) throws SQLException, ConnectionException {
+	public boolean deleteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException {
 		EmployeeDB employeeDB = new EmployeeDBImpl();
 		employeeDB.deleteEmployee(employeeID);
 		return true;
@@ -124,7 +127,7 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	}
 
 	@Override
-	public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException {
+	public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException {
 		boolean result;
 		EmployeeDB employeeDB = new EmployeeDBImpl();
 		result = employeeDB.promoteEmployee(employeeID);
@@ -132,7 +135,7 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	}
 
 	@Override
-	public Employee findEmployee(int id) throws SQLException, ConnectionException {
+	public Employee findEmployee(int id) throws SQLException, ConnectionException, DataNotFoundException {
 		EmployeeDB employeeDB = new EmployeeDBImpl();
 		return employeeDB.findEmployeeByID(id);
 	}
@@ -144,13 +147,13 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	}
 
 	@Override
-	public Resource findResource(int id) throws SQLException, ConnectionException {
+	public Resource findResource(int id) throws SQLException, ConnectionException, DataNotFoundException {
 		ResourceDB resourceDB = new ResourceDBImpl();
 		return resourceDB.findResourceByID(id);
 	}
 
 	@Override
-	public Room findRoom(int id) throws SQLException, ConnectionException {
+	public Room findRoom(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException {
 		RoomDB roomDB = new RoomDBImpl();
 		return roomDB.findRoomByID(id);
 	}
