@@ -50,9 +50,8 @@ public class RoomDBImpl implements RoomDB {
 
 		// query para inserir novo registro na tabela room
 		// informaçoes de relacionamento do resource e employee eh feita em outra query
-		String query = "INSERT INTO room (number, creditAmount, idGoal) VALUES " 
-				+ "('" + r.getRoomNumber() + "', '" + r.getCreditAmount() + "', '" 
-				+ r.getDailyGoal().getIdentifier() + "');";
+		String query = "INSERT INTO room (number, creditAmount) VALUES " 
+				+ "('" + r.getRoomNumber() + "', '" + r.getCreditAmount() + "');";
 
 		connect();
 		statement.executeUpdate(query);
@@ -73,7 +72,7 @@ public class RoomDBImpl implements RoomDB {
 		statement.executeUpdate(query2);
 
 		String query3 = "UPDATE resource SET idRoom = 0 WHERE idRoom = " + roomID + ";";
-		
+
 		statement.executeUpdate(query3);
 
 		disconnect();
@@ -98,41 +97,51 @@ public class RoomDBImpl implements RoomDB {
 		ResultSet resultset = null;
 		List<Room> results = new ArrayList<Room>();
 		String query = "SELECT * FROM room";
-
 		connect();
-		resultset = statement.executeQuery(query);
 
-		while (resultset.next()) {
-			int identifier = resultset.getInt("identifier");
-			int number = resultset.getInt("number");
-			float credit = resultset.getFloat("creditAmount");
-			int idGoal = resultset.getInt("idGoal");
+		int identifier = 0, number = 0, idGoal = 0;
+		float credit = 0;
 
-			GoalDB gDB = new GoalDBImpl();
-			Goal g = gDB.findGoalByID(idGoal);
+		try{ 
+			resultset = statement.executeQuery(query);
 
-			ResourceDB rDB = new ResourceDBImpl();
-			EmployeeDB eDB = new EmployeeDBImpl();
-			List<Resource> resourceList;
-			List<Employee> employeeList;
-			
-			try{
-				resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
-				employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
-			} catch(DataNotFoundException exp){
-				throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
+
+			while (resultset.next()) {
+				identifier = resultset.getInt("identifier");
+				number = resultset.getInt("number");
+				credit = resultset.getFloat("creditAmount");
+				idGoal = resultset.getInt("idGoal");
 			}
-			
-
-			Room aux = new Room(identifier,
-					number,
-					credit,
-					g, 
-					resourceList, 
-					employeeList);
-			results.add(aux);
+		} catch(SQLException exp){
+			disconnect();
+			throw new DataNotFoundException("A sala não foi encontrada.");
 		}
-		disconnect();
+		ResourceDB rDB = new ResourceDBImpl();
+		EmployeeDB eDB = new EmployeeDBImpl();
+		GoalDB gDB = new GoalDBImpl();
+		List<Resource> resourceList;
+		List<Employee> employeeList;
+		Goal g;
+		try{
+			g = gDB.findGoalByID(idGoal);
+			resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
+			employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
+		} catch(DataNotFoundException exp){
+			throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
+		} finally{
+			disconnect();
+		}
+
+
+		Room aux = new Room(identifier,
+				number,
+				credit,
+				g, 
+				resourceList, 
+				employeeList);
+		results.add(aux);
+
+
 		return results;
 
 	}
@@ -142,32 +151,42 @@ public class RoomDBImpl implements RoomDB {
 
 		ResultSet resultset = null;
 		String query = "SELECT * FROM room WHERE identifier = " + id + ";";
-
+		int identifier = 0, number = 0, idGoal = 0;
+		float credit = 0;
 		connect(); 
 
-		resultset = statement.executeQuery(query);
-		resultset.next();
+		try{
+			resultset = statement.executeQuery(query);
+			resultset.next();
 
-		int identifier = resultset.getInt("identifier");
-		int number = resultset.getInt("number");
-		float credit = resultset.getFloat("creditAmount");
-		int idGoal = resultset.getInt("idGoal");
-                
-                System.out.println(identifier + " " +number + " " + credit + " " + idGoal);
+			identifier = resultset.getInt("identifier");
+			number = resultset.getInt("number");
+			credit = resultset.getFloat("creditAmount");
+			idGoal = resultset.getInt("idGoal");
+
+			System.out.println(identifier + " " +number + " " + credit + " " + idGoal);
+
+		} catch(SQLException exp){
+			disconnect();
+			throw new DataNotFoundException("A sala não foi encontrada."); 
+		}
 
 		GoalDB gDB = new GoalDBImpl();
-		Goal g = gDB.findGoalByID(idGoal);
-
+		Goal g;
 		ResourceDB rDB = new ResourceDBImpl();
 		EmployeeDB eDB = new EmployeeDBImpl();
 		List<Resource> resourceList;
 		List<Employee> employeeList;
-		
+
 		try{
 			resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
 			employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
+			g = gDB.findGoalByID(idGoal);
 		} catch(DataNotFoundException exp){
 			throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
+		}
+		finally{
+			disconnect();
 		}
 
 		Room aux = new Room(identifier,
@@ -176,7 +195,6 @@ public class RoomDBImpl implements RoomDB {
 				g, 
 				resourceList, 
 				employeeList);       
-		disconnect();
 		return aux;
 
 

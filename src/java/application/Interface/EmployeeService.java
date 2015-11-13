@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import database.Connection.ConnectionException;
+import database.ServicesDB.DataNotFoundException;
+import database.ServicesDB.InconsistentDBException;
 
 /**
  *
@@ -20,19 +22,19 @@ import database.Connection.ConnectionException;
  */
 public interface EmployeeService {
 
-	public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException;
+	public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException;
         
-	public void turnOffResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException;
+	public void turnOffResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException, InconsistentDBException;
         	
-	public void warnFlawResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException;
+	public void warnFlawResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException;
 	
-	public List<Resource> listResorcesWorkRoom(int employeeID) throws SQLException, ConnectionException;
+	public List<Resource> listResorcesWorkRoom(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 	
-	public List<CustomAction> listCustomActions(int employeeID) throws SQLException, ConnectionException;
+	public List<CustomAction> listCustomActions(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 	
-	public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction, SQLException, ConnectionException; 
+	public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction, SQLException, ConnectionException, DataNotFoundException; 
 	
 	public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction;
 	
-	public Employee login(String email, String password) throws InvalidUserException, ConnectionException;
+	public Employee login(String email, String password) throws InvalidUserException, ConnectionException, DataNotFoundException;
 }

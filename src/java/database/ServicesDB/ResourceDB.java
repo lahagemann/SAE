@@ -26,9 +26,9 @@ public interface ResourceDB {
     
     public void updateResource(Resource r) throws SQLException, ConnectionException;
     
-    public Resource findResourceByID(int ID) throws SQLException, ConnectionException;
+    public Resource findResourceByID(int ID) throws SQLException, ConnectionException, DataNotFoundException;
     
-    public List<Resource> findResourceByRoom(int room) throws SQLException, ConnectionException;
+    public List<Resource> findResourceByRoom(int room) throws SQLException, ConnectionException, DataNotFoundException;
     
-    public List<Resource> getAllResources() throws SQLException, ConnectionException;
+    public List<Resource> getAllResources() throws SQLException, ConnectionException, DataNotFoundException;
 }
