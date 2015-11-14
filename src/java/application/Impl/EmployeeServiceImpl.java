@@ -210,4 +210,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 	}
 
+    @Override
+    public boolean createCustomAction(int employeeID, String name, List<Resource> listResources) throws SQLException, ConnectionException {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        CustomActionDB customActionDB = new CustomActionDBImpl();
+        CustomAction customAction = new CustomAction(employeeID, name, listResources);
+        customActionDB.insertCustomAction(customAction); 
+        return true;
+    }
+
 }

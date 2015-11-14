@@ -37,4 +37,6 @@ public interface EmployeeService {
 	public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction;
 	
 	public Employee login(String email, String password) throws InvalidUserException, ConnectionException, DataNotFoundException;
+        
+        public boolean createCustomAction(int employeeID, String name, List<Resource> listResources) throws SQLException, ConnectionException;
 }
