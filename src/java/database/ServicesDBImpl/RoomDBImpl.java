@@ -102,46 +102,43 @@ public class RoomDBImpl implements RoomDB {
 		int identifier = 0, number = 0, idGoal = 0;
 		float credit = 0;
 
-		try{ 
-			resultset = statement.executeQuery(query);
+		resultset = statement.executeQuery(query);
 
-
-			while (resultset.next()) {
+		while (resultset.next()) {
+			try{ 
 				identifier = resultset.getInt("identifier");
 				number = resultset.getInt("number");
 				credit = resultset.getFloat("creditAmount");
 				idGoal = resultset.getInt("idGoal");
+			} catch(SQLException exp){
+				disconnect();
+				throw new DataNotFoundException("A sala não foi encontrada.");
 			}
-		} catch(SQLException exp){
-			disconnect();
-			throw new DataNotFoundException("A sala não foi encontrada.");
+
+			ResourceDB rDB = new ResourceDBImpl();
+			EmployeeDB eDB = new EmployeeDBImpl();
+			GoalDB gDB = new GoalDBImpl();
+			List<Resource> resourceList;
+			List<Employee> employeeList;
+			Goal g;
+			try{
+				g = gDB.findGoalByID(idGoal);
+				resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
+				employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
+			} catch(DataNotFoundException exp){
+				throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
+			}
+			results.add( 
+					new Room(identifier,
+							 number,
+							 credit,
+							 g, 
+							 resourceList, 
+							 employeeList) 
+					);
 		}
-		ResourceDB rDB = new ResourceDBImpl();
-		EmployeeDB eDB = new EmployeeDBImpl();
-		GoalDB gDB = new GoalDBImpl();
-		List<Resource> resourceList;
-		List<Employee> employeeList;
-		Goal g;
-		try{
-			g = gDB.findGoalByID(idGoal);
-			resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
-			employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
-		} catch(DataNotFoundException exp){
-			throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
-		} finally{
-			disconnect();
-		}
 
-
-		Room aux = new Room(identifier,
-				number,
-				credit,
-				g, 
-				resourceList, 
-				employeeList);
-		results.add(aux);
-
-
+		disconnect();
 		return results;
 
 	}
@@ -163,8 +160,6 @@ public class RoomDBImpl implements RoomDB {
 			number = resultset.getInt("number");
 			credit = resultset.getFloat("creditAmount");
 			idGoal = resultset.getInt("idGoal");
-
-			System.out.println(identifier + " " +number + " " + credit + " " + idGoal);
 
 		} catch(SQLException exp){
 			disconnect();
@@ -189,14 +184,11 @@ public class RoomDBImpl implements RoomDB {
 			disconnect();
 		}
 
-		Room aux = new Room(identifier,
+		return new Room(identifier,
 				number,
 				credit,
 				g, 
 				resourceList, 
-				employeeList);       
-		return aux;
-
-
+				employeeList); 
 	}
 }

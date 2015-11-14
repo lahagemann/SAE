@@ -163,7 +163,13 @@ public class Room {
                 //db2.insertResource(c);
                 //db3.deleteRoom(1);
                 //s.login("gvdambros","b");
-                db4.insertGoal(e);
+                //db4.insertGoal(e);
+                
+                List<Room> aux = db3.getRoomList();
+                
+                for(int i = 0; i < aux.size(); i++) System.out.println(aux.get(i).toString());
+                
+                System.out.println( ">>> " + db3.findRoomByID(2).toString());
                 
                 //db1.promoteEmployee(2);
                 
@@ -183,7 +189,7 @@ public class Room {
                 //sala.setDailyGoal(test);
                 //db3.updateRoom(sala);
                 
-                System.out.println(sala);
+                //System.out.println(sala);
                // System.out.println(test.getIdentifier());
                 
                 //for(int i = 0; i < l.size(); i++){
