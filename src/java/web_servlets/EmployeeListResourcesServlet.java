@@ -7,12 +7,10 @@ package web_servlets;
 
 import application.Domain.Employee;
 import application.Domain.Resource;
-import application.Domain.Room;
-import application.Impl.AdminServiceImpl;
 import application.Impl.EmployeeServiceImpl;
-import application.Interface.AdminService;
 import application.Interface.EmployeeService;
 import database.Connection.ConnectionException;
+import database.ServicesDB.DataNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -48,6 +46,8 @@ public class EmployeeListResourcesServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeListResourcesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConnectionException ex) {
+            Logger.getLogger(EmployeeListResourcesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataNotFoundException ex) {
             Logger.getLogger(EmployeeListResourcesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         

@@ -11,6 +11,7 @@ import application.Impl.EmployeeServiceImpl;
 import application.Interface.EmployeeService;
 import application.Interface.InvalidUserException;
 import database.Connection.ConnectionException;
+import database.ServicesDB.DataNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,6 +66,8 @@ public class ValidateLoginServlet extends HttpServlet {
         } catch (ConnectionException s) {
             s.printStackTrace();
         } catch (InvalidUserException ex) {
+            Logger.getLogger(ValidateLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataNotFoundException ex) {
             Logger.getLogger(ValidateLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 

@@ -8,9 +8,12 @@ package web_servlets;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
 import database.Connection.ConnectionException;
+import database.ServicesDB.InvalidGoalException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +46,8 @@ public class AddGoalServlet extends HttpServlet {
             s.printStackTrace();
         } catch (ConnectionException s) {
             s.printStackTrace();
+        } catch (InvalidGoalException ex) {
+            Logger.getLogger(AddGoalServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);

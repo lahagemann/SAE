@@ -10,8 +10,11 @@ import application.Domain.Resource;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
 import database.Connection.ConnectionException;
+import database.ServicesDB.DataNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +44,8 @@ public class ModifyResourceFormServlet extends HttpServlet {
             s.printStackTrace();
         } catch (ConnectionException s) {
             s.printStackTrace();
+        } catch (DataNotFoundException ex) {
+            Logger.getLogger(ModifyResourceFormServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         request.getRequestDispatcher("/ModifyResource.jsp").forward(request, response);

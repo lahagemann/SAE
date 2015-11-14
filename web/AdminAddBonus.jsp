@@ -41,7 +41,7 @@
             Employee e = (Employee) session.getAttribute("user");
             Room eRoom = service.findRoom(e.getWorkRoomID());
             Goal g = new Goal(null, 0);// = service.findGoal();            
-%>
+    %>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= eRoom.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              

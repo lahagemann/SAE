@@ -11,6 +11,7 @@ import application.Domain.Resource;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
 import database.Connection.ConnectionException;
+import database.ServicesDB.DataNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -48,6 +49,8 @@ public class AdminAddCustomActionServlet extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(AdminAddCustomActionServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ConnectionException ex) {
+                Logger.getLogger(AdminAddCustomActionServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DataNotFoundException ex) {
                 Logger.getLogger(AdminAddCustomActionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
