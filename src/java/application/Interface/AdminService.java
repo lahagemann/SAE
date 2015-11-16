@@ -24,12 +24,12 @@ import database.ServicesDB.InvalidGoalException;
  */
 public interface AdminService extends EmployeeService {
 
-	public void warnRepairResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException;
+    public void warnRepairResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException;
 
     public List<Room> listAllRooms() throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
 
     public List<Employee> listAllEmployees() throws SQLException, ConnectionException, DataNotFoundException;
-    
+
     public List<Resource> listAllResources() throws SQLException, ConnectionException;
 
     public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException;
@@ -38,7 +38,7 @@ public interface AdminService extends EmployeeService {
             int roomID, int isAdmin) throws SQLException, ConnectionException;
 
     public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
-    
+
     void updateEmployee(Employee e) throws SQLException, ConnectionException;
 
     boolean createRoom(int roomNumber, float creditAmount, int dailyGoalID)
@@ -53,14 +53,8 @@ public interface AdminService extends EmployeeService {
     boolean deleteRoom(int roomID) throws SQLException, ConnectionException;
 
     boolean deleteGoal(int goalID) throws SQLException, ConnectionException;
-    
-    Employee findEmployee(int id) throws SQLException, ConnectionException, DataNotFoundException;
-    
-    Resource findResource(int id) throws SQLException, ConnectionException, DataNotFoundException;
-    
-    Room findRoom(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
-    
+
     void updateResource(Resource r) throws SQLException, ConnectionException;
-    
+
     void updateRoom(Room r) throws SQLException, ConnectionException;
 }

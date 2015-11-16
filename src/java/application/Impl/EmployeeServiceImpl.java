@@ -36,231 +36,244 @@ import database.ServicesDBImpl.RoomDBImpl;
  */
 public class EmployeeServiceImpl implements EmployeeService {
 
-	public EmployeeServiceImpl() {
-		super();
-	}
+    public EmployeeServiceImpl() {
+        super();
+    }
 
-	@Override
-	public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException {
-		ResourceDB resourceDB = new ResourceDBImpl();
-		EmployeeDB employeeDB = new EmployeeDBImpl();
-		Resource resource = resourceDB.findResourceByID(resourceID);
-		Employee employee = employeeDB.findEmployeeByID(employeeID);
+    @Override
+    public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException {
+        ResourceDB resourceDB = new ResourceDBImpl();
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+        Resource resource = resourceDB.findResourceByID(resourceID);
+        Employee employee = employeeDB.findEmployeeByID(employeeID);
 
-		if (checkLicense(resource, employee)) {
-			createTurnOnReport(resource);
-			resourceDB.updateResource(resource);
-		} else {
-			throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
-		}
-	}
+        if (checkLicense(resource, employee)) {
+            createTurnOnReport(resource);
+            resourceDB.updateResource(resource);
+        } else {
+            throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
+        }
+    }
 
-	@Override
-	public void turnOffResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException, InconsistentDBException {
+    @Override
+    public void turnOffResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException, InconsistentDBException {
 
-		ResourceDB resourceDB = new ResourceDBImpl();
-		EmployeeDB employeeDB = new EmployeeDBImpl();
+        ResourceDB resourceDB = new ResourceDBImpl();
+        EmployeeDB employeeDB = new EmployeeDBImpl();
 
-		Resource resource = resourceDB.findResourceByID(resourceID);
-		Employee employee = employeeDB.findEmployeeByID(employeeID);
+        Resource resource = resourceDB.findResourceByID(resourceID);
+        Employee employee = employeeDB.findEmployeeByID(employeeID);
 
-		if (checkLicense(resource, employee)) {
-			createTurnOffReport(resource);
-			resourceDB.updateResource(resource);
-		} else {
-			throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
-		}
-	}
+        if (checkLicense(resource, employee)) {
+            createTurnOffReport(resource);
+            resourceDB.updateResource(resource);
+        } else {
+            throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
+        }
+    }
 
-	@Override
-	public void warnFlawResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException {
+    @Override
+    public void warnFlawResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException {
 
-		ResourceDB resourceDB = new ResourceDBImpl();
-		EmployeeDB employeeDB = new EmployeeDBImpl();
+        ResourceDB resourceDB = new ResourceDBImpl();
+        EmployeeDB employeeDB = new EmployeeDBImpl();
 
-		Resource resource = resourceDB.findResourceByID(resourceID);
-		Employee employee = employeeDB.findEmployeeByID(employeeID);
+        Resource resource = resourceDB.findResourceByID(resourceID);
+        Employee employee = employeeDB.findEmployeeByID(employeeID);
 
-		if (checkLicense(resource, employee)) {
-			createFlawReport(resource);
-			resourceDB.updateResource( resource );
-		} else {
-			throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
-		}
+        if (checkLicense(resource, employee)) {
+            createFlawReport(resource);
+            resourceDB.updateResource(resource);
+        } else {
+            throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
+        }
 
-		return;
-	}
+        return;
+    }
 
-	@Override
-	public List<Resource> listResorcesWorkRoom(int employeeID) throws SQLException, ConnectionException, DataNotFoundException {
-		EmployeeDB employeeDB = new EmployeeDBImpl();
-		Employee e = employeeDB.findEmployeeByID(employeeID);
+    @Override
+    public List<Resource> listResorcesWorkRoom(int employeeID) throws SQLException, ConnectionException, DataNotFoundException {
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+        Employee e = employeeDB.findEmployeeByID(employeeID);
 
-		ResourceDB resourceDB = new ResourceDBImpl();
-		return resourceDB.findResourceByRoom(e.getWorkRoomID());
-	}
+        ResourceDB resourceDB = new ResourceDBImpl();
+        return resourceDB.findResourceByRoom(e.getWorkRoomID());
+    }
 
-	@Override
-	public List<CustomAction> listCustomActions(int employeeID) throws SQLException, ConnectionException, DataNotFoundException {
-		EmployeeDB employeeDB = new EmployeeDBImpl();
+    @Override
+    public List<CustomAction> listCustomActions(int employeeID) throws SQLException, ConnectionException, DataNotFoundException {
+        EmployeeDB employeeDB = new EmployeeDBImpl();
 
-		Employee employee = employeeDB.findEmployeeByID(employeeID);
+        Employee employee = employeeDB.findEmployeeByID(employeeID);
 
-		return employee.getCustomActionList();
-	}
+        return employee.getCustomActionList();
+    }
 
-	@Override
-	public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction, SQLException, ConnectionException, DataNotFoundException { 
-		
+    @Override
+    public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction, SQLException, ConnectionException, DataNotFoundException {
+
 		// customActionID é a posição da ação personalizada na lista de ações personalizadas do employee
-		
-		CustomActionDB caDB = new CustomActionDBImpl();
-		ResourceDB resourceDB = new ResourceDBImpl();
-		
-		List<CustomAction> customActionList = caDB.findCustomActionByEmployee(employeeID);
-		List<Resource> listResources;
+        CustomActionDB caDB = new CustomActionDBImpl();
+        ResourceDB resourceDB = new ResourceDBImpl();
 
-		try{
-			listResources = customActionList.get(customAction).getResourceList();
-		}
-		catch(Exception e){
-			throw new InvalidCustomAction("Essa ação personalizada não existe.");
-		}
+        List<CustomAction> customActionList = caDB.findCustomActionByEmployee(employeeID);
+        List<Resource> listResources;
 
-		for(int i = 0; i < listResources.size(); i++){
-			createTurnOnReport(listResources.get(i));
-			resourceDB.updateResource( listResources.get(i) );
-		}
-		
-		return ;
-
-	}
-        
-        @Override
-        public void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException {
-            CustomActionDB customActionDB = new CustomActionDBImpl();
-            ResourceDB resourceDB = new ResourceDBImpl();
-            EmployeeDB employeeDB = new EmployeeDBImpl();
-            
-            Employee employee = employeeDB.findEmployeeByID(employeeID);
-            
-            CustomAction action = customActionDB.findCustomActionByID(caID);
-            List<Resource> resources = action.getResourceList();
-            
-            for(Resource resource : resources) {
-                if (checkLicense(resource, employee)) {
-                    createTurnOnReport(resource);
-                    resourceDB.updateResource(resource);
-                } else {
-                    throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
-                }
-                
-            }
-        }
-        
-        @Override
-        public void customActionTurnOff(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, InconsistentDBException, LicenceException {
-            CustomActionDB customActionDB = new CustomActionDBImpl();
-            ResourceDB resourceDB = new ResourceDBImpl();
-            EmployeeDB employeeDB = new EmployeeDBImpl();
-            
-            Employee employee = employeeDB.findEmployeeByID(employeeID);
-            
-            CustomAction action = customActionDB.findCustomActionByID(caID);
-            List<Resource> resources = action.getResourceList();
-            
-            for(Resource resource : resources) {
-                if (checkLicense(resource, employee)) {
-			createTurnOffReport(resource);
-			resourceDB.updateResource(resource);
-		} else {
-			throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
-		}
-            }
-            
+        try {
+            listResources = customActionList.get(customAction).getResourceList();
+        } catch (Exception e) {
+            throw new InvalidCustomAction("Essa ação personalizada não existe.");
         }
 
-	@Override
-	public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction {
+        for (int i = 0; i < listResources.size(); i++) {
+            createTurnOnReport(listResources.get(i));
+            resourceDB.updateResource(listResources.get(i));
+        }
+
+        return;
+
+    }
+
+    @Override
+    public void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException {
+        CustomActionDB customActionDB = new CustomActionDBImpl();
+        ResourceDB resourceDB = new ResourceDBImpl();
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+
+        Employee employee = employeeDB.findEmployeeByID(employeeID);
+
+        CustomAction action = customActionDB.findCustomActionByID(caID);
+        List<Resource> resources = action.getResourceList();
+
+        for (Resource resource : resources) {
+            if (checkLicense(resource, employee)) {
+                createTurnOnReport(resource);
+                resourceDB.updateResource(resource);
+            } else {
+                throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
+            }
+
+        }
+    }
+
+    @Override
+    public void customActionTurnOff(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, InconsistentDBException, LicenceException {
+        CustomActionDB customActionDB = new CustomActionDBImpl();
+        ResourceDB resourceDB = new ResourceDBImpl();
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+
+        Employee employee = employeeDB.findEmployeeByID(employeeID);
+
+        CustomAction action = customActionDB.findCustomActionByID(caID);
+        List<Resource> resources = action.getResourceList();
+
+        for (Resource resource : resources) {
+            if (checkLicense(resource, employee)) {
+                createTurnOffReport(resource);
+                resourceDB.updateResource(resource);
+            } else {
+                throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
+            }
+        }
+
+    }
+
+    @Override
+    public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction {
 		//		Employee employee = database.getEmployeeID(employeeID); // retorna o empregado que está logado no momento
-		//		List<CustomAction> listCustomActions = employee.getCustomActionList();
-		//		List<TurnOffReport> listTurnOffReports = new ArrayList<TurnOffReport>();
-		//		CustomAction ca;
-		//		try{
-		//			 ca = listCustomActions.get(customAction);
-		//		}
-		//		catch(Exception e){
-		//			throw new InvalidCustomAction("Essa ação personalizada não existe.");
-		//		}
-		//		List<Resource> listResources = ca.getResourceList();
-		//		for(int i = 0; i < listResources.size(); i++){
-		//			listTurnOffReports.add( createTurnOffReport(listResources.get(i)) );
-		//		}
-		//		return ;
-		//                
-		return;
-	}
+        //		List<CustomAction> listCustomActions = employee.getCustomActionList();
+        //		List<TurnOffReport> listTurnOffReports = new ArrayList<TurnOffReport>();
+        //		CustomAction ca;
+        //		try{
+        //			 ca = listCustomActions.get(customAction);
+        //		}
+        //		catch(Exception e){
+        //			throw new InvalidCustomAction("Essa ação personalizada não existe.");
+        //		}
+        //		List<Resource> listResources = ca.getResourceList();
+        //		for(int i = 0; i < listResources.size(); i++){
+        //			listTurnOffReports.add( createTurnOffReport(listResources.get(i)) );
+        //		}
+        //		return ;
+        //                
+        return;
+    }
 
-	protected static boolean checkLicense(Resource resource, Employee employee) { // retorna true se é um admin ou se workroom é igual a location
-		if (employee instanceof Admin) {
-			return true;
-		}
-		if (employee.getWorkRoomID() == resource.getLocationID()) {
-			return true;
-		}
-		return false;
-	}
+    protected static boolean checkLicense(Resource resource, Employee employee) { // retorna true se é um admin ou se workroom é igual a location
+        if (employee instanceof Admin) {
+            return true;
+        }
+        if (employee.getWorkRoomID() == resource.getLocationID()) {
+            return true;
+        }
+        return false;
+    }
 
-	private static void createTurnOnReport(Resource resource) throws SQLException, ConnectionException { // Liga o recurso e cria o relatorio
-		resource.turnOn();
-		ReportOnOffDB reportDB = new ReportOnOffDBImpl();
-		reportDB.insertReportOn(resource.getIdentifier(), new Date());
-		return;
-	}
+    private static void createTurnOnReport(Resource resource) throws SQLException, ConnectionException { // Liga o recurso e cria o relatorio
+        resource.turnOn();
+        ReportOnOffDB reportDB = new ReportOnOffDBImpl();
+        reportDB.insertReportOn(resource.getIdentifier(), new Date());
+        return;
+    }
 
-	private static void createTurnOffReport(Resource resource) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException {  // Desliga, gasta os créditos da sala e cria o relatorio
-		RoomDB roomDB = new RoomDBImpl();
-		ReportOnOffDB reportDB = new ReportOnOffDBImpl();
-		Room resourceRoom = roomDB.findRoomByID(resource.getLocationID());
-		float consuption = resource.turnOff();
-		resourceRoom.expendCredits(consuption);
-		roomDB.updateRoom(resourceRoom);
-		reportDB.insertReportOff(resource.getIdentifier(), new Date());
-		return;
-	}
+    private static void createTurnOffReport(Resource resource) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException {  // Desliga, gasta os créditos da sala e cria o relatorio
+        RoomDB roomDB = new RoomDBImpl();
+        ReportOnOffDB reportDB = new ReportOnOffDBImpl();
+        Room resourceRoom = roomDB.findRoomByID(resource.getLocationID());
+        float consuption = resource.turnOff();
+        resourceRoom.expendCredits(consuption);
+        roomDB.updateRoom(resourceRoom);
+        reportDB.insertReportOff(resource.getIdentifier(), new Date());
+        return;
+    }
 
-	private static void createFlawReport(Resource resource) throws SQLException, ConnectionException {
-		resource.warnFlaw();
+    private static void createFlawReport(Resource resource) throws SQLException, ConnectionException {
+        resource.warnFlaw();
 		//ReportStatusDB reportDB = new ReportStatusDBImpl();
-		//reportDB.insertReportBroken(resource.getIdentifier(), new Date());
-		return;
-	}
+        //reportDB.insertReportBroken(resource.getIdentifier(), new Date());
+        return;
+    }
 
-
-
-	@Override
-	public Employee login(String email, String password) throws InvalidUserException, ConnectionException, DataNotFoundException {
-		EmployeeDB employeeDB = new EmployeeDBImpl();
-		Employee employee;
-		try {
-			employee = employeeDB.findEmployeeByEmail(email);
-		} catch (SQLException e) {
-			throw new InvalidUserException("Email não registrado");
-		}
-		if (!employee.getPassword().equals(password)) {
-			throw new InvalidUserException("Senha inválida");
-		} else {
-			return employee;
-		}
-	}
+    @Override
+    public Employee login(String email, String password) throws InvalidUserException, ConnectionException, DataNotFoundException {
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+        Employee employee;
+        try {
+            employee = employeeDB.findEmployeeByEmail(email);
+        } catch (SQLException e) {
+            throw new InvalidUserException("Email não registrado");
+        }
+        if (!employee.getPassword().equals(password)) {
+            throw new InvalidUserException("Senha inválida");
+        } else {
+            return employee;
+        }
+    }
 
     @Override
     public boolean createCustomAction(int employeeID, String name, List<Resource> listResources) throws SQLException, ConnectionException {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         CustomActionDB customActionDB = new CustomActionDBImpl();
         CustomAction customAction = new CustomAction(employeeID, name, listResources);
-        customActionDB.insertCustomAction(customAction); 
+        customActionDB.insertCustomAction(customAction);
         return true;
     }
 
+    @Override
+    public Resource findResource(int id) throws SQLException, ConnectionException, DataNotFoundException {
+        ResourceDB resourceDB = new ResourceDBImpl();
+        return resourceDB.findResourceByID(id);
+    }
+
+    @Override
+    public Room findRoom(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException {
+        RoomDB roomDB = new RoomDBImpl();
+        return roomDB.findRoomByID(id);
+    }
+
+    @Override
+    public Employee findEmployee(int id) throws SQLException, ConnectionException, DataNotFoundException {
+        EmployeeDB employeeDB = new EmployeeDBImpl();
+        return employeeDB.findEmployeeByID(id);
+    }
 }

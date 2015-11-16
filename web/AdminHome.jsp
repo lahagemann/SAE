@@ -66,7 +66,7 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="ManageCustomAction.jsp">
+                                <form action="AdminManageCustomAction.jsp">
                                     <button type="submit" class="btn btn-primary" id="btn"><b>Ações personalizadas</b></button>
                                 </form>
                                 

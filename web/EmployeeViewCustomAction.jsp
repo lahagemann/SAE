@@ -1,6 +1,6 @@
 <%-- 
-    Document   : AdminViewCustomAction
-    Created on : Nov 13, 2015, 3:27:42 PM
+    Document   : EmployeeViewCustomAction
+    Created on : Nov 16, 2015, 3:33:09 PM
     Author     : Luiza
 --%>
 
@@ -10,8 +10,8 @@
 <%@page import="application.Domain.Goal"%>
 <%@page import="application.Domain.Room"%>
 <%@page import="application.Domain.Employee"%>
-<%@page import="application.Impl.AdminServiceImpl"%>
-<%@page import="application.Interface.AdminService"%>
+<%@page import="application.Impl.EmployeeServiceImpl"%>
+<%@page import="application.Interface.EmployeeService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -40,20 +40,18 @@
                 </div>
             </div>
         </nav>
-
+        
         <%
-            AdminService service = new AdminServiceImpl();
+            EmployeeService service = new EmployeeServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
-            Room eRoom = service.findRoom(e.getWorkRoomID());
+            Room room = service.findRoom(e.getWorkRoomID());
             Goal g = new Goal(null, 0);// = service.findGoal();            
-%>
+        %>
         <div align="center" class="well">
-            <font color="black" size="4"><b>Saldo:</b> <%= eRoom.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <font color="black" size="4"><b>Saldo:</b> <%= room.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <h3 align="center">Ações personalizadas</h3>
-        
         <% List<CustomAction> actions = service.listCustomActions(e.getIdentifier()); %>
         
         <table class="table table-hover" align="center">

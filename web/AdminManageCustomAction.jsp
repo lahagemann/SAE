@@ -1,14 +1,14 @@
 <%-- 
-    Document   : EmployeeHome
-    Created on : Nov 2, 2015, 11:53:11 PM
+    Document   : AdminManageCustomAction
+    Created on : Nov 8, 2015, 12:56:12 AM
     Author     : Luiza
 --%>
 
 <%@page import="application.Domain.Goal"%>
 <%@page import="application.Domain.Room"%>
 <%@page import="application.Domain.Employee"%>
-<%@page import="application.Interface.EmployeeService"%>
-<%@page import="application.Impl.EmployeeServiceImpl"%>
+<%@page import="application.Impl.AdminServiceImpl"%>
+<%@page import="application.Interface.AdminService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,40 +35,25 @@
                 </div>
             </div>
         </nav>
-        
+
         <%
-            EmployeeService service = new EmployeeServiceImpl();
+            AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room r = service.findRoom(e.getWorkRoomID());
             Goal g = new Goal(null, 0);// = service.findGoal();            
-        %>
+%>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <!-- /container -->
         <div class="container">
             <div align="center" id="block">
-                <table>
-                    <colgroup> 
-                        <col span="2">
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <form method="post" action="./employee_resources">
-                                    <button type="submit" class="btn btn-primary" id="btn"><b>Ligar/Desligar recurso</b></button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="EmployeeManageCustomAction.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><b>Ações personalizadas</b></button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <h3>Ação personalizada</h3>
+                    <div class="btn-group" align="center">
+                        <a href="AdminViewCustomAction.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span><b>&nbsp;&nbsp;Visualizar minhas ações</b></a>
+                        <a href="AdminAddCustomAction.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar uma ação</b></a>
+                    </div>
             </div>
         </div>
     </body>
