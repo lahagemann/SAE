@@ -61,5 +61,6 @@ public interface AdminService extends EmployeeService {
     Room findRoom(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
     
     void updateResource(Resource r) throws SQLException, ConnectionException;
-
+    
+    void updateRoom(Room r) throws SQLException, ConnectionException;
 }

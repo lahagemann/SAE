@@ -163,6 +163,12 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 		ResourceDB resourceDB = new ResourceDBImpl();
 		resourceDB.updateResource(r);
 	}
+        
+        @Override
+        public void updateRoom(Room r) throws SQLException, ConnectionException {
+            RoomDB roomDB = new RoomDBImpl();
+            roomDB.updateRoom(r);
+        }
 
 	private static void createRepairReport(Resource resource) throws SQLException, ConnectionException {
 		resource.warnRepair();

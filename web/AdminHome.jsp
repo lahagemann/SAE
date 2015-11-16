@@ -87,7 +87,9 @@
                                 </form>  
                             </td>
                             <td>
-                                <button type="button" class="btn btn-primary" id="btn"><b>Atribuir bônus</b></button>
+                                <form action="AdminAddBonus.jsp">
+                                    <button type="submit" class="btn btn-primary" id="btn"><b>Atribuir bônus</b></button>
+                                </form>
                             </td>
                         </tr>
                 </table>

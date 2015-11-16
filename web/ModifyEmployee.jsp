@@ -47,7 +47,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="room">Sala:</label>
                 <div class="col-sm-10">
-                    <input type="number" min="1" step="1" class="form-control" placeholder="Digite o número da sala do funcionário" name="room" value="<%= e.getWorkRoomID()%>">
+                    <input type="number" min="0" step="1" class="form-control" placeholder="Digite o número da sala do funcionário" name="room" value="<%= e.getWorkRoomID() %>">
                 </div>
             </div>
             <div class="form-group">

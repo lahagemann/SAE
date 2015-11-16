@@ -144,4 +144,20 @@
         <servlet-name>delete_goal</servlet-name>
         <url-pattern>/delete_goal</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>add_bonus</servlet-name>
+        <servlet-class>web_servlets.AdminAddBonusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add_bonus</servlet-name>
+        <url-pattern>/add_bonus</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>set_bonus</servlet-name>
+        <servlet-class>web_servlets.AdminSetBonusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>set_bonus</servlet-name>
+        <url-pattern>/set_bonus</url-pattern>
+    </servlet-mapping>
 </web-app>
