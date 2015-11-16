@@ -135,6 +135,50 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return ;
 
 	}
+        
+        @Override
+        public void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException {
+            CustomActionDB customActionDB = new CustomActionDBImpl();
+            ResourceDB resourceDB = new ResourceDBImpl();
+            EmployeeDB employeeDB = new EmployeeDBImpl();
+            
+            Employee employee = employeeDB.findEmployeeByID(employeeID);
+            
+            CustomAction action = customActionDB.findCustomActionByID(caID);
+            List<Resource> resources = action.getResourceList();
+            
+            for(Resource resource : resources) {
+                if (checkLicense(resource, employee)) {
+                    createTurnOnReport(resource);
+                    resourceDB.updateResource(resource);
+                } else {
+                    throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
+                }
+                
+            }
+        }
+        
+        @Override
+        public void customActionTurnOff(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, InconsistentDBException, LicenceException {
+            CustomActionDB customActionDB = new CustomActionDBImpl();
+            ResourceDB resourceDB = new ResourceDBImpl();
+            EmployeeDB employeeDB = new EmployeeDBImpl();
+            
+            Employee employee = employeeDB.findEmployeeByID(employeeID);
+            
+            CustomAction action = customActionDB.findCustomActionByID(caID);
+            List<Resource> resources = action.getResourceList();
+            
+            for(Resource resource : resources) {
+                if (checkLicense(resource, employee)) {
+			createTurnOffReport(resource);
+			resourceDB.updateResource(resource);
+		} else {
+			throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");
+		}
+            }
+            
+        }
 
 	@Override
 	public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction {

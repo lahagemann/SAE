@@ -32,7 +32,11 @@ public interface EmployeeService {
 	
 	public List<CustomAction> listCustomActions(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 	
-	public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction, SQLException, ConnectionException, DataNotFoundException; 
+	public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction, SQLException, ConnectionException, DataNotFoundException;
+        
+        void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException;
+        
+        void customActionTurnOff(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, InconsistentDBException, LicenceException;
 	
 	public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction;
 	
