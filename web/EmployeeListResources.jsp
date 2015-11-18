@@ -4,6 +4,9 @@
     Author     : Luiza
 --%>
 
+<%@page import="application.Domain.Goal"%>
+<%@page import="application.Impl.EmployeeServiceImpl"%>
+<%@page import="application.Interface.EmployeeService"%>
 <%@page import="application.Domain.Resource"%>
 <%@page import="java.util.List"%>
 <%@page import="application.Domain.Employee"%>
@@ -24,22 +27,29 @@
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="EmployeeHome.jsp">Home</a></li>
-                        <li><a href="#">Page 1</a></li>
-                        <li><a href="#">Page 2</a></li> 
-                        <li><a href="#">Page 3</a></li> 
+                        <li class="active"><a href="AdminHome.jsp">Home</a></li>
+                        <li><a href="#">Meu consumo</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Olá, ${name}</a></li>
+                        <li><a href="./logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        
+        <%
+            EmployeeService service = new EmployeeServiceImpl();
+            Employee e = (Employee) session.getAttribute("user");
+            Room r = service.findRoom(e.getWorkRoomID());
+            Goal g = new Goal(null, 0);// = service.findGoal();            
+        %>
+        <div align="center" class="well">
+            <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
+        </div>
         <br>
-        <br>
-        <br>
-        <% Employee e = (Employee) session.getAttribute("user"); 
-           List<Resource> resources = (List<Resource>) request.getAttribute("resources"); %>
+        <% List<Resource> resources = (List<Resource>) request.getAttribute("resources"); %>
         <h3 align="center">Sala <%= e.getWorkRoomID() %></h3>
         <br>
         <br>
@@ -53,29 +63,29 @@
                             <td></td>
                             <td><b>Manutenção</b></td>
                     </tr>
-                    <% for(Resource r : resources) { %>
+                    <% for(Resource resource : resources) { %>
                         <tr>
                             <td>
-                                <%= r.getName() %> 
+                                <%= resource.getName() %> 
                             </td>
                             <td>
-                                <%= r.getType() %>
+                                <%= resource.getType() %>
                             </td>
                             
-                            <% if(r.isOn()) { %>
+                            <% if(resource.isOn()) { %>
                                 <td>
                                     <button type="button" class="btn btn-success" disabled="disabled"><b>ON</b></button>
                                 </td>
                                 <td>
                                     <form action=" ./turn_off" method="post">
-                                        <input type="hidden" name="id" value="<%= r.getIdentifier() %>">
+                                        <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                         <button type="submit" class="btn btn-danger"><b>OFF</b></button>
                                     </form>
                                 </td>
                             <% } else { %>
                                 <td>
                                     <form action=" ./turn_on" method="post">
-                                        <input type="hidden" name="id" value="<%= r.getIdentifier() %>">
+                                        <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                         <button type="submit" class="btn btn-success" ><b>ON</b></button>
                                     </form>
                                 </td>

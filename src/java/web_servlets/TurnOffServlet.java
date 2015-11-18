@@ -5,6 +5,7 @@
  */
 package web_servlets;
 
+import application.Domain.Employee;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
 import application.Interface.LicenceException;
@@ -35,10 +36,12 @@ public class TurnOffServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Employee user = (Employee) session.getAttribute("user");
+        
         String id = request.getParameter("id");
         AdminService service = new AdminServiceImpl();
         try {
-            service.turnOffResource(Integer.parseInt(id),(int) session.getAttribute("userID"));
+            service.turnOffResource(Integer.parseInt(id),user.getIdentifier());
         } catch (SQLException s) {
             s.printStackTrace();
         } catch (ConnectionException s) {

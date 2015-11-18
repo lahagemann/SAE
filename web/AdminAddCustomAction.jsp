@@ -32,7 +32,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Olá, ${name}</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="./logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -53,7 +53,7 @@
         
         <% List<Room> rooms = service.listAllRooms(); %>
         
-        <form class="form-horizontal" role="form" method="post" action="">
+        <form class="form-horizontal" role="form" method="post" action="./admin_add_action">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Nome:</label>
                 <div class="col-sm-10">

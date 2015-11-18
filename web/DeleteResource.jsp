@@ -4,6 +4,8 @@
     Author     : Luiza
 --%>
 
+<%@page import="application.Domain.Goal"%>
+<%@page import="application.Domain.Employee"%>
 <%@page import="application.Domain.Resource"%>
 <%@page import="application.Domain.Room"%>
 <%@page import="java.util.List"%>
@@ -26,26 +28,31 @@
                 <div>
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="AdminHome.jsp">Home</a></li>
-                        <li><a href="#">Page 1</a></li>
-                        <li><a href="#">Page 2</a></li> 
-                        <li><a href="#">Page 3</a></li> 
+                        <li><a href="#">Meu consumo</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Olá, ${name}</a></li>
+                        <li><a href="./logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <br>
-        <br>
+        
+        <%
+            AdminService service = new AdminServiceImpl();
+            Employee e = (Employee) session.getAttribute("user");
+            Room r = service.findRoom(e.getWorkRoomID());
+            Goal g = new Goal(null, 0);// = service.findGoal();            
+        %>
+        <div align="center" class="well">
+            <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
+        </div>
         <br>
         <h2 align="center">Excluir recursos</h2>
         <br>
         <br>
-        <%
-            AdminService service = new AdminServiceImpl();
-            List<Room> rooms = service.listAllRooms();
-        %>
+        <% List<Room> rooms = service.listAllRooms(); %>
         
         <% for(Room room : rooms) { %>
         
@@ -61,14 +68,14 @@
                         <td></td>
                     </tr>
                     
-                    <% for(Resource r : room.getResourceList()) { %>
+                    <% for(Resource resource : room.getResourceList()) { %>
                     <tr>
-                        <td><%= r.getIdentifier() %></td>
-                        <td><%= r.getName() %></td>
-                        <td><%= r.getType() %></td>
+                        <td><%= resource.getIdentifier() %></td>
+                        <td><%= resource.getName() %></td>
+                        <td><%= resource.getType() %></td>
                         <td>
                             <form method="post" action="./delete_resource">
-                                    <input type="hidden" name="id" value="<%= r.getIdentifier() %>">
+                                    <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                     <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')"><b>Excluir</b></button>
                             </form>
                         </td>

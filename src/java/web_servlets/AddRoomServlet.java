@@ -31,12 +31,14 @@ public class AddRoomServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int number = Integer.parseInt(request.getParameter("number"));
+        String name = request.getParameter("name");
+//        int number = Integer.parseInt(request.getParameter("number"));
  
         AdminService service = new AdminServiceImpl();
         
         try {
-            if(service.createRoom(number, 0f, 1))
+            //AQUI: arrumar o id da goal, a sala não pode ser criada com goal padrão
+            if(service.createRoom(name, 0f, 1))
                 request.setAttribute("message", "foi adicionado com sucesso");
             else
                 request.setAttribute("message", "não foi adicionado com sucesso");

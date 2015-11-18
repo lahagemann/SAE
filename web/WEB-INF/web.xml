@@ -33,6 +33,14 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>web_servlets.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>manage_employee</servlet-name>
         <servlet-class>web_servlets.AddEmployeeServlet</servlet-class>
     </servlet>
@@ -175,5 +183,21 @@
     <servlet-mapping>
         <servlet-name>custom_action_off</servlet-name>
         <url-pattern>/custom_action_off</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>admin_add_action</servlet-name>
+        <servlet-class>web_servlets.AdminAddCustomActionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin_add_action</servlet-name>
+        <url-pattern>/admin_add_action</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>employee_add_action</servlet-name>
+        <servlet-class>web_servlets.EmployeeAddCustomActionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>employee_add_action</servlet-name>
+        <url-pattern>/employee_add_action</url-pattern>
     </servlet-mapping>
 </web-app>

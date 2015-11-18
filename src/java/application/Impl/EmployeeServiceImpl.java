@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeDB.findEmployeeByID(employeeID);
 
         if (checkLicense(resource, employee)) {
-            createTurnOnReport(resource);
+            //createTurnOnReport(resource);
             resourceDB.updateResource(resource);
         } else {
             throw new LicenceException("Usuário não tem permissão para acessar esse recurso.");

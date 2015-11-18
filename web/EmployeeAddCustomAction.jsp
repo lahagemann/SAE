@@ -52,7 +52,7 @@
         <h3 align="center">Adicionar ação personalizada</h3>
         <% List<Resource> resources = service.listResorcesWorkRoom(e.getWorkRoomID()); %>
         
-        <form class="form-horizontal" role="form" method="post" action="">
+        <form class="form-horizontal" role="form" method="post" action="./employee_add_action">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="name">Nome:</label>
                 <div class="col-sm-10">

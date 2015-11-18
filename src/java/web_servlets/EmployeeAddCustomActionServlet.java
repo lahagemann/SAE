@@ -27,11 +27,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author Luiza
  */
-public class AdminAddCustomActionServlet extends HttpServlet {
+public class EmployeeAddCustomActionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Preprocess request: we actually don't need to do any business stuff, so just display JSP.
-        request.getRequestDispatcher("/AdminAddCustomAction.jsp").forward(request, response);
+        request.getRequestDispatcher("/EmployeeAddCustomAction.jsp").forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,6 +57,6 @@ public class AdminAddCustomActionServlet extends HttpServlet {
                 Logger.getLogger(AdminAddCustomActionServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         
-        request.getRequestDispatcher("/AdminManageCustomAction.jsp").forward(request, response);
+        request.getRequestDispatcher("/EmployeeManageCustomAction.jsp").forward(request, response);
     }
 }
