@@ -30,7 +30,7 @@ public class TurnOffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Preprocess request: we actually don't need to do any business stuff, so just display JSP.
-        request.getRequestDispatcher("/ListAllResources.jsp").forward(request, response);
+        request.getRequestDispatcher("/AdminListAllResources.jsp").forward(request, response);
     }
     
     @Override
@@ -54,6 +54,6 @@ public class TurnOffServlet extends HttpServlet {
             Logger.getLogger(TurnOffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("/ListAllResources.jsp").forward(request, response);
+        request.getRequestDispatcher("/AdminListAllResources.jsp").forward(request, response);
     }
 }
