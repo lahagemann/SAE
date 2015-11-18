@@ -15,10 +15,12 @@ import database.ServicesDB.EmployeeDB;
 import database.ServicesDB.GoalDB;
 import database.ServicesDB.InconsistentDBException;
 import database.ServicesDB.InvalidGoalException;
+import database.ServicesDB.ReportOnOffDB;
 import database.ServicesDB.ResourceDB;
 import database.ServicesDB.RoomDB;
 import database.ServicesDBImpl.EmployeeDBImpl;
 import database.ServicesDBImpl.GoalDBImpl;
+import database.ServicesDBImpl.ReportOnOffDBImpl;
 import database.ServicesDBImpl.ResourceDBImpl;
 import database.ServicesDBImpl.RoomDBImpl;
 
@@ -59,9 +61,9 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
     }
 
     @Override
-    public List<Resource> listAllResources() throws SQLException, ConnectionException {
+    public List<Resource> listAllResources() throws SQLException, ConnectionException, DataNotFoundException {
         ResourceDB resourceDB = new ResourceDBImpl();
-        return null;
+        return resourceDB.getAllResources();
     }
 
     @Override
@@ -161,4 +163,16 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
         return;
     }
 
+	@Override
+	public List<TurnOnOrOffReport> reportsOfDay(String day) throws SQLException, ConnectionException {
+		ReportOnOffDB reportOnOffDB = new ReportOnOffDBImpl();
+		return reportOnOffDB.findAllReportByDate( convertStringToDate(day) );
+	}
+
+	private Date convertStringToDate(String day){
+		String delims = "[/]";
+		String[] tokens = day.split(delims);
+		return new Date(Integer.parseInt(tokens[2]) - 1900, Integer.parseInt(tokens[1]) - 1, Integer.parseInt(tokens[0]));
+	}
+	
 }

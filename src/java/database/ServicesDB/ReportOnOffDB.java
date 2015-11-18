@@ -7,6 +7,9 @@ package database.ServicesDB;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+
+import application.Domain.TurnOnOrOffReport;
 
 import database.Connection.ConnectionException;
 
@@ -26,4 +29,7 @@ public interface ReportOnOffDB {
     public boolean resourceAlreadyOn (int idResource) throws SQLException, ConnectionException;
     
     public boolean resourceAlreadyOff (int idResource) throws SQLException, ConnectionException;    
+    
+	public List<TurnOnOrOffReport> findAllReportByDate(Date dayRequested) throws SQLException, ConnectionException;
+	
 }

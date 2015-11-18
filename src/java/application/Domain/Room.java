@@ -5,15 +5,10 @@
  */
 package application.Domain;
 
-import database.ServicesDB.RoomDB;
-import database.ServicesDBImpl.RoomDBImpl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import application.Impl.EmployeeServiceImpl;
-import application.Interface.EmployeeService;
 
 /**
  *
@@ -123,19 +118,5 @@ public class Room {
             }
         }
         return false;
-    }
-
-    public static void main (String []args){
-    	try{
-    		RoomDB rDB = new RoomDBImpl();
-    		Goal g = new Goal(new Date(), 1000);
-    		Room r = new Room("Sala do Gustavo",g);
-    		rDB.insertRoom(r);
-    		System.out.println("aqui");
-    	}
-    	catch (Exception e){
-    		System.out.println(e.getMessage());
-    	}
-    	
     }
 }

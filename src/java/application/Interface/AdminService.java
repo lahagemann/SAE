@@ -8,6 +8,7 @@ package application.Interface;
 import application.Domain.Employee;
 import application.Domain.Resource;
 import application.Domain.Room;
+import application.Domain.TurnOnOrOffReport;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -30,7 +31,7 @@ public interface AdminService extends EmployeeService {
 
     public List<Employee> listAllEmployees() throws SQLException, ConnectionException, DataNotFoundException;
 
-    public List<Resource> listAllResources() throws SQLException, ConnectionException;
+    public List<Resource> listAllResources() throws SQLException, ConnectionException, DataNotFoundException;
 
     public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException;
 
@@ -39,24 +40,26 @@ public interface AdminService extends EmployeeService {
 
     public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 
-    void updateEmployee(Employee e) throws SQLException, ConnectionException;
+    public void updateEmployee(Employee e) throws SQLException, ConnectionException;
 
     public boolean createRoom(String roomName, float creditAmount, int dailyGoalID) throws SQLException, 
     																					   ConnectionException, 
     																					   DataNotFoundException;
 
 
-    boolean createGoal(Date day, float value) throws SQLException, ConnectionException, InvalidGoalException;
+    public boolean createGoal(Date day, float value) throws SQLException, ConnectionException, InvalidGoalException;
 
-    boolean deleteResource(int resourceID) throws SQLException, ConnectionException;
+    public boolean deleteResource(int resourceID) throws SQLException, ConnectionException;
 
-    boolean deleteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
+    public boolean deleteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 
-    boolean deleteRoom(int roomID) throws SQLException, ConnectionException;
+    public boolean deleteRoom(int roomID) throws SQLException, ConnectionException;
 
-    boolean deleteGoal(int goalID) throws SQLException, ConnectionException;
+    public boolean deleteGoal(int goalID) throws SQLException, ConnectionException;
 
-    void updateResource(Resource r) throws SQLException, ConnectionException;
+    public void updateResource(Resource r) throws SQLException, ConnectionException;
 
-    void updateRoom(Room r) throws SQLException, ConnectionException;
+    public void updateRoom(Room r) throws SQLException, ConnectionException;
+    
+    public List<TurnOnOrOffReport> reportsOfDay(String day) throws SQLException, ConnectionException;
 }
