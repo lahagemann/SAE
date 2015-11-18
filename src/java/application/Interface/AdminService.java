@@ -41,8 +41,10 @@ public interface AdminService extends EmployeeService {
 
     void updateEmployee(Employee e) throws SQLException, ConnectionException;
 
-    boolean createRoom(int roomNumber, float creditAmount, int dailyGoalID)
-            throws SQLException, ConnectionException, DataNotFoundException;
+    public boolean createRoom(String roomName, float creditAmount, int dailyGoalID) throws SQLException, 
+    																					   ConnectionException, 
+    																					   DataNotFoundException;
+
 
     boolean createGoal(Date day, float value) throws SQLException, ConnectionException, InvalidGoalException;
 

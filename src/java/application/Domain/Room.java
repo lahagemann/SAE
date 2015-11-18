@@ -5,15 +5,7 @@
  */
 package application.Domain;
 
-import database.ServicesDB.CustomActionDB;
-import database.ServicesDB.EmployeeDB;
-import database.ServicesDB.GoalDB;
-import database.ServicesDB.ResourceDB;
 import database.ServicesDB.RoomDB;
-import database.ServicesDBImpl.CustomActionDBImpl;
-import database.ServicesDBImpl.EmployeeDBImpl;
-import database.ServicesDBImpl.GoalDBImpl;
-import database.ServicesDBImpl.ResourceDBImpl;
 import database.ServicesDBImpl.RoomDBImpl;
 
 import java.util.ArrayList;
@@ -22,10 +14,6 @@ import java.util.List;
 
 import application.Impl.EmployeeServiceImpl;
 import application.Interface.EmployeeService;
-import database.Connection.ConnectionException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -37,30 +25,30 @@ public class Room {
     private List<Employee> employeeList;
     private final int identifier;
     private float creditAmount;
-    private int roomNumber;
+    private String name;
     private Goal dailyGoal;
 
-    public Room(int roomNumber) {
-        super();
-        this.resourceList = new ArrayList<Resource>();
-        this.employeeList = new ArrayList<Employee>();
-        this.identifier = 0;
-        this.dailyGoal = new Goal(new Date(), 1000);
-        this.creditAmount = dailyGoal.getValue();
-        this.roomNumber = roomNumber;
-    }
-
-    public Room(int roomNumber, float creditAmount, Goal dailyGoal) {
+    public Room(String name, Goal dailyGoal) {
         super();
         this.resourceList = new ArrayList<Resource>();
         this.employeeList = new ArrayList<Employee>();
         this.identifier = 0;
         this.dailyGoal = dailyGoal;
         this.creditAmount = dailyGoal.getValue();
-        this.roomNumber = roomNumber;
+        this.name = name;
     }
 
-    public Room(int id, int roomNumber, float creditAmount, Goal dailyGoal,
+    public Room(String name, float creditAmount, Goal dailyGoal) {
+        super();
+        this.resourceList = new ArrayList<Resource>();
+        this.employeeList = new ArrayList<Employee>();
+        this.identifier = 0;
+        this.dailyGoal = dailyGoal;
+        this.creditAmount = dailyGoal.getValue();
+        this.name = name;
+    }
+
+    public Room(int id, String name, float creditAmount, Goal dailyGoal,
             List<Resource> resourceList, List<Employee> resourceEmployee) {
         super();
         this.identifier = id;
@@ -68,7 +56,7 @@ public class Room {
         this.employeeList = resourceEmployee;
         this.dailyGoal = dailyGoal;
         this.creditAmount = creditAmount;
-        this.roomNumber = roomNumber;
+        this.name = name;
     }
 
     public List<Resource> getResourceList() {
@@ -99,15 +87,15 @@ public class Room {
         dailyGoal = DailyGoal;
     }
 
-    public int getRoomNumber() {
-        return roomNumber;
-    }
+    public String getName() {
+		return name;
+	}
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void addResource(Resource element) {
+	public void addResource(Resource element) {
         this.resourceList.add(element);
     }
 
@@ -135,5 +123,19 @@ public class Room {
             }
         }
         return false;
+    }
+
+    public static void main (String []args){
+    	try{
+    		RoomDB rDB = new RoomDBImpl();
+    		Goal g = new Goal(new Date(), 1000);
+    		Room r = new Room("Sala do Gustavo",g);
+    		rDB.insertRoom(r);
+    		System.out.println("aqui");
+    	}
+    	catch (Exception e){
+    		System.out.println(e.getMessage());
+    	}
+    	
     }
 }

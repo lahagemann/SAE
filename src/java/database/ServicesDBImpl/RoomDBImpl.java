@@ -50,8 +50,8 @@ public class RoomDBImpl implements RoomDB {
 
 		// query para inserir novo registro na tabela room
 		// informaçoes de relacionamento do resource e employee eh feita em outra query
-		String query = "INSERT INTO room (number, creditAmount) VALUES " 
-				+ "('" + r.getRoomNumber() + "', '" + r.getCreditAmount() + "');";
+		String query = "INSERT INTO room (name, creditAmount, idGoal) VALUES " 
+				+ "('" + r.getName() + "', '" + r.getCreditAmount() +  "', '" + r.getDailyGoal().getIdentifier() + "');";
 
 		connect();
 		statement.executeUpdate(query);
@@ -82,7 +82,7 @@ public class RoomDBImpl implements RoomDB {
 	@Override
 	public void updateRoom(Room r) throws SQLException, ConnectionException {
 
-		String query = "UPDATE room SET number = '" + r.getRoomNumber() 
+		String query = "UPDATE room SET name = '" + r.getName() 
 				+ "', creditAmount = '" + r.getCreditAmount() + "', idGoal = '" + r.getDailyGoal().getIdentifier()
 				+ "' WHERE identifier = " + r.getIdentifier() + ";";
 
@@ -99,15 +99,16 @@ public class RoomDBImpl implements RoomDB {
 		String query = "SELECT * FROM room";
 		connect();
 
-		int identifier = 0, number = 0, idGoal = 0;
+		int identifier = 0, idGoal = 0;
 		float credit = 0;
+		String name;
 
 		resultset = statement.executeQuery(query);
 
 		while (resultset.next()) {
 			try{ 
 				identifier = resultset.getInt("identifier");
-				number = resultset.getInt("number");
+				name = resultset.getString("name");
 				credit = resultset.getFloat("creditAmount");
 				idGoal = resultset.getInt("idGoal");
 			} catch(SQLException exp){
@@ -130,7 +131,7 @@ public class RoomDBImpl implements RoomDB {
 			}
 			results.add( 
 					new Room(identifier,
-							 number,
+							 name,
 							 credit,
 							 g, 
 							 resourceList, 
@@ -148,8 +149,9 @@ public class RoomDBImpl implements RoomDB {
 
 		ResultSet resultset = null;
 		String query = "SELECT * FROM room WHERE identifier = " + id + ";";
-		int identifier = 0, number = 0, idGoal = 0;
+		int identifier = 0, idGoal = 0;
 		float credit = 0;
+		String name;
 		connect(); 
 
 		try{
@@ -157,7 +159,7 @@ public class RoomDBImpl implements RoomDB {
 			resultset.next();
 
 			identifier = resultset.getInt("identifier");
-			number = resultset.getInt("number");
+			name = resultset.getString("name");
 			credit = resultset.getFloat("creditAmount");
 			idGoal = resultset.getInt("idGoal");
 
@@ -185,7 +187,7 @@ public class RoomDBImpl implements RoomDB {
 		}
 
 		return new Room(identifier,
-				number,
+				name,
 				credit,
 				g, 
 				resourceList, 

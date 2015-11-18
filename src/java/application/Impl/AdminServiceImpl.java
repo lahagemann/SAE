@@ -82,10 +82,10 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
     }
 
     @Override
-    public boolean createRoom(int roomNumber, float creditAmount, int dailyGoalID) throws SQLException, ConnectionException, DataNotFoundException {
+    public boolean createRoom(String roomName, float creditAmount, int dailyGoalID) throws SQLException, ConnectionException, DataNotFoundException {
         RoomDB roomDB = new RoomDBImpl();
         GoalDB goalDB = new GoalDBImpl();
-        Room room = new Room(roomNumber, creditAmount, goalDB.findLastGoal());
+        Room room = new Room(roomName, creditAmount, goalDB.findLastGoal());
         roomDB.insertRoom(room);
         return true;
     }
