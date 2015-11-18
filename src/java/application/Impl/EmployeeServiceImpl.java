@@ -7,12 +7,10 @@ package application.Impl;
 
 import application.Domain.*;
 import application.Interface.EmployeeService;
-import application.Interface.InvalidCustomAction;
 import application.Interface.InvalidUserException;
 import application.Interface.LicenceException;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +32,7 @@ import database.ServicesDBImpl.RoomDBImpl;
  *
  * @author Luiza
  */
+
 public class EmployeeServiceImpl implements EmployeeService {
 
     public EmployeeServiceImpl() {
@@ -110,31 +109,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void runCustomAction(int employeeID, int customAction) throws InvalidCustomAction, SQLException, ConnectionException, DataNotFoundException {
-
-		// customActionID é a posição da ação personalizada na lista de ações personalizadas do employee
-        CustomActionDB caDB = new CustomActionDBImpl();
-        ResourceDB resourceDB = new ResourceDBImpl();
-
-        List<CustomAction> customActionList = caDB.findCustomActionByEmployee(employeeID);
-        List<Resource> listResources;
-
-        try {
-            listResources = customActionList.get(customAction).getResourceList();
-        } catch (Exception e) {
-            throw new InvalidCustomAction("Essa ação personalizada não existe.");
-        }
-
-        for (int i = 0; i < listResources.size(); i++) {
-            createTurnOnReport(listResources.get(i));
-            resourceDB.updateResource(listResources.get(i));
-        }
-
-        return;
-
-    }
-
-    @Override
     public void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException {
         CustomActionDB customActionDB = new CustomActionDBImpl();
         ResourceDB resourceDB = new ResourceDBImpl();
@@ -176,27 +150,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
         }
 
-    }
-
-    @Override
-    public void cancelCustomAction(int employeeID, int customAction) throws InvalidCustomAction {
-		//		Employee employee = database.getEmployeeID(employeeID); // retorna o empregado que está logado no momento
-        //		List<CustomAction> listCustomActions = employee.getCustomActionList();
-        //		List<TurnOffReport> listTurnOffReports = new ArrayList<TurnOffReport>();
-        //		CustomAction ca;
-        //		try{
-        //			 ca = listCustomActions.get(customAction);
-        //		}
-        //		catch(Exception e){
-        //			throw new InvalidCustomAction("Essa ação personalizada não existe.");
-        //		}
-        //		List<Resource> listResources = ca.getResourceList();
-        //		for(int i = 0; i < listResources.size(); i++){
-        //			listTurnOffReports.add( createTurnOffReport(listResources.get(i)) );
-        //		}
-        //		return ;
-        //                
-        return;
     }
 
     protected static boolean checkLicense(Resource resource, Employee employee) { // retorna true se é um admin ou se workroom é igual a location
