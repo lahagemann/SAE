@@ -62,33 +62,33 @@
                         <tr>
                             <td>
                                 <form method="post" action="AdminActionMenu.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><b>Ligar/Desligar recurso</b></button>
+                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-off"></span><b>&nbsp;&nbsp;Ligar/Desligar Recursos</b></button>
                                 </form>
                             </td>
                             <td>
                                 <form action="AdminManageCustomAction.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><b>Ações personalizadas</b></button>
+                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-user"></span><b>&nbsp;&nbsp;Ações Personalizadas</b></button>
                                 </form>
                                 
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <button type="button" class="btn btn-primary" id="btn"><b>Relatórios</b></button>
+                                <button type="button" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-file"></span><b>&nbsp;&nbsp;Relatórios</b></button>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-primary" id="btn"><b>Atualizar manutenção</b></button>
+                                <button type="button" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-wrench"></span><b>&nbsp;&nbsp;Atualizar Manutenção</b></button>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <form action="AdminManage.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><b>Gerenciar <br>recurso/sala/funcionário</b></button>
+                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-cog"></span><b>&nbsp;&nbsp;Gerenciar Dados</button>
                                 </form>  
                             </td>
                             <td>
                                 <form action="AdminAddBonus.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><b>Atribuir bônus</b></button>
+                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-gift"></span><b>&nbsp;&nbsp;Atribuir Bônus</b></button>
                                 </form>
                             </td>
                         </tr>
