@@ -58,12 +58,12 @@
                         <tr>
                             <td>
                                 <form method="post" action="./employee_resources">
-                                    <button type="submit" class="btn btn-primary" id="btn"><b>Ligar/Desligar recurso</b></button>
+                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-off"></span><b>&nbsp;&nbsp;Ligar/Desligar recurso</b></button>
                                 </form>
                             </td>
                             <td>
                                 <form action="EmployeeManageCustomAction.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><b>Ações personalizadas</b></button>
+                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-user"></span><b>&nbsp;&nbsp;Ações personalizadas</b></button>
                                 </form>
                             </td>
                         </tr>

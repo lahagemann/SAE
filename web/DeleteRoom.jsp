@@ -66,7 +66,7 @@
                         <td>
                             <form method="post" action="./delete_room">
                                 <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')"><b>Excluir</b></button>
+                                <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
                             </form>
                         </td>
                     </tr>

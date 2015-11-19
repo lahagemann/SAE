@@ -66,7 +66,7 @@
                             <td>
                                 <form method="post" action="./modify_employee_form">
                                     <input type="hidden" name="id" value="<%= employee.getIdentifier() %>">
-                                    <button type="submit" class="btn btn-primary" ><b>Alterar</b></button>
+                                    <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></button>
                                 </form>
                             </td>                       
                         </tr>
