@@ -51,33 +51,33 @@
             <div align="center" id="block">
                     <h3>Funcionário</h3>
                     <div class="btn-group" align="center">
-                        <a href="AddEmployee.jsp" class="btn btn-primary"><b>Adicionar</b></a>
-                        <a href="ModifyEmployeeList.jsp" class="btn btn-primary"><b>Alterar</b></a>
-                        <a href="DeleteEmployee.jsp" class="btn btn-primary"><b>Excluir</b></a>
+                        <a href="AddEmployee.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar</b></a>
+                        <a href="ModifyEmployeeList.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></a>
+                        <a href="DeleteEmployee.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></a>
                     </div>
             </div>
             <div align="center" id="block">
                     <h3>Sala</h3>
                     <div class="btn-group" align="center">
-                        <a href="AddRoom.jsp" class="btn btn-primary"><b>Adicionar</b></a>
-                        <a href="#" class="btn btn-primary"><b>Alterar</b></a>
-                        <a href="DeleteRoom.jsp" class="btn btn-primary"><b>Excluir</b></a>
+                        <a href="AddRoom.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar</b></a>
+                        <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></a>
+                        <a href="DeleteRoom.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></a>
                     </div>
             </div>
             <div align="center" id="block">
                     <h3>Recurso</h3>
                     <div class="btn-group" align="center">
-                        <a href="AddResource.jsp" class="btn btn-primary"><b>Adicionar</b></a>
-                        <a href="ModifyResourceList.jsp" class="btn btn-primary"><b>Alterar</b></a>
-                        <a href="DeleteResource.jsp" class="btn btn-primary"><b>Excluir</b></a>
+                        <a href="AddResource.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar</b></a>
+                        <a href="ModifyResourceList.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></a>
+                        <a href="DeleteResource.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></a>
                     </div>
             </div>
             <div align="center" id="block">
                     <h3>Meta</h3>
                     <div class="btn-group" align="center">
-                        <a href="AddGoal.jsp" class="btn btn-primary"><b>Adicionar</b></a>
-                        <a href="#" class="btn btn-primary"><b>Alterar</b></a>
-                        <a href="#" class="btn btn-primary"><b>Excluir</b></a>
+                        <a href="AddGoal.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar</b></a>
+                        <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></a>
+                        <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></a>
                     </div>
             </div>
         </div>
