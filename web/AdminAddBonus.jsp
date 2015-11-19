@@ -63,7 +63,7 @@
                         <td>
                             <form method="post" action="./set_bonus">
                                 <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                <button type="submit" class="btn btn-primary"><b>Atribuir bônus</b></button>
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-usd"></span><b>&nbsp;&nbsp;Atribuir bônus</b></button>
                             </form>
                         </td>
                     </tr>
