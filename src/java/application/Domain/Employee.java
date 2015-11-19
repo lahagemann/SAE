@@ -21,7 +21,6 @@ public class Employee {
 	private String password;
 	private int workRoomID;
 	private List<CustomAction> customActionList;
-	private int isAdmin;
 
 	public Employee(String name, String cpf, String email, String password,
 			int workRoomID, int isAdmin) {
@@ -32,7 +31,6 @@ public class Employee {
 		this.email = email;
 		this.password = password;
 		this.workRoomID = workRoomID;
-		this.isAdmin = isAdmin;
 		customActionList = new ArrayList<CustomAction>();
 	}
 
@@ -47,7 +45,6 @@ public class Employee {
 		this.password = password;
 		this.workRoomID = workRoomID;
 		this.customActionList = customActionList;
-		this.isAdmin = isAdmin;
 	}
 
 	public int getIdentifier() {
