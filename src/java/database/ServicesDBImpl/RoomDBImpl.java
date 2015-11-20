@@ -104,8 +104,10 @@ public class RoomDBImpl implements RoomDB {
 		String name;
 
 		resultset = statement.executeQuery(query);
-
-		while (resultset.next()) {
+		
+		if(!resultset.next()) throw new DataNotFoundException("O sistema não tem salas registradas.");
+		
+		do {
 			try{ 
 				identifier = resultset.getInt("identifier");
 				name = resultset.getString("name");
@@ -119,16 +121,24 @@ public class RoomDBImpl implements RoomDB {
 			ResourceDB rDB = new ResourceDBImpl();
 			EmployeeDB eDB = new EmployeeDBImpl();
 			GoalDB gDB = new GoalDBImpl();
-			List<Resource> resourceList;
-			List<Employee> employeeList;
-			Goal g;
+			List<Resource> resourceList = new ArrayList<Resource>();
+			List<Employee> employeeList = new ArrayList<Employee>();
+			Goal g = null;
+			
+			try{
+				resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
+			} catch(DataNotFoundException e){ /*Sala pode não ter recursos*/ }
+			
+			try{
+				employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
+			} catch(DataNotFoundException e){ /*Sala pode não ter funcionários*/ }
+			
 			try{
 				g = gDB.findGoalByID(idGoal);
-				resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
-				employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
-			} catch(DataNotFoundException exp){
-				throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
+			} catch(DataNotFoundException e){ 
+				throw new InconsistentDBException("Inconsistência no Banco de Dados, sala não tem meta. Entre em contato com o suporte.");
 			}
+			
 			results.add( 
 					new Room(identifier,
 							 name,
@@ -137,7 +147,7 @@ public class RoomDBImpl implements RoomDB {
 							 resourceList, 
 							 employeeList) 
 					);
-		}
+		} while (resultset.next());
 
 		disconnect();
 		return results;
@@ -146,7 +156,7 @@ public class RoomDBImpl implements RoomDB {
 
 	@Override
 	public Room findRoomByID(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException {
-
+		
 		ResultSet resultset = null;
 		String query = "SELECT * FROM room WHERE identifier = " + id + ";";
 		int identifier = 0, idGoal = 0;
@@ -169,21 +179,22 @@ public class RoomDBImpl implements RoomDB {
 		}
 
 		GoalDB gDB = new GoalDBImpl();
-		Goal g;
+		Goal g = null;
 		ResourceDB rDB = new ResourceDBImpl();
 		EmployeeDB eDB = new EmployeeDBImpl();
-		List<Resource> resourceList;
-		List<Employee> employeeList;
+		List<Resource> resourceList = null;
+		List<Employee> employeeList = null;
 
 		try{
 			resourceList = rDB.findResourceByRoom(resultset.getInt("identifier"));
+		} catch(DataNotFoundException e){ /*Sala pode não ter recursos*/ }
+		try{
 			employeeList = eDB.findEmployeeByRoom(resultset.getInt("identifier"));
+		} catch(DataNotFoundException e){ /*Sala pode não ter funcionários*/ }
+		try{
 			g = gDB.findGoalByID(idGoal);
-		} catch(DataNotFoundException exp){
-			throw new InconsistentDBException("O banco de dados está inconsistente, por favor contate o suporte técnico.");
-		}
-		finally{
-			disconnect();
+		} catch(DataNotFoundException e){ 
+			throw new InconsistentDBException("Inconsistência no Banco de Dados, sala não tem meta. Entre em contato com o suporte.");
 		}
 
 		return new Room(identifier,

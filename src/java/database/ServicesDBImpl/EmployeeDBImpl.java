@@ -198,8 +198,12 @@ public class EmployeeDBImpl implements EmployeeDB {
 
 		try{
 			resultset = statement.executeQuery(query);                
-			while (resultset.next()) {
+			
+			if(!resultset.next()) throw new DataNotFoundException("A sala não possui funcionários.");
+			
+			do {
 				Employee aux;
+
 				String name = resultset.getString("name");
 				int identifier = resultset.getInt("identifier"); 
 				String cpf = resultset.getString("cpf");
@@ -214,10 +218,9 @@ public class EmployeeDBImpl implements EmployeeDB {
 					aux = new Admin(name, identifier, cpf, email, password, room, listOfCustomActions(identifier), isAdmin);
 				}
 				results.add(aux);
-			}
+			} while (resultset.next());
 		} catch(SQLException exp){
 			disconnect();
-			throw new DataNotFoundException("A sala não possui funcionários.");
 		}
 
 		disconnect();

@@ -43,13 +43,13 @@ public class ReportOnOffDBImpl implements ReportOnOffDB {
 		connection.close();
 	}
        
-    public boolean insertReportOn(int idResource, Date date) throws SQLException, ConnectionException {
+    public boolean insertReportOn(int idResource, String name, Date date) throws SQLException, ConnectionException {
         
         boolean isOn = resourceAlreadyOn(idResource);
         
         if (!isOn) {
             String DateTime = DateConversion.DateConvert(date) + " " + DateConversion.TimeConvert(date);        
-            String query = "INSERT INTO reportonoff (idResource, initialTime) VALUES " + "('" + idResource + "', '" + DateTime + "');";
+            String query = "INSERT INTO reportonoff (idResource, roomName, initialTime) VALUES " + "('" + idResource + "', '" + name + "','" + DateTime + "');";
 
             	connect();
             	statement.executeUpdate(query);
@@ -132,6 +132,7 @@ public class ReportOnOffDBImpl implements ReportOnOffDB {
 
 			aux = new TurnOnOrOffReport(
 					resultset.getInt("idResource"), 
+					resultset.getString("roomName"),
 					(Date) resultset.getTimestamp("initialTime"), 
 					(Date) resultset.getTimestamp("finalTime") );
 

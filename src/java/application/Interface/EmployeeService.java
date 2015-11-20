@@ -23,7 +23,7 @@ import database.ServicesDB.InconsistentDBException;
  */
 public interface EmployeeService {
 
-    public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException;
+    public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException, InconsistentDBException;
 
     public void turnOffResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException, InconsistentDBException;
 
@@ -33,11 +33,11 @@ public interface EmployeeService {
 
     public List<CustomAction> listCustomActions(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 
-    void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException;
+    void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException, InconsistentDBException;
 
     void customActionTurnOff(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, InconsistentDBException, LicenceException;
 
-    public Employee login(String email, String password) throws InvalidUserException, ConnectionException, DataNotFoundException;
+    public Employee login(String email, String password) throws InvalidUserException, ConnectionException, DataNotFoundException, SQLException;
 
     public boolean createCustomAction(int employeeID, String name, List<Resource> listResources) throws SQLException, ConnectionException;
 

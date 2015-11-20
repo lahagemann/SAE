@@ -40,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException {
+    public void turnOnResource(int resourceID, int employeeID) throws LicenceException, SQLException, ConnectionException, DataNotFoundException, InconsistentDBException {
         ResourceDB resourceDB = new ResourceDBImpl();
         EmployeeDB employeeDB = new EmployeeDBImpl();
         Resource resource = resourceDB.findResourceByID(resourceID);
@@ -109,7 +109,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException {
+    public void customActionTurnOn(int caID, int employeeID) throws SQLException, ConnectionException, DataNotFoundException, LicenceException, InconsistentDBException {
         CustomActionDB customActionDB = new CustomActionDBImpl();
         ResourceDB resourceDB = new ResourceDBImpl();
         EmployeeDB employeeDB = new EmployeeDBImpl();
@@ -162,10 +162,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return false;
     }
 
-    private static void createTurnOnReport(Resource resource) throws SQLException, ConnectionException { // Liga o recurso e cria o relatorio
+    private static void createTurnOnReport(Resource resource) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException { // Liga o recurso e cria o relatorio
         resource.turnOn();
         ReportOnOffDB reportDB = new ReportOnOffDBImpl();
-        reportDB.insertReportOn(resource.getIdentifier(), new Date());
+        RoomDB roomDB = new RoomDBImpl();
+        Room room = roomDB.findRoomByID( resource.getLocationID() );
+        reportDB.insertReportOn(resource.getIdentifier(), room.getName(), new Date());
         return;
     }
 
@@ -188,14 +190,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee login(String email, String password) throws InvalidUserException, ConnectionException, DataNotFoundException {
+    public Employee login(String email, String password) throws InvalidUserException, ConnectionException, DataNotFoundException, SQLException {
         EmployeeDB employeeDB = new EmployeeDBImpl();
         Employee employee;
-        try {
-            employee = employeeDB.findEmployeeByEmail(email);
-        } catch (SQLException e) {
-            throw new InvalidUserException("Email não registrado");
-        }
+        
+        employee = employeeDB.findEmployeeByEmail(email);
+        
         if (!employee.getPassword().equals(password)) {
             throw new InvalidUserException("Senha inválida");
         } else {

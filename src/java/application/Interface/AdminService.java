@@ -25,41 +25,38 @@ import database.ServicesDB.InvalidGoalException;
  */
 public interface AdminService extends EmployeeService {
 
-    public void warnRepairResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException;
+	public void warnRepairResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException;
 
-    public List<Room> listAllRooms() throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
+	public List<Room> listAllRooms() throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
 
-    public List<Employee> listAllEmployees() throws SQLException, ConnectionException, DataNotFoundException;
+	public List<Employee> listAllEmployees() throws SQLException, ConnectionException, DataNotFoundException;
 
-    public List<Resource> listAllResources() throws SQLException, ConnectionException, DataNotFoundException;
+	public List<Resource> listAllResources() throws SQLException, ConnectionException, DataNotFoundException;
 
-    public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException;
+	public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException;
 
-    public boolean createEmployee(String name, String cpf, String email, String password,
-            int roomID, int isAdmin) throws SQLException, ConnectionException;
+	public boolean createEmployee(String name, String cpf, String email, String password,
+			int roomID, int isAdmin) throws SQLException, ConnectionException;
 
-    public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
+	public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 
-    public void updateEmployee(Employee e) throws SQLException, ConnectionException, DataNotFoundException;
+	public void updateEmployee(Employee e) throws SQLException, ConnectionException, DataNotFoundException;
 
-    public boolean createRoom(String roomName, float creditAmount, int dailyGoalID) throws SQLException, 
-    																					   ConnectionException, 
-    																					   DataNotFoundException;
+	public boolean createRoom(String roomName) throws SQLException, ConnectionException, DataNotFoundException;
 
+	public boolean createGoal(Date day, float value) throws SQLException, ConnectionException, InvalidGoalException;
 
-    public boolean createGoal(Date day, float value) throws SQLException, ConnectionException, InvalidGoalException;
+	public boolean deleteResource(int resourceID) throws SQLException, ConnectionException;
 
-    public boolean deleteResource(int resourceID) throws SQLException, ConnectionException;
+	public boolean deleteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 
-    public boolean deleteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
+	public boolean deleteRoom(int roomID) throws SQLException, ConnectionException;
 
-    public boolean deleteRoom(int roomID) throws SQLException, ConnectionException;
+	public boolean deleteGoal(int goalID) throws SQLException, ConnectionException, DataNotFoundException, InvalidGoalException;
 
-    public boolean deleteGoal(int goalID) throws SQLException, ConnectionException, DataNotFoundException, InvalidGoalException;
+	public void updateResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException;
 
-    public void updateResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException;
+	public void updateRoom(Room r) throws SQLException, ConnectionException;
 
-    public void updateRoom(Room r) throws SQLException, ConnectionException;
-    
-    public List<TurnOnOrOffReport> reportsOfDay(String day) throws SQLException, ConnectionException;
+	public List<TurnOnOrOffReport> reportsOfDay(String day) throws SQLException, ConnectionException, InconsistentDBException;
 }

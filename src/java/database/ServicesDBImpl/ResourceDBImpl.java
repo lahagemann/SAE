@@ -114,6 +114,7 @@ public class ResourceDBImpl implements ResourceDB {
 
 	@Override
 	public Resource findResourceByID(int ID) throws SQLException, ConnectionException, DataNotFoundException {
+		
 		ResultSet resultset = null;
 		String query = "SELECT * FROM resource WHERE identifier = " + ID + ";";
 		String name, type;

@@ -22,7 +22,7 @@ public interface ReportOnOffDB {
     
     public void disconnect() throws SQLException;
     
-    public boolean insertReportOn(int idResource, Date date) throws SQLException, ConnectionException;
+    public boolean insertReportOn(int idResource, String name, Date date) throws SQLException, ConnectionException;
     
     public boolean insertReportOff(int idResource, Date date) throws SQLException, ConnectionException;
     

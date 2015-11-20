@@ -166,17 +166,15 @@ public class GoalDBImpl implements GoalDB{
 	@Override
 	public Goal findLastGoal() throws SQLException, ConnectionException, DataNotFoundException {
 		ResultSet resultset = null;
-		String query = "SELECT Max(day) FROM goal;";
+		String query = "select * from goal " +
+				"where day < now() " +
+				"order by day desc " +
+				"limit 1;";
 		connect();
 		int identifier;
 		float value;
 		Date day = new Date();
 		try{
-			
-			resultset = statement.executeQuery(query);
-			resultset.next();
-			Date dateOfLastGoal = resultset.getTimestamp("Max(day)");
-			query = "SELECT * FROM goal WHERE day = '" + DateConversion.DateConvert(dateOfLastGoal) + " " +  DateConversion.TimeConvert(dateOfLastGoal) + "';";
 			
 			resultset = statement.executeQuery(query);
 			resultset.next();
