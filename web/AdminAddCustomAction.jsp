@@ -65,7 +65,7 @@
                 <div class="col-sm-10">
                     <% for (Room room : rooms) {%>
 
-                    <h3 align="center">Sala <%= room.getIdentifier()%></h3>
+                    <h3 align="center"><%= room.getName()%> <%= room.getIdentifier()%></h3>
 
                     <table class="table table-hover" align="center">
                         <tr class="danger">
