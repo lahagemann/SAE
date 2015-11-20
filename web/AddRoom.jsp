@@ -53,9 +53,9 @@
         <br>
         <form class="form-horizontal" role="form" method="post" action="./manage_room">
             <div class="form-group">
-                <label class="control-label col-sm-2" for="number">Sala:</label>
+                <label class="control-label col-sm-2" for="name">Nome da sala:</label>
                 <div class="col-sm-10">
-                    <input type="number" min="1" step="1" class="form-control" placeholder="Digite o número da sala do funcionário" name="number">
+                    <input type="text" class="form-control" placeholder="Digite o nome da sala" name="name">
                 </div>
             </div>
             <div class="form-group"> 

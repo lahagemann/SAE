@@ -1,14 +1,15 @@
 <%-- 
-    Document   : GoalForm
-    Created on : Nov 6, 2015, 9:32:08 PM
+    Document   : ModifyRoomList
+    Created on : Nov 20, 2015, 3:07:49 PM
     Author     : Luiza
 --%>
 
-<%@page import="application.Domain.Room"%>
+<%@page import="java.util.List"%>
+<%@page import="application.Interface.AdminService"%>
 <%@page import="application.Domain.Goal"%>
+<%@page import="application.Domain.Room"%>
 <%@page import="application.Impl.AdminServiceImpl"%>
 <%@page import="application.Domain.Employee"%>
-<%@page import="application.Interface.AdminService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,7 +36,6 @@
                 </div>
             </div>
         </nav>
-        
         <%
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
@@ -47,27 +47,30 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <h2>Inserir nova meta</h2>
-        <br>
-        <br>
-        <form class="form-horizontal" role="form" method="post" action="">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="day">Data:</label>
-                <div class="col-sm-10">
-                    <input type="date" class="form-control" placeholder="Digite o dia da meta" name="day">
-                </div>
+        <% List<Room> rooms = service.listAllRooms(); %>
+        
+        <div class="container">
+            <div align="center" id="block">
+                <table class="table table-hover" align="center">
+                    <tr>
+                        <td><b>Nome da sala</b></td>
+                        <td></td>
+                    </tr>
+                    
+                    <% for(Room room : rooms) { %>
+                    <tr>
+                        <td><%= room.getName() %></td>
+                        <td>
+                            <form method="post" action="./modify_room_form">
+                                    <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
+                                    <button type="submit" class="btn btn-primary"><b>Alterar</b></button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+                </table>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="value">Valor:</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" placeholder="Digite o valor da meta" name="value">
-                </div>
-            </div>
-            <div class="form-group"> 
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Criar</button>
-                </div>
-            </div>
-        </form>
+        </div>           
+                        
     </body>
 </html>
