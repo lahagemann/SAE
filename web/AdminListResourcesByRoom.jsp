@@ -48,7 +48,9 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <% Room room = (Room) request.getAttribute("room"); %>
+        <% int roomID = (Integer) session.getAttribute("searchedRoom");
+           Room room = service.findRoom(roomID); %>
+           
         <h3 align="center">Sala <%= room.getIdentifier() %></h3>
         <br>
         <br>
@@ -62,29 +64,29 @@
                             <td></td>
                             <td><b>Manutenção</b></td>
                     </tr>
-                    <% for(Resource r : room.getResourceList()) { %>
+                    <% for(Resource resource : room.getResourceList()) { %>
                         <tr>
                             <td>
-                                <%= r.getName() %> 
+                                <%= resource.getName() %> 
                             </td>
                             <td>
-                                <%= r.getType() %>
+                                <%= resource.getType() %>
                             </td>
                             
-                            <% if(r.isOn()) { %>
+                            <% if(resource.isOn()) { %>
                                 <td>
                                     <button type="button" class="btn btn-success" disabled="disabled"><b>ON</b></button>
                                 </td>
                                 <td>
-                                    <form action=" ./turn_off" method="post">
-                                        <input type="hidden" name="id" value="<%= r.getIdentifier() %>">
+                                    <form action=" ./turn_off_by_room" method="post">
+                                        <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                         <button type="submit" class="btn btn-danger"><b>OFF</b></button>
                                     </form>
                                 </td>
                             <% } else { %>
                                 <td>
-                                    <form action=" ./turn_on" method="post">
-                                        <input type="hidden" name="id" value="<%= r.getIdentifier() %>">
+                                    <form action=" ./turn_on_by_room" method="post">
+                                        <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                         <button type="submit" class="btn btn-success" ><b>ON</b></button>
                                     </form>
                                 </td>

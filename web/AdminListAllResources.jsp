@@ -85,14 +85,14 @@
                                         <button type="button" class="btn btn-success" disabled="disabled"><b>ON</b></button>
                                     </td>
                                     <td>
-                                        <form action=" ./turn_off" method="post">
+                                        <form action=" ./turn_off_all" method="post">
                                             <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                             <button type="submit" class="btn btn-danger"><b>OFF</b></button>
                                         </form>
                                     </td>
                                 <% } else { %>
                                     <td>
-                                        <form action=" ./turn_on" method="post">
+                                        <form action=" ./turn_on_all" method="post">
                                             <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                             <button type="submit" class="btn btn-success" ><b>ON</b></button>
                                         </form>

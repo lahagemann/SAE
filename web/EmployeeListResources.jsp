@@ -27,7 +27,7 @@
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="AdminHome.jsp">Home</a></li>
+                        <li class="active"><a href="EmployeeHome.jsp">Home</a></li>
                         <li><a href="#">Meu consumo</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -49,7 +49,7 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <% List<Resource> resources = (List<Resource>) request.getAttribute("resources"); %>
+        <% List<Resource> resources = r.getResourceList(); %>
         <h3 align="center">Sala <%= e.getWorkRoomID() %></h3>
         <br>
         <br>
@@ -77,14 +77,14 @@
                                     <button type="button" class="btn btn-success" disabled="disabled"><b>ON</b></button>
                                 </td>
                                 <td>
-                                    <form action=" ./turn_off" method="post">
+                                    <form action=" ./turn_off_employee" method="post">
                                         <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                         <button type="submit" class="btn btn-danger"><b>OFF</b></button>
                                     </form>
                                 </td>
                             <% } else { %>
                                 <td>
-                                    <form action=" ./turn_on" method="post">
+                                    <form action=" ./turn_on_employee" method="post">
                                         <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
                                         <button type="submit" class="btn btn-success" ><b>ON</b></button>
                                     </form>
