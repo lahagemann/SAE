@@ -122,7 +122,7 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
     }
 
     @Override
-    public boolean deleteGoal(int goalID) throws SQLException, ConnectionException {
+    public boolean deleteGoal(int goalID) throws SQLException, ConnectionException, DataNotFoundException, InvalidGoalException {
         GoalDB goalDB = new GoalDBImpl();
         goalDB.deleteGoal(goalID);
         return true;

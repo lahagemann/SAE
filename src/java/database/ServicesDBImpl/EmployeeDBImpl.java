@@ -155,6 +155,7 @@ public class EmployeeDBImpl implements EmployeeDB {
 
 		ResultSet resultset = null;
 		String query = "SELECT * FROM employee WHERE identifier = " + ID + ";";
+		System.out.println(ID);
 		Employee aux;
 		connect();
 

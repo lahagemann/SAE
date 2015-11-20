@@ -23,7 +23,7 @@ public interface GoalDB {
     public void insertGoal(Goal g) throws SQLException, ConnectionException, 
     		InvalidGoalException;
     
-    public void deleteGoal(int goalID) throws SQLException, ConnectionException;
+    public void deleteGoal(int goalID) throws SQLException, ConnectionException, DataNotFoundException, InvalidGoalException;
     
     public List<Goal> getListGoal() throws SQLException, ConnectionException, 
     		DataNotFoundException;

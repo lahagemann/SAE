@@ -55,7 +55,7 @@ public interface AdminService extends EmployeeService {
 
     public boolean deleteRoom(int roomID) throws SQLException, ConnectionException;
 
-    public boolean deleteGoal(int goalID) throws SQLException, ConnectionException;
+    public boolean deleteGoal(int goalID) throws SQLException, ConnectionException, DataNotFoundException, InvalidGoalException;
 
     public void updateResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException;
 

@@ -72,13 +72,25 @@ public class GoalDBImpl implements GoalDB{
 		}
 	} 
 
-	public void deleteGoal(int goalID) throws SQLException, ConnectionException {
+	public void deleteGoal(int goalID) throws SQLException, ConnectionException, DataNotFoundException, InvalidGoalException {
 
 		String query = "DELETE FROM goal WHERE identifier = " + goalID + ";";
-
-		connect();        
-		statement.executeUpdate(query);
-		disconnect();
+		
+		Goal goal = this.findGoalByID(goalID);
+		
+		if( isAfterToday( goal.getDay() ) ){
+			if(isAnotherMonth( goal.getDay() ) ){
+				connect();        
+				statement.executeUpdate(query);
+				disconnect();
+			}
+			else{
+				throw new InvalidGoalException("Essa meta não pode ser removida pois está em vigência.");
+			}
+		}
+		else{
+			throw new InvalidGoalException("Essa meta não pode ser removida pois esteve/está em vigência.");
+		}
 	}
 
 	public List<Goal> getListGoal() throws SQLException, ConnectionException, DataNotFoundException {
