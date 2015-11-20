@@ -128,6 +128,18 @@ public class CustomActionDBImpl implements CustomActionDB{
 
 		disconnect();           
 	}
+	
+	public void deleteResourceFromAllCA(int resourceID) throws SQLException, ConnectionException{
+
+		String query = "DELETE FROM caresource WHERE idResource = " + resourceID + " ;";
+
+		connect();
+
+		statement.executeUpdate(query);
+
+		disconnect();           
+
+	}
 
 	public CustomAction findCustomActionByID(int idCustomAction) throws SQLException, ConnectionException, DataNotFoundException {
 

@@ -82,10 +82,15 @@ public class EmployeeDBImpl implements EmployeeDB {
 	}
 
 	@Override
-	public void updateEmployee(Employee e) throws SQLException, ConnectionException {
+	public void updateEmployee(Employee e) throws SQLException, ConnectionException, DataNotFoundException {
 		int isAdmin = 0;
 		if(e instanceof Admin){
 			isAdmin = 1;
+		}
+		
+		if(e.getWorkRoomID() != this.findEmployeeByID( e.getIdentifier() ).getWorkRoomID() ){
+			CustomActionDB caDB = new CustomActionDBImpl();
+			caDB.deleteAllCustomActionOfEmployee( e.getIdentifier() );
 		}
 
 		String query = "UPDATE employee SET name = '" + e.getName() + "', cpf = '" + e.getCpf() + "', email = '" + e.getEmail()

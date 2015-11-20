@@ -40,7 +40,7 @@ public interface AdminService extends EmployeeService {
 
     public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 
-    public void updateEmployee(Employee e) throws SQLException, ConnectionException;
+    public void updateEmployee(Employee e) throws SQLException, ConnectionException, DataNotFoundException;
 
     public boolean createRoom(String roomName, float creditAmount, int dailyGoalID) throws SQLException, 
     																					   ConnectionException, 
@@ -57,7 +57,7 @@ public interface AdminService extends EmployeeService {
 
     public boolean deleteGoal(int goalID) throws SQLException, ConnectionException;
 
-    public void updateResource(Resource r) throws SQLException, ConnectionException;
+    public void updateResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException;
 
     public void updateRoom(Room r) throws SQLException, ConnectionException;
     

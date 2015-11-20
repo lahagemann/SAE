@@ -35,7 +35,9 @@ public interface CustomActionDB {
 	
 	public void deleteAllCustomActionOfEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
     
-    public CustomAction findCustomActionByID(int idCustomAction) throws SQLException, ConnectionException, DataNotFoundException;
+	public void deleteResourceFromAllCA(int resourceID) throws SQLException, ConnectionException;
+	
+	public CustomAction findCustomActionByID(int idCustomAction) throws SQLException, ConnectionException, DataNotFoundException;
     
     public List<CustomAction> findCustomActionByEmployee(int idEmployee) throws SQLException, ConnectionException, DataNotFoundException;
     

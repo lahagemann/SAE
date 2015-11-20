@@ -8,6 +8,7 @@ package database.ServicesDBImpl;
 import application.Domain.Resource;
 import database.Connection.ConnectionException;
 import database.Connection.ConnectionFactory;
+import database.ServicesDB.CustomActionDB;
 import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.ResourceDB;
 import java.sql.Connection;
@@ -70,16 +71,29 @@ public class ResourceDBImpl implements ResourceDB {
 
 		String query = "DELETE FROM resource WHERE identifier = " + resourceID + ";";
 
+		CustomActionDB caDB = new CustomActionDBImpl();
+		
 		connect();
+		
 		statement.executeUpdate(query);
-
+		
+		caDB.deleteResourceFromAllCA(resourceID);
+		
 		disconnect();
 	}
 
 	@Override
-	public void updateResource(Resource r) throws SQLException, ConnectionException {
+	public void updateResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException {
 		String DateTime = null;
 		String query;
+		
+		if(r.getLocationID() != this.findResourceByID( r.getIdentifier() ).getLocationID() ){
+			CustomActionDB caDB = new CustomActionDBImpl();
+			
+			caDB.deleteResourceFromAllCA( r.getIdentifier() );
+			
+		}
+		
 		if (r.isOn()) {
 			DateTime = DateConversion.DateConvert(r.getTurnOnTime()) + " " + DateConversion.TimeConvert(r.getTurnOnTime());
 			query = "UPDATE resource SET name = '" + r.getName() + "', type = '" + r.getType() + "', resourceOn = " + r.isOnINT()
@@ -92,6 +106,7 @@ public class ResourceDBImpl implements ResourceDB {
 		}
 
 		connect();
+		
 		statement.executeUpdate(query);
 
 		disconnect();

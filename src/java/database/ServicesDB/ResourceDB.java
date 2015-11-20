@@ -24,7 +24,7 @@ public interface ResourceDB {
     
     public void deleteResource(int resourceID) throws SQLException, ConnectionException;
     
-    public void updateResource(Resource r) throws SQLException, ConnectionException;
+    public void updateResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException;
     
     public Resource findResourceByID(int ID) throws SQLException, ConnectionException, DataNotFoundException;
     

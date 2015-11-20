@@ -137,13 +137,13 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
     }
 
     @Override
-    public void updateEmployee(Employee e) throws SQLException, ConnectionException {
+    public void updateEmployee(Employee e) throws SQLException, ConnectionException, DataNotFoundException {
         EmployeeDB employeeDB = new EmployeeDBImpl();
         employeeDB.updateEmployee(e);
     }
 
     @Override
-    public void updateResource(Resource r) throws SQLException, ConnectionException {
+    public void updateResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException {
         ResourceDB resourceDB = new ResourceDBImpl();
         resourceDB.updateResource(r);
     }
