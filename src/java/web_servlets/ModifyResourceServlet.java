@@ -51,6 +51,6 @@ public class ModifyResourceServlet extends HttpServlet {
             Logger.getLogger(ModifyResourceServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("/Manage.jsp").forward(request, response);
+        request.getRequestDispatcher("/ModifyResourceList.jsp").forward(request, response);
     }
 }

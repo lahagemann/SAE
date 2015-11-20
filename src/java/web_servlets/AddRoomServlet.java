@@ -38,7 +38,7 @@ public class AddRoomServlet extends HttpServlet {
         
         try {
             //AQUI: arrumar o id da goal, a sala não pode ser criada com goal padrão
-            if(service.createRoom(name, 0f, 1))
+            if(service.createRoom(name))
                 request.setAttribute("message", "foi adicionado com sucesso");
             else
                 request.setAttribute("message", "não foi adicionado com sucesso");

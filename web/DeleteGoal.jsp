@@ -52,7 +52,7 @@
         <h3 align="center">Excluir meta</h3>
         <br>
         <br>
-        <%  List<Goal> goals = new ArrayList<Goal>(); %>
+        <%  List<Goal> goals = service.listAllGoals(); %>
         <div class="container">
             <div align="center" id="block">
                 <table class="table table-hover" align="center">
@@ -67,12 +67,21 @@
                         <td><%= goal.getIdentifier() %></td>
                         <td><%= goal.getValue() %></td>
                         <td><%= goal.getDay() %></td>
+                        <% if(goal.getIdentifier() == 0) {  %>
+                        <td>
+                            <form method="post" action="./delete_goal">
+                                <input type="hidden" name="id" value="<%= goal.getIdentifier() %>">
+                                <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')" disabled="disabled"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
+                            </form>
+                        </td>
+                        <% } else { %>
                         <td>
                             <form method="post" action="./delete_goal">
                                 <input type="hidden" name="id" value="<%= goal.getIdentifier() %>">
                                 <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
                             </form>
                         </td>
+                        <% } %>
                     </tr>
                     <% } %>
                 </table>

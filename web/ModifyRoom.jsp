@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ModifyResource
-    Created on : Nov 8, 2015, 11:37:31 PM
+    Document   : ModifyRoom
+    Created on : Nov 20, 2015, 4:02:33 PM
     Author     : Luiza
 --%>
 
@@ -9,9 +9,7 @@
 <%@page import="application.Domain.Room"%>
 <%@page import="application.Domain.Employee"%>
 <%@page import="application.Impl.AdminServiceImpl"%>
-<%@page import="application.Impl.AdminServiceImpl"%>
 <%@page import="application.Interface.AdminService"%>
-<%@page import="application.Domain.Resource"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -50,40 +48,32 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <% Resource resource = (Resource) request.getAttribute("resource"); %>
+        <h2>Inserir nova sala</h2>
+        <br>
+        <br>
         
-        <form class="form-horizontal" role="form" method="post" action="./modify_resource">
+        <% Room room = (Room) request.getAttribute("room"); %>
+        
+        <form class="form-horizontal" role="form" method="post" action="./manage_room">
             <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Nome:</label>
+                <label class="control-label col-sm-2" for="name">Nome da sala:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Digitar o nome identificador do recurso (ex.: LMP00001)" name="name" value="<%= resource.getName() %>">
-                    <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="type">Tipo:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Digitar o tipo de recurso (ex.: Lâmpada)" name="type" value="<%= resource.getType()%>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="consumption">Consumo:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Digitar o consumo em KWh do recurso (ex.: 0.01)" name="consumption" value="<%= resource.getConsumption() %>">
+                    <input type="text" class="form-control" placeholder="Digite o nome da sala" name="name" value="<%= room.getName() %>">
                 </div>
             </div>
                 
-            <% List<Room> rooms = service.listAllRooms(); %>
+            <% List<Goal> goals = service.listAllGoals(); %>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="room">Sala:</label>
+                <label class="control-label col-sm-2" for="room">Meta:</label>
                 <div class="col-sm-10">
-                    <select class="form-control" name="room">
-                        <% for(Room room : rooms) { %>
-                            <option value="<%= room.getIdentifier() %>"><%= room.getName() %></option>
+                    <select class="form-control" name="goal">
+                        <% for(Goal goal : goals) { %>
+                            <option value="<%= goal.getIdentifier() %>"><%= goal.getValue() %> ( <%= goal.getDay().toString() %> )</option>
                         <% } %>
                     </select>
                 </div>
-            </div>
+            </div>    
+                
             <div class="form-group"> 
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default">Alterar</button>

@@ -232,4 +232,20 @@
         <servlet-name>employee_add_action</servlet-name>
         <url-pattern>/employee_add_action</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>modify_room_form</servlet-name>
+        <servlet-class>web_servlets.ModifyRoomFormServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modify_room_form</servlet-name>
+        <url-pattern>/modify_room_form</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>modify_room</servlet-name>
+        <servlet-class>web_servlets.ModifyRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modify_room</servlet-name>
+        <url-pattern>/modify_room</url-pattern>
+    </servlet-mapping>
 </web-app>

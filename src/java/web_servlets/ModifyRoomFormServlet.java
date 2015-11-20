@@ -5,10 +5,10 @@
  */
 package web_servlets;
 
-import application.Domain.Employee;
+import application.Domain.Resource;
+import application.Domain.Room;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
-import application.Interface.LicenceException;
 import database.Connection.ConnectionException;
 import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.InconsistentDBException;
@@ -20,40 +20,37 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Luiza
  */
-public class CustomActionOnServlet extends HttpServlet {
+public class ModifyRoomFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Preprocess request: we actually don't need to do any business stuff, so just display JSP.
-        request.getRequestDispatcher("/AdminViewCustomAction.jsp").forward(request, response);
+        request.getRequestDispatcher("/ModifyRoomList.jsp").forward(request, response);
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        HttpSession session = request.getSession();
-        Employee user = (Employee) session.getAttribute("user");
         
         AdminService service = new AdminServiceImpl();
+        
         try {
-            service.customActionTurnOn(id, user.getIdentifier());
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConnectionException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Room r = service.findRoom(id);
+            request.setAttribute("room", r);
+        } catch (SQLException s) {
+            s.printStackTrace();
+        } catch (ConnectionException s) {
+            s.printStackTrace();
         } catch (DataNotFoundException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LicenceException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModifyResourceFormServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InconsistentDBException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ModifyRoomFormServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("/AdminViewCustomAction.jsp").forward(request, response);
+        request.getRequestDispatcher("/ModifyRoom.jsp").forward(request, response);
     }
 }

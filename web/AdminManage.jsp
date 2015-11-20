@@ -60,7 +60,7 @@
                     <h3>Sala</h3>
                     <div class="btn-group" align="center">
                         <a href="AddRoom.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar</b></a>
-                        <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></a>
+                        <a href="ModifyRoomList.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></a>
                         <a href="DeleteRoom.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></a>
                     </div>
             </div>
@@ -76,8 +76,8 @@
                     <h3>Meta</h3>
                     <div class="btn-group" align="center">
                         <a href="AddGoal.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar</b></a>
-                        <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></a>
-                        <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></a>
+                        <a href="#" class="btn btn-primary disabled"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></a>
+                        <a href="DeleteGoal.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></a>
                     </div>
             </div>
         </div>
