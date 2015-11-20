@@ -9,20 +9,52 @@
         <welcome-file>Login.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
-        <servlet-name>turn_on</servlet-name>
-        <servlet-class>web_servlets.TurnOnServlet</servlet-class>
+        <servlet-name>turn_on_by_room</servlet-name>
+        <servlet-class>web_servlets.TurnOnAdminByRoomServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>turn_on</servlet-name>
-        <url-pattern>/turn_on</url-pattern>
+        <servlet-name>turn_on_by_room</servlet-name>
+        <url-pattern>/turn_on_by_room</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>turn_off</servlet-name>
-        <servlet-class>web_servlets.TurnOffServlet</servlet-class>
+        <servlet-name>turn_off_by_room</servlet-name>
+        <servlet-class>web_servlets.TurnOffAdminByRoomServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>turn_off</servlet-name>
-        <url-pattern>/turn_off</url-pattern>
+        <servlet-name>turn_off_by_room</servlet-name>
+        <url-pattern>/turn_off_by_room</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>turn_on_all</servlet-name>
+        <servlet-class>web_servlets.TurnOnAdminAllServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>turn_on_all</servlet-name>
+        <url-pattern>/turn_on_all</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>turn_off_all</servlet-name>
+        <servlet-class>web_servlets.TurnOffAdminAllServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>turn_off_all</servlet-name>
+        <url-pattern>/turn_off_all</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>turn_on_employee</servlet-name>
+        <servlet-class>web_servlets.TurnOnEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>turn_on_employee</servlet-name>
+        <url-pattern>/turn_on_employee</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>turn_off_employee</servlet-name>
+        <servlet-class>web_servlets.TurnOffEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>turn_off_employee</servlet-name>
+        <url-pattern>/turn_off_employee</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>login</servlet-name>
@@ -88,7 +120,7 @@
         <servlet-name>modify_employee</servlet-name>
         <url-pattern>/modify_employee</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>modify_resource_form</servlet-name>
         <servlet-class>web_servlets.ModifyResourceFormServlet</servlet-class>
     </servlet>

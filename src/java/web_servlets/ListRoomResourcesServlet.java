@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,20 +36,10 @@ public class ListRoomResourcesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int roomID = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
         
-        AdminService service = new AdminServiceImpl();
-        try {
-            Room room = service.findRoom(roomID);
-            request.setAttribute("room", room);
-        } catch (SQLException s) {
-            s.printStackTrace();
-        } catch (ConnectionException s) {
-            s.printStackTrace();
-        } catch (InconsistentDBException ex) {
-            Logger.getLogger(ListRoomResourcesServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DataNotFoundException ex) {
-            Logger.getLogger(ListRoomResourcesServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        AdminService service = new AdminServiceImpl();
+        session.setAttribute("searchedRoom", roomID);
         
         request.getRequestDispatcher("/AdminListResourcesByRoom.jsp").forward(request, response);
     }

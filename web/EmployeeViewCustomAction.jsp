@@ -30,7 +30,7 @@
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="AdminHome.jsp">Home</a></li>
+                        <li class="active"><a href="EmployeeHome.jsp">Home</a></li>
                         <li><a href="#">Meu consumo</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

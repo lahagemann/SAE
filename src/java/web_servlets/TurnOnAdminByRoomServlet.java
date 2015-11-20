@@ -6,12 +6,11 @@
 package web_servlets;
 
 import application.Domain.Employee;
-import application.Impl.AdminServiceImpl;
-import application.Interface.AdminService;
+import application.Impl.EmployeeServiceImpl;
+import application.Interface.EmployeeService;
 import application.Interface.LicenceException;
 import database.Connection.ConnectionException;
 import database.ServicesDB.DataNotFoundException;
-import database.ServicesDB.InconsistentDBException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -26,11 +25,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author Luiza
  */
-public class TurnOffServlet extends HttpServlet {
+public class TurnOnAdminByRoomServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Preprocess request: we actually don't need to do any business stuff, so just display JSP.
-        request.getRequestDispatcher("/AdminListAllResources.jsp").forward(request, response);
+        request.getRequestDispatcher("/AdminListResourcesByRoom.jsp").forward(request, response);
     }
     
     @Override
@@ -39,21 +38,19 @@ public class TurnOffServlet extends HttpServlet {
         Employee user = (Employee) session.getAttribute("user");
         
         String id = request.getParameter("id");
-        AdminService service = new AdminServiceImpl();
+        EmployeeService service = new EmployeeServiceImpl();
         try {
-            service.turnOffResource(Integer.parseInt(id),user.getIdentifier());
+            service.turnOnResource(Integer.parseInt(id),user.getIdentifier());            
         } catch (SQLException s) {
             s.printStackTrace();
         } catch (ConnectionException s) {
             s.printStackTrace();
-        }catch (LicenceException s) {
+        } catch (LicenceException s) {
             s.printStackTrace();
         } catch (DataNotFoundException ex) {
-            Logger.getLogger(TurnOffServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InconsistentDBException ex) {
-            Logger.getLogger(TurnOffServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TurnOnAdminByRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.getRequestDispatcher("/AdminListAllResources.jsp").forward(request, response);
+
+        request.getRequestDispatcher("/AdminListResourcesByRoom.jsp").forward(request, response);       
     }
 }

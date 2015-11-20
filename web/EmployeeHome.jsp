@@ -57,7 +57,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <form method="post" action="./employee_resources">
+                                <form method="post" action="EmployeeListResources.jsp">
                                     <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-off"></span><b>&nbsp;&nbsp;Ligar/Desligar recurso</b></button>
                                 </form>
                             </td>

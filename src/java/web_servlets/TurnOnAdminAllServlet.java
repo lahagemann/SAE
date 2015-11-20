@@ -6,8 +6,8 @@
 package web_servlets;
 
 import application.Domain.Employee;
-import application.Impl.AdminServiceImpl;
-import application.Interface.AdminService;
+import application.Impl.EmployeeServiceImpl;
+import application.Interface.EmployeeService;
 import application.Interface.LicenceException;
 import database.Connection.ConnectionException;
 import database.ServicesDB.DataNotFoundException;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Luiza
  */
-public class TurnOnServlet extends HttpServlet{
+public class TurnOnAdminAllServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Preprocess request: we actually don't need to do any business stuff, so just display JSP.
@@ -38,7 +38,7 @@ public class TurnOnServlet extends HttpServlet{
         Employee user = (Employee) session.getAttribute("user");
         
         String id = request.getParameter("id");
-        AdminService service = new AdminServiceImpl();
+        EmployeeService service = new EmployeeServiceImpl();
         try {
             service.turnOnResource(Integer.parseInt(id),user.getIdentifier());            
         } catch (SQLException s) {
@@ -48,9 +48,9 @@ public class TurnOnServlet extends HttpServlet{
         } catch (LicenceException s) {
             s.printStackTrace();
         } catch (DataNotFoundException ex) {
-            Logger.getLogger(TurnOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TurnOnAdminByRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         request.getRequestDispatcher("/AdminListAllResources.jsp").forward(request, response);
     }
 }
