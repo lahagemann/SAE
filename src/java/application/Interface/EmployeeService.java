@@ -46,4 +46,5 @@ public interface EmployeeService {
     Resource findResource(int id) throws SQLException, ConnectionException, DataNotFoundException;
 
     Room findRoom(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
+	
 }

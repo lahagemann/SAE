@@ -6,6 +6,7 @@
 package application.Interface;
 
 import application.Domain.Employee;
+import application.Domain.Goal;
 import application.Domain.Resource;
 import application.Domain.Room;
 import application.Domain.TurnOnOrOffReport;
@@ -19,10 +20,10 @@ import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.InconsistentDBException;
 import database.ServicesDB.InvalidGoalException;
 
-/**
- *
+/*
  * @author Luiza
  */
+
 public interface AdminService extends EmployeeService {
 
 	public void warnRepairResource(int resourceID, int employeeID) throws SQLException, ConnectionException, LicenceException, DataNotFoundException;
@@ -33,6 +34,8 @@ public interface AdminService extends EmployeeService {
 
 	public List<Resource> listAllResources() throws SQLException, ConnectionException, DataNotFoundException;
 
+	public List<Goal> listAllGoals() throws SQLException, ConnectionException, DataNotFoundException;
+	
 	public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException;
 
 	public boolean createEmployee(String name, String cpf, String email, String password,

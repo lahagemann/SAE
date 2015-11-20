@@ -186,4 +186,11 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 		return new Date(Integer.parseInt(tokens[2]) - 1900, Integer.parseInt(tokens[1]) - 1, Integer.parseInt(tokens[0]));
 	}
 
+	@Override
+	public List<Goal> listAllGoals() throws SQLException, ConnectionException,
+			DataNotFoundException {
+		GoalDB goalDB = new GoalDBImpl();
+		return goalDB.getListGoal();
+	}
+
 }
