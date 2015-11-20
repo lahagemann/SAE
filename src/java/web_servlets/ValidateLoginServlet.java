@@ -66,9 +66,9 @@ public class ValidateLoginServlet extends HttpServlet {
         } catch (ConnectionException s) {
             s.printStackTrace();
         } catch (InvalidUserException ex) {
-            Logger.getLogger(ValidateLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.getRequestDispatcher("/LoginErrorWrongPassword.jsp").forward(request, response);
         } catch (DataNotFoundException ex) {
-            Logger.getLogger(ValidateLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.getRequestDispatcher("/LoginErrorNoEmail.jsp").forward(request, response);
         }
 
         
