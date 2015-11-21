@@ -28,6 +28,8 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import sun.io.Converters;
+
 /*
  * @author Luiza
  */
@@ -180,10 +182,10 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 		return reportList;
 	}
 
-	private Date convertStringToDate(String day){
+	static private Date convertStringToDate(String day){
 		String delims = "[-]";
 		String[] tokens = day.split(delims);
-		return new Date(Integer.parseInt(tokens[1]) - 1900, Integer.parseInt(tokens[1]) - 1, Integer.parseInt(tokens[0]));
+		return new Date(Integer.parseInt(tokens[0]) - 1900, Integer.parseInt(tokens[1]) - 1, Integer.parseInt(tokens[2]));
 	}
 
 	@Override
