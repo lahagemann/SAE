@@ -13,6 +13,7 @@ import application.Interface.InvalidUserException;
 import database.Connection.ConnectionException;
 import database.ServicesDB.DataNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -69,6 +70,8 @@ public class ValidateLoginServlet extends HttpServlet {
             request.getRequestDispatcher("/LoginErrorWrongPassword.jsp").forward(request, response);
         } catch (DataNotFoundException ex) {
             request.getRequestDispatcher("/LoginErrorNoEmail.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ValidateLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         

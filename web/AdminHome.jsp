@@ -74,7 +74,10 @@
                         </tr>
                         <tr>
                             <td>
-                                <button type="button" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-file"></span><b>&nbsp;&nbsp;Relatórios</b></button>
+                                <form action="AdminSelectReportDate.jsp">
+                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-file"></span><b>&nbsp;&nbsp;Relatórios</b></button>
+                                </form>
+                                
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-wrench"></span><b>&nbsp;&nbsp;Atualizar Manutenção</b></button>

@@ -60,12 +60,21 @@
                     <% for(Room room : rooms) { %>
                     <tr>
                         <td><%= room.getName() %></td>
+                        <% if(room.getIdentifier() == 0) { %>
+                        <td>
+                            <form method="post" action="./modify_room_form">
+                                    <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
+                                    <button type="submit" class="btn btn-primary" disabled="disabled"><b>Alterar</b></button>
+                            </form>
+                        </td>
+                        <% } else { %>
                         <td>
                             <form method="post" action="./modify_room_form">
                                     <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
                                     <button type="submit" class="btn btn-primary"><b>Alterar</b></button>
                             </form>
                         </td>
+                        <% } %>
                     </tr>
                     <% } %>
                 </table>

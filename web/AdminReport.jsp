@@ -1,14 +1,15 @@
 <%-- 
-    Document   : DeleteRoom
-    Created on : Nov 9, 2015, 8:12:36 PM
+    Document   : AdminReport
+    Created on : Nov 21, 2015, 3:25:12 PM
     Author     : Luiza
 --%>
 
-<%@page import="application.Domain.Employee"%>
-<%@page import="application.Domain.Goal"%>
-<%@page import="application.Domain.Room"%>
+<%@page import="application.Domain.TurnOnOrOffReport"%>
 <%@page import="java.util.List"%>
 <%@page import="application.Impl.AdminServiceImpl"%>
+<%@page import="application.Domain.Goal"%>
+<%@page import="application.Domain.Room"%>
+<%@page import="application.Domain.Employee"%>
 <%@page import="application.Interface.AdminService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -36,7 +37,6 @@
                 </div>
             </div>
         </nav>
-        
         <%
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
@@ -48,43 +48,28 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <h3 align="center">Excluir sala</h3>
-        <br>
-        <br>
-        <%  List<Room> rooms = service.listAllRooms(); %>
+        
+        <h2>Relatório do dia <%= (String) request.getAttribute("day") %></h2>
+        
+        <% List<TurnOnOrOffReport> reports = (List<TurnOnOrOffReport>) request.getAttribute("reports"); %>
         
         <div class="container">
             <div align="center" id="block">
                 <table class="table table-hover" align="center">
-                    <tr>
-                        <td><b>Número</b></td>                       
-                        <td></td>
+                    <tr class="warning">
+                        <td>Recurso</td>
+                        <td>Localização</td>
+                        <td>Tempo de uso</td>
+                        <td>Data de início</td>
                     </tr>
-                    <% for(Room room : rooms) { %>
-                    <tr>
-                        <td><%= room.getName() %></td>
-                        <% if(room.getIdentifier() == 0) { %>
-                        <td>
-                            <form method="post" action="./delete_room">
-                                <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')" disabled="disabled"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
-                            </form>
-                        </td>
-                        <% } else { %>
-                        <td>
-                            <form method="post" action="./delete_room">
-                                <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
-                            </form>
-                        </td>
-                        
-                        <% } %>
-                    </tr>
+                    <% for(TurnOnOrOffReport report : reports) { %>
+                        <td><%= report.getResourceName() %></td>
+                        <td><%= report.getRoomName() %></td>
+                        <td><%= report.secondsTurnedOn()/60 %> minutos</td>
+                        <td><%= report.getInitialTime().toString() %></td>
                     <% } %>
                 </table>
             </div>
         </div>
-            
-            
     </body>
 </html>

@@ -181,9 +181,9 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	}
 
 	private Date convertStringToDate(String day){
-		String delims = "[/]";
+		String delims = "[-]";
 		String[] tokens = day.split(delims);
-		return new Date(Integer.parseInt(tokens[2]) - 1900, Integer.parseInt(tokens[1]) - 1, Integer.parseInt(tokens[0]));
+		return new Date(Integer.parseInt(tokens[1]) - 1900, Integer.parseInt(tokens[1]) - 1, Integer.parseInt(tokens[0]));
 	}
 
 	@Override

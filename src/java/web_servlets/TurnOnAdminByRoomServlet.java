@@ -11,6 +11,7 @@ import application.Interface.EmployeeService;
 import application.Interface.LicenceException;
 import database.Connection.ConnectionException;
 import database.ServicesDB.DataNotFoundException;
+import database.ServicesDB.InconsistentDBException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -48,6 +49,8 @@ public class TurnOnAdminByRoomServlet extends HttpServlet{
         } catch (LicenceException s) {
             s.printStackTrace();
         } catch (DataNotFoundException ex) {
+            Logger.getLogger(TurnOnAdminByRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InconsistentDBException ex) {
             Logger.getLogger(TurnOnAdminByRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 

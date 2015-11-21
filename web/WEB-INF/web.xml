@@ -248,4 +248,12 @@
         <servlet-name>modify_room</servlet-name>
         <url-pattern>/modify_room</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>select_date</servlet-name>
+        <servlet-class>web_servlets.AdminSelectReportDateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>select_date</servlet-name>
+        <url-pattern>/select_date</url-pattern>
+    </servlet-mapping>
 </web-app>
