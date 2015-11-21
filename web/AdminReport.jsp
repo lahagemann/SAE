@@ -49,7 +49,8 @@
         </div>
         <br>
         
-        <h2>Relatório do dia <%= (String) request.getAttribute("day") %></h2>
+        <h2 align="center">Relatório do dia <%= (String) request.getAttribute("day") %></h2>
+        <br>
         
         <% List<TurnOnOrOffReport> reports = (List<TurnOnOrOffReport>) request.getAttribute("reports"); %>
         
@@ -57,16 +58,18 @@
             <div align="center" id="block">
                 <table class="table table-hover" align="center">
                     <tr class="warning">
-                        <td>Recurso</td>
-                        <td>Localização</td>
-                        <td>Tempo de uso</td>
-                        <td>Data de início</td>
+                        <td><b>Recurso</b></td>
+                        <td><b>Localização</b></td>
+                        <td><b>Tempo de uso</b></td>
+                        <td><b>Data de início</b></td>
                     </tr>
                     <% for(TurnOnOrOffReport report : reports) { %>
+                    <tr>
                         <td><%= report.getResourceName() %></td>
                         <td><%= report.getRoomName() %></td>
                         <td><%= report.secondsTurnedOn()/60 %> minutos</td>
                         <td><%= report.getInitialTime().toString() %></td>
+                    </tr>
                     <% } %>
                 </table>
             </div>
