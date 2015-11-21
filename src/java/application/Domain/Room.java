@@ -125,19 +125,4 @@ public class Room {
         return false;
     }
     
-    public static void main(String args[]){
-    	try{
-    		AdminService aS = new AdminServiceImpl();
-    		List<TurnOnOrOffReport> reports = aS.reportsOfDay("08/11/2015");
-    		
-    		for(TurnOnOrOffReport t : reports){
-    			System.out.println(t.toString());
-    		}
-    		
-    	} catch(Exception e){
-    		e.printStackTrace();
-    	}
-    	
-    } 
-    
 }

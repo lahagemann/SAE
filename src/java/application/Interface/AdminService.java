@@ -62,4 +62,7 @@ public interface AdminService extends EmployeeService {
 	public void updateRoom(Room r) throws SQLException, ConnectionException;
 
 	public List<TurnOnOrOffReport> reportsOfDay(String day) throws SQLException, ConnectionException, InconsistentDBException;
+
+    Goal findGoal(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
+
 }

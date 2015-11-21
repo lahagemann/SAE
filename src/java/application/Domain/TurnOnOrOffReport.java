@@ -51,8 +51,13 @@ public class TurnOnOrOffReport extends Transaction {
 	}
 	
 	public String toString(){
-		return "Recurso: " + getResourceName() + "\nSala: " + getRoomName() + "\nLigou: " + getInitialTime() + "\nDesligou: " + getFinalTime();  
-		
+		return "Recurso: " + getResourceName() + "\nSala: " + getRoomName() + "\nLigou: " + getInitialTime() + "\nDesligou: " + getFinalTime();  	
 	}
+	
+	public long secondsTurnedOn(){
+        return (this.getFinalTime().getTime() - this.getInitialTime().getTime()) / 1000;
+	}
+	
+	
 	
 }

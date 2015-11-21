@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
+/*
  * @author Jessica
  */
+
 public class ResourceDBImpl implements ResourceDB {
 
 	private Connection connection = null;
@@ -88,8 +88,8 @@ public class ResourceDBImpl implements ResourceDB {
 		String query;
 		
 		if(r.getLocationID() != this.findResourceByID( r.getIdentifier() ).getLocationID() ){
-			CustomActionDB caDB = new CustomActionDBImpl();
 			
+			CustomActionDB caDB = new CustomActionDBImpl();
 			caDB.deleteResourceFromAllCA( r.getIdentifier() );
 			
 		}

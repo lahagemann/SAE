@@ -193,4 +193,11 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 		return goalDB.getListGoal();
 	}
 
+	@Override
+	public Goal findGoal(int id) throws SQLException, ConnectionException,
+			InconsistentDBException, DataNotFoundException {
+		GoalDB goalDB = new GoalDBImpl();
+		return goalDB.findGoalByID(id);
+	}
+
 }
