@@ -33,7 +33,7 @@ public class AddGoalServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] date = request.getParameter("date").split("\\-");
-        Date day = new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
+        Date day = new Date(Integer.parseInt(date[0])-1900, Integer.parseInt(date[1])-1, Integer.parseInt(date[2]));
         float value = Float.parseFloat(request.getParameter("value"));
         
         AdminService service = new AdminServiceImpl();

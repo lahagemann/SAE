@@ -36,43 +36,45 @@
                 </div>
             </div>
         </nav>
-        
+
         <%
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room r = service.findRoom(e.getWorkRoomID());
-            Goal g = new Goal(null, 0);// = service.findGoal();            
-        %>
+            Goal g = service.findGoal(r.getDailyGoal().getIdentifier());           
+%>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
         <% List<Employee> employees = service.listAllEmployees(); %>
-        
+
+
         <div class="container">
-            <div align="center" id="block">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" align="center" id="block">
                 <table class="table table-hover" align="center">
                     <tr>
-                        <td><b>Identificação</b></td>
                         <td><b>Nome</b></td>
+                        <td><b>Email</b></td>
                         <td></td>
                     </tr>
-                    <% for(Employee employee : employees) { %>
-                        <tr>
-                            <td><%= employee.getIdentifier() %></td>
-                            <td><%= employee.getName() %></td>
-                            <td>
-                                <form method="post" action="./delete_employee">
-                                    <input type="hidden" name="id" value="<%= employee.getIdentifier() %>">
-                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
-                                </form>
-                            </td>                       
-                        </tr>
-                    <% } %>
+                    <% for (Employee employee : employees) {%>
+                    <tr>
+                        <td><%= employee.getName()%></td>
+                        <td><%= employee.getEmail()%></td>
+                        <td>
+                            <form method="post" action="./delete_employee">
+                                <input type="hidden" name="id" value="<%= employee.getIdentifier()%>">
+                                <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
+                            </form>
+                        </td>                       
+                    </tr>
+                    <% }%>
                 </table>
             </div>
+            <div class="col-md-3"></div>
         </div>
-        
     </body>
 </html>

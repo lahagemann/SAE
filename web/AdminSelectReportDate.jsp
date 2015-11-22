@@ -41,20 +41,21 @@
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room r = service.findRoom(e.getWorkRoomID());
-            Goal g = new Goal(null, 0);// = service.findGoal();            
+            Goal g = service.findGoal(r.getDailyGoal().getIdentifier());            
         %>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        Debug message: ${message}
         
         <h2 align="center">Selecionar data para emitir relatório</h2>
         <br>
         <br>
         <div class="container">
-            <form class="form-horizontal" role="form" method="post" action="./select_date">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form class="form-horizontal" role="form" method="post" action="./select_date">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="date">Data:</label>
                     <div class="col-sm-10">
@@ -67,6 +68,8 @@
                     </div>
                 </div>
             </form>
+            </div>
+            <div class="col-md-3"></div>
         </div>
     </body>
 </html>

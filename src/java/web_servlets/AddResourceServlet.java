@@ -11,8 +11,6 @@ import database.Connection.ConnectionException;
 import database.ServicesDB.DataNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,9 +45,9 @@ public class AddResourceServlet extends HttpServlet {
         } catch (ConnectionException s) {
             s.printStackTrace();
         } catch (DataNotFoundException ex) {
-            //sala não existe
+            request.getRequestDispatcher("/ErrorNoRoomWithChosenNumber.jsp").forward(request, response);
         }
         
-        request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);
+        request.getRequestDispatcher("/AdminManage.jsp").forward(request, response);
     }
 }

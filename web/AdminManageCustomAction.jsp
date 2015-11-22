@@ -40,7 +40,7 @@
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room r = service.findRoom(e.getWorkRoomID());
-            Goal g = new Goal(null, 0);// = service.findGoal();            
+            Goal g = service.findGoal(r.getDailyGoal().getIdentifier());            
 %>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

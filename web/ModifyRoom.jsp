@@ -36,13 +36,13 @@
                 </div>
             </div>
         </nav>
-        
+
         <%
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room r = service.findRoom(e.getWorkRoomID());
-            Goal g = new Goal(null, 0);// = service.findGoal();            
-        %>
+            Goal g = service.findGoal(r.getDailyGoal().getIdentifier());            
+%>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
@@ -51,34 +51,40 @@
         <h2>Inserir nova sala</h2>
         <br>
         <br>
-        
-        <% Room room = (Room) request.getAttribute("room"); %>
-        
-        <form class="form-horizontal" role="form" method="post" action="./manage_room">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Nome da sala:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Digite o nome da sala" name="name" value="<%= room.getName() %>">
-                </div>
+
+        <% Room room = (Room) request.getAttribute("room");%>
+
+        <div class="container">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form class="form-horizontal" role="form" method="post" action="./manage_room">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Nome da sala:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Digite o nome da sala" name="name" value="<%= room.getName()%>">
+                        </div>
+                    </div>
+
+                    <% List<Goal> goals = service.listAllGoals(); %>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="room">Meta:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="goal">
+                                <% for (Goal goal : goals) {%>
+                                <option value="<%= goal.getIdentifier()%>"><%= goal.getValue()%> ( <%= goal.getDay().toString()%> )</option>
+                                <% }%>
+                            </select>
+                        </div>
+                    </div>    
+
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Alterar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-                
-            <% List<Goal> goals = service.listAllGoals(); %>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="room">Meta:</label>
-                <div class="col-sm-10">
-                    <select class="form-control" name="goal">
-                        <% for(Goal goal : goals) { %>
-                            <option value="<%= goal.getIdentifier() %>"><%= goal.getValue() %> ( <%= goal.getDay().toString() %> )</option>
-                        <% } %>
-                    </select>
-                </div>
-            </div>    
-                
-            <div class="form-group"> 
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Alterar</button>
-                </div>
-            </div>
-        </form>
+            <div class="col-md-3"></div>
+        </div>
     </body>
 </html>

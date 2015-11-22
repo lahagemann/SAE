@@ -16,14 +16,20 @@
         <br>
         <br>
         <br>
-        <div class="well">
-            <h2 align="center"><b>Erro ao conectar ao banco de dados</b></h2>
-            <br>
-            <h3 align="center">Não foi possível conectar ao banco de dados. Favor informar ao suporte.</h3>
-            <br>
-            <div align="center">
-                <a href="Login.jsp" class="btn btn-primary"><b>Leve-me de volta para o login</b></a>
+        <div class="container">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="well">
+                    <h2 align="center"><b>Erro ao conectar ao banco de dados</b></h2>
+                    <br>
+                    <h3 align="center">Não foi possível conectar ao banco de dados. Favor informar ao suporte.</h3>
+                    <br>
+                    <div align="center">
+                        <a href="Login.jsp" class="btn btn-default"><b>Leve-me de volta para o login</b></a>
+                    </div>
+                </div>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </body>
 </html>

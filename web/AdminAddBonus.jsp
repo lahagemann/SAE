@@ -41,7 +41,7 @@
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room eRoom = service.findRoom(e.getWorkRoomID());
-            Goal g = new Goal(null, 0);// = service.findGoal();            
+            Goal g = service.findGoal(eRoom.getDailyGoal().getIdentifier());            
         %>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= eRoom.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -50,26 +50,29 @@
         <br>
         <% List<Room> rooms = service.listAllRooms(); %>
 
+
         <div class="container">
-            <div align="center" id="block">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" align="center" id="block">
                 <table class="table table-hover" align="center">
                     <tr>
                         <td><b>Número</b></td>                       
                         <td></td>
                     </tr>
-                    <% for(Room room : rooms) { %>
+                    <% for (Room room : rooms) {%>
                     <tr>
-                        <td><%= room.getIdentifier() %></td>
+                        <td><%= room.getIdentifier()%></td>
                         <td>
                             <form method="post" action="./set_bonus">
-                                <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
+                                <input type="hidden" name="id" value="<%= room.getIdentifier()%>">
                                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-usd"></span><b>&nbsp;&nbsp;Atribuir bônus</b></button>
                             </form>
                         </td>
                     </tr>
-                    <% } %>
+                    <% }%>
                 </table>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </body>
 </html>

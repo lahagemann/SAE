@@ -48,12 +48,12 @@ public class AddEmployeeServlet extends HttpServlet {
         } catch (SQLException s) {
             s.printStackTrace();
         } catch (ConnectionException s) {
-            s.printStackTrace();
+            request.getRequestDispatcher("/ConnectionError.jsp").forward(request, response);
         } catch (DataNotFoundException ex) {
-            //nao achou sala
+            request.getRequestDispatcher("/ErrorNoRoomWithChosenNumber.jsp").forward(request, response);
         }
         
-        request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);
+        request.getRequestDispatcher("/AdminManage.jsp").forward(request, response);
     }
     
 }

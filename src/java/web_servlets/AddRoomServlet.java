@@ -50,6 +50,6 @@ public class AddRoomServlet extends HttpServlet {
             Logger.getLogger(AddRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);
+        request.getRequestDispatcher("/AdminManage.jsp").forward(request, response);
     }
 }

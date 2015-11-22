@@ -37,13 +37,13 @@
                 </div>
             </div>
         </nav>
-        
+
         <%
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room r = service.findRoom(e.getWorkRoomID());
-            Goal g = new Goal(null, 0);// = service.findGoal();            
-        %>
+            Goal g = service.findGoal(r.getDailyGoal().getIdentifier());            
+%>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
@@ -53,8 +53,10 @@
         <br>
         <br>
         <%  List<Goal> goals = service.listAllGoals(); %>
+
         <div class="container">
-            <div align="center" id="block">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" align="center" id="block">
                 <table class="table table-hover" align="center">
                     <tr>
                         <td><b>Número</b></td>                       
@@ -62,30 +64,31 @@
                         <td>Dia</td>
                         <td></td>
                     </tr>
-                    <% for(Goal goal : goals) { %>
+                    <% for (Goal goal : goals) {%>
                     <tr>
-                        <td><%= goal.getIdentifier() %></td>
-                        <td><%= goal.getValue() %></td>
-                        <td><%= goal.getDay() %></td>
-                        <% if(goal.getIdentifier() == 0) {  %>
+                        <td><%= goal.getIdentifier()%></td>
+                        <td><%= goal.getValue()%></td>
+                        <td><%= goal.getDay()%></td>
+                        <% if (goal.getIdentifier() == 0) {%>
                         <td>
                             <form method="post" action="./delete_goal">
-                                <input type="hidden" name="id" value="<%= goal.getIdentifier() %>">
+                                <input type="hidden" name="id" value="<%= goal.getIdentifier()%>">
                                 <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')" disabled="disabled"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
                             </form>
                         </td>
-                        <% } else { %>
+                        <% } else {%>
                         <td>
                             <form method="post" action="./delete_goal">
-                                <input type="hidden" name="id" value="<%= goal.getIdentifier() %>">
+                                <input type="hidden" name="id" value="<%= goal.getIdentifier()%>">
                                 <button type="submit" class="btn btn-primary" onclick="return confirm('Você tem certeza?')"><span class="glyphicon glyphicon-remove"></span><b>&nbsp;&nbsp;Excluir</b></button>
                             </form>
                         </td>
                         <% } %>
                     </tr>
-                    <% } %>
+                    <% }%>
                 </table>
             </div>
-        </div>  
+            <div class="col-md-3"></div>
+        </div>
     </body>
 </html>
