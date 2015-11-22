@@ -8,6 +8,7 @@ package web_servlets;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
 import database.Connection.ConnectionException;
+import database.ServicesDB.DataNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -48,6 +49,8 @@ public class AddEmployeeServlet extends HttpServlet {
             s.printStackTrace();
         } catch (ConnectionException s) {
             s.printStackTrace();
+        } catch (DataNotFoundException ex) {
+            //nao achou sala
         }
         
         request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);

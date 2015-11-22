@@ -29,12 +29,6 @@ import javax.servlet.http.HttpSession;
 public class TurnOnAdminByRoomServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Preprocess request: we actually don't need to do any business stuff, so just display JSP.
-        request.getRequestDispatcher("/AdminListResourcesByRoom.jsp").forward(request, response);
-    }
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Employee user = (Employee) session.getAttribute("user");
         
@@ -54,6 +48,6 @@ public class TurnOnAdminByRoomServlet extends HttpServlet{
             Logger.getLogger(TurnOnAdminByRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        request.getRequestDispatcher("/AdminListResourcesByRoom.jsp").forward(request, response);       
+        request.getRequestDispatcher("/AdminListResourcesByRoom.jsp").forward(request, response);
     }
 }

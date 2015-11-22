@@ -8,8 +8,11 @@ package web_servlets;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
 import database.Connection.ConnectionException;
+import database.ServicesDB.DataNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +46,8 @@ public class AddResourceServlet extends HttpServlet {
             s.printStackTrace();
         } catch (ConnectionException s) {
             s.printStackTrace();
+        } catch (DataNotFoundException ex) {
+            //sala não existe
         }
         
         request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);

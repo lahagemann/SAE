@@ -60,7 +60,6 @@
                             <td><b>Identificação</b></td>
                             <td><b>Tipo de recurso</b></td>
                             <td><b>Ação</b></td>
-                            <td></td>
                             <td><b>Manutenção</b></td>
                     </tr>
                     <% for(Resource resource : resources) { %>

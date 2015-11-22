@@ -79,8 +79,13 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	public boolean createEmployee(String name, String cpf, String email,
 			String password, int roomID, int isAdmin) throws SQLException, ConnectionException, DataNotFoundException {
 		EmployeeDB employeeDB = new EmployeeDBImpl();
-		Employee employee = new Employee(name, cpf, email, password, roomID, isAdmin);
-		employeeDB.insertEmployee(employee);
+                if(isAdmin == 1) {
+                    Admin admin = new Admin(name, cpf, email, password, roomID, isAdmin);
+                    employeeDB.insertEmployee(admin);
+                } else {
+                    Employee employee = new Employee(name, cpf, email, password, roomID, isAdmin);
+                    employeeDB.insertEmployee(employee);
+                }
 		return true;
 	}
 
