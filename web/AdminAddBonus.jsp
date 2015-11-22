@@ -56,16 +56,16 @@
             <div class="col-md-6" align="center" id="block">
                 <table class="table table-hover" align="center">
                     <tr>
-                        <td><b>Número</b></td>                       
+                        <td><b>Sala</b></td>                       
                         <td></td>
                     </tr>
                     <% for (Room room : rooms) {%>
                     <tr>
-                        <td><%= room.getIdentifier()%></td>
+                        <td><%= room.getName()%></td>
                         <td>
                             <form method="post" action="./set_bonus">
                                 <input type="hidden" name="id" value="<%= room.getIdentifier()%>">
-                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-usd"></span><b>&nbsp;&nbsp;Atribuir bônus</b></button>
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-usd"></span><b>&nbsp;&nbsp;Atribuir bônus</b></button>
                             </form>
                         </td>
                     </tr>

@@ -4,6 +4,7 @@
     Author     : Luiza
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="application.Domain.Admin"%>
 <%@page import="application.Domain.Goal"%>
 <%@page import="application.Impl.AdminServiceImpl"%>
@@ -79,10 +80,15 @@
                             <input type="password" class="form-control" placeholder="Digite uma senha para o funcionário" name="password" value="<%= employee.getPassword()%>">
                         </div>
                     </div>
+                    <% List<Room> rooms = service.listAllRooms(); %>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="room">Sala:</label>
                         <div class="col-sm-10">
-                            <input type="number" min="0" step="1" class="form-control" placeholder="Digite o número da sala do funcionário" name="room" value="<%= employee.getWorkRoomID()%>">
+                            <select class="form-control" name="room">
+                                <% for (Room room : rooms) {%>
+                                <option value="<%= room.getIdentifier()%>"><%= room.getName()%></option>
+                                <% }%>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

@@ -34,7 +34,7 @@ public class AdminAddBonusServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        float bonus = Float.parseFloat("bonus");
+        float bonus = Float.parseFloat(request.getParameter("bonus"));
         
         AdminService service = new AdminServiceImpl();
         

@@ -56,18 +56,20 @@
                 <form class="form-horizontal" role="form" method="post" action="./add_bonus">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="name">Nome:</label>
-                        <input type="text" name="room" value="<%= room.getIdentifier()%>" disabled="disabled">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" value="<%= room.getName()%>" disabled="disabled">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="room">Sala:</label>
+                        <label class="control-label col-sm-2" for="room">Valor:</label>
                         <div class="col-sm-10">
-                            <input type="hidden" name="room" value="<%= room.getIdentifier()%>">
-                            <input type="number" min="0" step="0.1" class="form-control" placeholder="Digite o número da sala do funcionário" name="bonus">
+                            <input type="hidden" name="id" value="<%= room.getIdentifier()%>">
+                            <input type="number" min="0" step="0.1" class="form-control" placeholder="Digite o valor do bônus" name="bonus">
                         </div>
                     </div>
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Adicionar</button>
+                            <button type="submit" class="btn btn-default" style="width: 100%;">Adicionar</button>
                         </div>
                     </div>
                 </form>

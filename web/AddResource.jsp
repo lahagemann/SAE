@@ -4,6 +4,7 @@
     Author     : Luiza
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="application.Domain.Goal"%>
 <%@page import="application.Domain.Room"%>
 <%@page import="application.Domain.Employee"%>
@@ -72,10 +73,15 @@
                             <input type="text" class="form-control" placeholder="Digitar o consumo em KWh do recurso (ex.: 0.01)" name="consumption">
                         </div>
                     </div>
+                    <% List<Room> rooms = service.listAllRooms(); %>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="room">Sala:</label>
                         <div class="col-sm-10">
-                            <input type="number" min="1" step="1" class="form-control" placeholder="Selecione a sala onde será colocado o recurso" name="room">
+                            <select class="form-control" name="room">
+                                <% for (Room room : rooms) {%>
+                                <option value="<%= room.getIdentifier()%>"><%= room.getName()%></option>
+                                <% }%>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group"> 
