@@ -48,7 +48,7 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <h2>Inserir nova sala</h2>
+        <h2 align="center">Alterar sala</h2>
         <br>
         <br>
 
@@ -57,21 +57,26 @@
         <div class="container">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form class="form-horizontal" role="form" method="post" action="./manage_room">
+                <form class="form-horizontal" role="form" method="post" action="./modify_room">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="name">Nome da sala:</label>
+                        <label class="control-label col-sm-2" for="name">Nome:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="Digite o nome da sala" name="name" value="<%= room.getName()%>">
+                            <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
                         </div>
                     </div>
 
                     <% List<Goal> goals = service.listAllGoals(); %>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="room">Meta:</label>
+                        <label class="control-label col-sm-2" for="goal">Meta:</label>
                         <div class="col-sm-10">
                             <select class="form-control" name="goal">
                                 <% for (Goal goal : goals) {%>
-                                <option value="<%= goal.getIdentifier()%>"><%= goal.getValue()%> ( <%= goal.getDay().toString()%> )</option>
+                                    <% if(goal.getIdentifier() == room.getDailyGoal().getIdentifier()) { %>
+                                        <option value="<%= goal.getIdentifier()%>" selected="selected"><%= goal.getValue()%> ( <%= goal.getDay().toString()%> )</option>
+                                    <% } else { %>
+                                        <option value="<%= goal.getIdentifier()%>"><%= goal.getValue()%> ( <%= goal.getDay().toString()%> )</option>
+                                    <% } %>
                                 <% }%>
                             </select>
                         </div>
@@ -79,7 +84,7 @@
 
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Alterar</button>
+                            <button type="submit" class="btn btn-default" style="width: 100%;">Alterar</button>
                         </div>
                     </div>
                 </form>

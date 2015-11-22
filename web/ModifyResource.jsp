@@ -50,6 +50,7 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
+        <h2 align="center">Alterar recurso</h2>
         <% Resource resource = (Resource) request.getAttribute("resource");%>
 
         <div class="container">
@@ -82,14 +83,18 @@
                         <div class="col-sm-10">
                             <select class="form-control" name="room">
                                 <% for (Room room : rooms) {%>
-                                <option value="<%= room.getIdentifier()%>"><%= room.getName()%></option>
+                                <% if(room.getIdentifier() == resource.getLocationID()) { %>
+                                        <option value="<%= room.getIdentifier()%>" selected="selected"><%= room.getName()%></option>
+                                    <% } else { %>
+                                        <option value="<%= room.getIdentifier()%>"><%= room.getName()%></option>
+                                    <% } %>
                                 <% }%>
                             </select>
                         </div>
                     </div>
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Alterar</button>
+                            <button type="submit" class="btn btn-default" style="width: 100%;">Alterar</button>
                         </div>
                     </div>
                 </form>

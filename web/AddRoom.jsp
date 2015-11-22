@@ -4,6 +4,7 @@
     Author     : Luiza
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="application.Domain.Goal"%>
 <%@page import="application.Domain.Room"%>
 <%@page import="application.Domain.Employee"%>
@@ -56,11 +57,22 @@
             <div class="col-md-6">
                 <form class="form-horizontal" role="form" method="post" action="./add_room">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="name">Nome da sala:</label>
+                        <label class="control-label col-sm-2" for="name">Nome:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="Digite o nome da sala" name="name">
                         </div>
                     </div>
+                    <% List<Goal> goals = service.listAllGoals(); %>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="goal">Meta:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="goal">
+                                <% for (Goal goal : goals) {%>
+                                    <option value="<%= goal.getIdentifier()%>"><%= goal.getValue()%> ( <%= goal.getDay().toString()%> )</option>
+                                <% }%>
+                            </select>
+                        </div>
+                    </div>  
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-default" style="width: 100%;">Criar</button>

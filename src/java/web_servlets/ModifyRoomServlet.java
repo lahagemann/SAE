@@ -6,10 +6,12 @@
 package web_servlets;
 
 import application.Domain.Resource;
+import application.Domain.Room;
 import application.Impl.AdminServiceImpl;
 import application.Interface.AdminService;
 import database.Connection.ConnectionException;
 import database.ServicesDB.DataNotFoundException;
+import database.ServicesDB.InconsistentDBException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,38 +25,36 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luiza
  */
-public class ModifyResourceServlet extends HttpServlet {
+public class ModifyRoomServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Preprocess request: we actually don't need to do any business stuff, so just display JSP.
-        request.getRequestDispatcher("/ModifyResource.jsp").forward(request, response);
+        request.getRequestDispatcher("/ModifyRoom.jsp").forward(request, response);
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String type = request.getParameter("type");
-        float consumption = Float.parseFloat(request.getParameter("consumption"));
-        int roomNumber = Integer.parseInt(request.getParameter("room"));
+        int goalID = Integer.parseInt(request.getParameter("goal"));
         
         AdminService service = new AdminServiceImpl();
         
         try {
-            Resource r = service.findResource(id);
-            r.setConsumption(consumption);
-            r.setLocationID(roomNumber);
+            Room r = service.findRoom(id);
             r.setName(name);
-            r.setType(type);
-            service.updateResource(r);
+            r.setDailyGoal(service.findGoal(goalID));
+            service.updateRoom(r);
         } catch (SQLException s) {
             s.printStackTrace();
         } catch (ConnectionException s) {
             s.printStackTrace();
         } catch (DataNotFoundException ex) {
             request.getRequestDispatcher("/ErrorNoRoomWithChosenNumber.jsp").forward(request, response);
+        } catch (InconsistentDBException ex) {
+            Logger.getLogger(ModifyRoomServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("/ModifyResourceList.jsp").forward(request, response);
+        request.getRequestDispatcher("/ModifyRoomList.jsp").forward(request, response);
     }
 }

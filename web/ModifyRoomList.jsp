@@ -47,6 +47,7 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
+        <h2 align="center">Escolher sala para alterar</h2>
         <% List<Room> rooms = service.listAllRooms(); %>
         
         <div class="container">
@@ -65,14 +66,14 @@
                         <td>
                             <form method="post" action="./modify_room_form">
                                     <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                    <button type="submit" class="btn btn-primary" disabled="disabled"><b>Alterar</b></button>
+                                    <button type="submit" class="btn btn-default" disabled="disabled"><b>Alterar</b></button>
                             </form>
                         </td>
                         <% } else { %>
                         <td>
                             <form method="post" action="./modify_room_form">
                                     <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                    <button type="submit" class="btn btn-primary"><b>Alterar</b></button>
+                                    <button type="submit" class="btn btn-default"><b>Alterar</b></button>
                             </form>
                         </td>
                         <% } %>

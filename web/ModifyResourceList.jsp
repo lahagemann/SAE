@@ -49,6 +49,7 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
+        <h2 align="center">Escolher recurso para alterar</h2>
         <% List<Room> rooms = service.listAllRooms(); %>
         
         <% for(Room room : rooms) { %>
@@ -74,7 +75,7 @@
                         <td>
                             <form method="post" action="./modify_resource_form">
                                     <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                    <button type="submit" class="btn btn-primary"><b>Alterar</b></button>
+                                    <button type="submit" class="btn btn-default"><b>Alterar</b></button>
                             </form>
                         </td>
                     </tr>

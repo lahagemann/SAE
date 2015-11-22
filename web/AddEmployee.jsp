@@ -4,6 +4,7 @@
     Author     : Luiza
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="application.Domain.Goal"%>
 <%@page import="application.Domain.Room"%>
 <%@page import="application.Domain.Employee"%>
@@ -75,13 +76,18 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="password">Senha:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Digite uma senha para o funcionário" name="password">
+                            <input type="password" class="form-control" placeholder="Digite uma senha para o funcionário" name="password">
                         </div>
                     </div>
+                    <% List<Room> rooms = service.listAllRooms(); %>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="room">Sala:</label>
                         <div class="col-sm-10">
-                            <input type="number" min="1" step="1" class="form-control" placeholder="Digite o número da sala do funcionário" name="room">
+                            <select class="form-control" name="room">
+                                <% for (Room room : rooms) {%>
+                                <option value="<%= room.getIdentifier()%>"><%= room.getName()%></option>
+                                <% }%>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
