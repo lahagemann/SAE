@@ -36,13 +36,13 @@
                 </div>
             </div>
         </nav>
-        
+
         <%
             AdminService service = new AdminServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room r = service.findRoom(e.getWorkRoomID());
             Goal g = new Goal(null, 0);// = service.findGoal();            
-        %>
+%>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
@@ -51,18 +51,24 @@
         <h2>Inserir nova sala</h2>
         <br>
         <br>
-        <form class="form-horizontal" role="form" method="post" action="./manage_room">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Nome da sala:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Digite o nome da sala" name="name">
-                </div>
+        <div class="container">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form class="form-horizontal" role="form" method="post" action="./add_room">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Nome da sala:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Digite o nome da sala" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default" style="width: 100%;">Criar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group"> 
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Criar</button>
-                </div>
-            </div>
-        </form>
+            <div class="col-md-3"></div>
+        </div>
     </body>
 </html>

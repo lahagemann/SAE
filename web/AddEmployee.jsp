@@ -53,7 +53,7 @@
         <div class="container">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form class="form-horizontal" role="form" method="post" action="./manage_employee">
+                <form class="form-horizontal" role="form" method="post" action="./add_employee">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="name">Nome:</label>
                         <div class="col-sm-10">

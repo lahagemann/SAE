@@ -32,13 +32,14 @@ public class AddGoalServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Date date = new Date(request.getParameter("date"));
+        String[] date = request.getParameter("date").split("\\-");
+        Date day = new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
         int value = Integer.parseInt("value");
         
         AdminService service = new AdminServiceImpl();
         
         try {
-            if(service.createGoal(date, value))
+            if(service.createGoal(day, value))
                 request.setAttribute("message", "foi adicionado com sucesso");
             else
                 request.setAttribute("message", "não foi adicionado com sucesso");

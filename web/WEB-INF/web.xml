@@ -73,28 +73,36 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>manage_employee</servlet-name>
+        <servlet-name>add_employee</servlet-name>
         <servlet-class>web_servlets.AddEmployeeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>manage_employee</servlet-name>
-        <url-pattern>/manage_employee</url-pattern>
+        <servlet-name>add_employee</servlet-name>
+        <url-pattern>/add_employee</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>manage_room</servlet-name>
+        <servlet-name>add_room</servlet-name>
         <servlet-class>web_servlets.AddRoomServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>manage_room</servlet-name>
-        <url-pattern>/manage_room</url-pattern>
+        <servlet-name>add_room</servlet-name>
+        <url-pattern>/add_room</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>manage_resource</servlet-name>
+        <servlet-name>add_resource</servlet-name>
         <servlet-class>web_servlets.AddResourceServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>manage_resource</servlet-name>
-        <url-pattern>/manage_resource</url-pattern>
+        <servlet-name>add_resource</servlet-name>
+        <url-pattern>/add_resource</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>add_goal</servlet-name>
+        <servlet-class>web_servlets.AddGoalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add_goal</servlet-name>
+        <url-pattern>/add_goal</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>list_resources</servlet-name>
