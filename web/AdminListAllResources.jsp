@@ -69,7 +69,6 @@
                             <td><b>Identificação</b></td>
                             <td><b>Tipo de recurso</b></td>
                             <td><b>Ação</b></td>
-                            <td></td>
                             <td><b>Manutenção</b></td>
                         </tr>
                                              
@@ -83,28 +82,20 @@
                                 </td>
                             
                                 <% if(resource.isOn()) { %>
-                                    <td style="width: 70px;">
-                                        <button type="button" class="btn btn-success" disabled="disabled" id="action_btn"><b>ON</b></button>
-                                    
-                                    </td>
-                                    <td style="width: 70px;">
-                                        <form action=" ./turn_off_all" method="post">
-                                            <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                            <button type="submit" class="btn btn-danger" id="action_btn"><b>OFF</b></button>
-                                        </form>
-                                    </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="#" class="btn btn-success disabled"><b>ON</b></a>
+                                        <a href="./turn_off_all?id=<%=resource.getIdentifier()%>" class="btn btn-danger"><b>OFF</b></a>
+                                    </div>
+                                </td>
                                 <% } else { %>
-                                    <td style="width: 70px;">
-                                        <form action=" ./turn_on_all" method="post">
-                                            <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                            <button type="submit" class="btn btn-success" id="action_btn"><b>ON</b></button>
-                                        </form>
-                                    </td>
-                                    <td style="width: 70px;">
-                                        <button type="button" class="btn btn-danger" disabled="disabled" id="action_btn"><b>OFF</b></button>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="./turn_on_all?id=<%=resource.getIdentifier()%>" class="btn btn-success"><b>ON</b></a>
+                                            <a href="#" class="btn btn-danger disabled"><b>OFF</b></a>
+                                        </div>
                                     </td>
                                 <% } %>
-                            
                                 <td>    
                                     <button type="button" class="btn btn-warning"><b>Solicitar</b></button>
                                 </td>

@@ -43,53 +43,60 @@
             Employee e = (Employee) session.getAttribute("user");
             Room eRoom = service.findRoom(e.getWorkRoomID());
             Goal g = new Goal(null, 0);// = service.findGoal();            
-%>
+        %>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= eRoom.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
         <h3 align="center">Adicionar ação personalizada</h3>
-        
-        <% List<Room> rooms = service.listAllRooms(); %>
-        
-        <form class="form-horizontal" role="form" method="post" action="./admin_add_action">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Nome:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Digitar um nome para a ação" name="name">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="name">Recursos:</label>
-                <div class="col-sm-10">
-                    <% for (Room room : rooms) {%>
 
-                    <h3 align="center"><%= room.getName()%> <%= room.getIdentifier()%></h3>
+        <div class="container">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <% List<Room> rooms = service.listAllRooms(); %>
 
-                    <table class="table table-hover" align="center">
-                        <tr class="danger">
-                            <td><b>Incluir</b></td>
-                            <td><b>Nome do recurso</b></td>
-                            <td><b>Tipo do recurso</b></td>
-                        </tr>
-                        <% for (Resource r : room.getResourceList()) {%>
-                        <tr>
-                            <td><input type="checkbox" name="resources" value="<%= r.getIdentifier()%>"></td>
-                            <td><%= r.getName()%></td>
-                            <td><%= r.getType()%></td>                      
-                        </tr>
-                        <% } %>
-                    </table>
-                    <% }%>
-                </div>
+                <form class="form-horizontal" role="form" method="post" action="./admin_add_action">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Nome:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Digitar um nome para a ação" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Recursos:</label>
+                        <div class="col-sm-10">
+                            <% for (Room room : rooms) {
+                               if(room.getIdentifier() != 0) { %>
+
+                            <h3 align="center"><%= room.getName()%></h3>
+
+                            <table class="table table-hover" align="center">
+                                <tr class="danger">
+                                    <td><b>Incluir</b></td>
+                                    <td><b>Nome do recurso</b></td>
+                                    <td><b>Tipo do recurso</b></td>
+                                </tr>
+                                <% for (Resource r : room.getResourceList()) {%>
+                                <tr>
+                                    <td><input type="checkbox" name="resources" value="<%= r.getIdentifier()%>"></td>
+                                    <td><%= r.getName()%></td>
+                                    <td><%= r.getType()%></td>                      
+                                </tr>
+                                <% } %>
+                            </table>
+                            <%    }
+                               }%>
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default" style="width: 100%;">Criar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group"> 
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Criar</button>
-                </div>
-            </div>
-        </form>
-        
+            <div class="col-md-3"></div>
+        </div>
     </body>
 </html>

@@ -74,26 +74,19 @@
                             
                             <% if(resource.isOn()) { %>
                                 <td>
-                                    <button type="button" class="btn btn-success" disabled="disabled"><b>ON</b></button>
+                                    <div class="btn-group" role="group">
+                                        <a href="#" class="btn btn-success disabled"><b>ON</b></a>
+                                        <a href="./turn_off_employee?id=<%=resource.getIdentifier()%>" class="btn btn-danger"><b>OFF</b></a>
+                                    </div>
                                 </td>
-                                <td>
-                                    <form action=" ./turn_off_employee" method="post">
-                                        <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                        <button type="submit" class="btn btn-danger"><b>OFF</b></button>
-                                    </form>
-                                </td>
-                            <% } else { %>
-                                <td>
-                                    <form action=" ./turn_on_employee" method="post">
-                                        <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                        <button type="submit" class="btn btn-success" ><b>ON</b></button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" disabled="disabled"><b>OFF</b></button>
-                                </td>
-                            <% } %>
-                            
+                                <% } else { %>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="./turn_on_employee?id=<%=resource.getIdentifier()%>" class="btn btn-success"><b>ON</b></a>
+                                            <a href="#" class="btn btn-danger disabled"><b>OFF</b></a>
+                                        </div>
+                                    </td>
+                                <% } %>
                             <td>    
                                 <button type="button" class="btn btn-warning"><b>Solicitar</b></button>
                             </td>

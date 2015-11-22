@@ -29,12 +29,6 @@ import javax.servlet.http.HttpSession;
 public class TurnOnEmployeeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Preprocess request: we actually don't need to do any business stuff, so just display JSP.
-        request.getRequestDispatcher("/EmployeeListResources.jsp").forward(request, response);
-    }
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Employee user = (Employee) session.getAttribute("user");
         
@@ -55,6 +49,5 @@ public class TurnOnEmployeeServlet extends HttpServlet {
         }
 
         request.getRequestDispatcher("/EmployeeListResources.jsp").forward(request, response);
-//        response.sendRedirect("/EmployeeListResources.jsp");
     }
 }

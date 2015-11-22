@@ -51,8 +51,8 @@
             <div align="center" id="block">
                     <h3>Ação personalizada</h3>
                     <div class="btn-group" align="center">
-                        <a href="EmployeeViewCustomAction.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span><b>&nbsp;&nbsp;Visualizar minhas ações</b></a>
-                        <a href="EmployeeAddCustomAction.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar uma ação</b></a>
+                        <a href="EmployeeViewCustomAction.jsp" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span><b>&nbsp;&nbsp;Visualizar minhas ações</b></a>
+                        <a href="EmployeeAddCustomAction.jsp" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span><b>&nbsp;&nbsp;Adicionar uma ação</b></a>
                     </div>
             </div>
         </div>

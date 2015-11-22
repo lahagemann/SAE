@@ -46,60 +46,66 @@
             Employee e = (Employee) session.getAttribute("user");
             Room eRoom = service.findRoom(e.getWorkRoomID());
             Goal g = new Goal(null, 0);// = service.findGoal();            
-%>
+        %>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= eRoom.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
         <h3 align="center">Ações personalizadas</h3>
-        
+
         <% List<CustomAction> actions = service.listCustomActions(e.getIdentifier()); %>
-        
-        <table class="table table-hover" align="center">
-            <tr>
-                <td><b>Descrição</b></td>
-                <td><b>Recursos</b></td>
-                <td><b>Ação</b></td>
-            </tr>
-            <% for(CustomAction action : actions) { %>
-            <tr>
-                <td><%= action.getName() %></td>
-                <td>
-                    <div class="panel-group">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" href="#collapse<%= action.getIdentifier() %>"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;Recursos nesta ação:</a>
-                                </h4>
+
+        <div class="container">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" align="center">
+                <table class="table table-hover" align="center">
+                    <tr>
+                        <td><b>Descrição</b></td>
+                        <td><b>Recursos</b></td>
+                        <td><b>Ação</b></td>
+                    </tr>
+                    <% for (CustomAction action : actions) {%>
+
+                    <tr>
+                        <td><%= action.getName()%></td>
+                        <td>
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapse<%= action.getIdentifier()%>"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;Recursos nesta ação:</a>
+                                        </h4>
+                                    </div>
+                                    <% String id = "collapse" + action.getIdentifier();%>
+                                    <div id="<%= id%>" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <% for (Resource r : action.getResourceList()) {
+                                                    String status = "";
+                                                    if (r.isOn()) {
+                                                        status = "ON";
+                                                    } else {
+                                                        status = "OFF";
+                                                    }
+                                            %>
+                                            <li class="list-group-item"><b><%= status%></b> <%="  " + r.getName()%> &nbsp;&nbsp; (<%= r.getType()%>)</li>
+                                                    <% }%>    
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <% String id = "collapse"+action.getIdentifier(); %>
-                            <div id="<%= id %>" class="panel-collapse collapse">
-                                <ul class="list-group">
-                                    <% for(Resource r : action.getResourceList()) { 
-                                       String status = "";
-                                       if(r.isOn()) status = "ON";
-                                       else status = "OFF";
-                                    %>
-                                        <li class="list-group-item"><%= r.getName() %> &nbsp;&nbsp; (<%= r.getType() %>)</li>
-                                    <% } %>    
-                                </ul>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="./custom_action_on?id=<%=action.getIdentifier()%>" class="btn btn-success"><b>ON</b></a>
+                                <a href="./custom_action_off?id=<%=action.getIdentifier()%>" class="btn btn-danger"><b>OFF</b></a>
                             </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <form action="./custom_action_on" method="post">
-                        <input type="hidden" name="id" value="<%= action.getIdentifier() %>">
-                        <button type="button" class="btn btn-success"><b>ON</b></button>
-                    </form>
-                    <form action="./custom_action_off" method="post">
-                        <input type="hidden" name="id" value="<%= action.getIdentifier() %>">
-                        <button type="submit" class="btn btn-danger"><b>OFF</b></button>
-                    </form>
-                </td>
-            </tr>
-            <% } %>
-        </table>
+                        </td>
+                    </tr>
+                    <% }%>
+                </table>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
     </body>
 </html>

@@ -35,39 +35,35 @@
                 </div>
             </div>
         </nav>
-        
+
         <%
             EmployeeService service = new EmployeeServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room r = service.findRoom(e.getWorkRoomID());
             Goal g = new Goal(null, 0);// = service.findGoal();            
-        %>
+%>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= r.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
         <!-- /container -->
-        <div class="container">
+        <div class="container" align="center">
             <div align="center" id="block">
-                <table>
-                    <colgroup> 
-                        <col span="2">
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <form method="post" action="EmployeeListResources.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-off"></span><b>&nbsp;&nbsp;Ligar/Desligar recurso</b></button>
-                                </form>
-                            </td>
-                            <td>
-                                <form action="EmployeeManageCustomAction.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-user"></span><b>&nbsp;&nbsp;Ações personalizadas</b></button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
+                <table class="button_table" align="center">
+                    <tr>
+                        <td class="col-md-2"></td>
+                        <td class="col-md-2"></td>
+                        <td class="col-md-2">
+                            <form method="post" action="EmployeeListResources.jsp">
+                                <button type="submit" class="btn btn-default" id="btn"><span class="glyphicon glyphicon-off"></span><b>&nbsp;&nbsp;Ligar/Desligar recurso</b></button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="EmployeeManageCustomAction.jsp">
+                                <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-user"></span><b>&nbsp;&nbsp;Ações personalizadas</b></button>
+                            </form>
+                        </td>
                 </table>
             </div>
         </div>
