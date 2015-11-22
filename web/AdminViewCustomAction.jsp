@@ -88,7 +88,7 @@
                                                         status = "OFF";
                                                     }
                                             %>
-                                            <li class="list-group-item"><b><%= status%></b> <%="  " + r.getName()%> &nbsp;&nbsp; (<%= r.getType()%>)</li>
+                                            <li class="list-group-item"><b><%= status%></b> <%="  " + r.getName() + " "%> (<%= r.getType()%>) &nbsp;&nbsp;&nbsp; <%=service.findRoom(r.getLocationID()).getName() %> </li>
                                                     <% }%>    
                                         </ul>
                                     </div>
