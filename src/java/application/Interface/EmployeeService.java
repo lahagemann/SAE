@@ -7,6 +7,7 @@ package application.Interface;
 
 import application.Domain.CustomAction;
 import application.Domain.Employee;
+import application.Domain.Goal;
 import application.Domain.Resource;
 import application.Domain.Room;
 
@@ -47,4 +48,6 @@ public interface EmployeeService {
 
     Room findRoom(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
 	
+    Goal findGoal(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
+
 }

@@ -18,12 +18,14 @@ import database.Connection.ConnectionException;
 import database.ServicesDB.CustomActionDB;
 import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.EmployeeDB;
+import database.ServicesDB.GoalDB;
 import database.ServicesDB.InconsistentDBException;
 import database.ServicesDB.ReportOnOffDB;
 import database.ServicesDB.ResourceDB;
 import database.ServicesDB.RoomDB;
 import database.ServicesDBImpl.CustomActionDBImpl;
 import database.ServicesDBImpl.EmployeeDBImpl;
+import database.ServicesDBImpl.GoalDBImpl;
 import database.ServicesDBImpl.ReportOnOffDBImpl;
 import database.ServicesDBImpl.ResourceDBImpl;
 import database.ServicesDBImpl.RoomDBImpl;
@@ -229,4 +231,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeDB employeeDB = new EmployeeDBImpl();
         return employeeDB.findEmployeeByID(id);
     }
+    
+	@Override
+	public Goal findGoal(int id) throws SQLException, ConnectionException,
+			InconsistentDBException, DataNotFoundException {
+		GoalDB goalDB = new GoalDBImpl();
+		return goalDB.findGoalByID(id);
+	}
+
 }
