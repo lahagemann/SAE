@@ -68,7 +68,7 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 	}
 
 	@Override
-	public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException {
+	public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException, DataNotFoundException {
 		ResourceDB resourceDB = new ResourceDBImpl();
 		Resource resource = new Resource(name, type, consumption, roomID); // retorna sala que tem ID roomID
 		resourceDB.insertResource(resource);
@@ -77,7 +77,7 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 
 	@Override
 	public boolean createEmployee(String name, String cpf, String email,
-			String password, int roomID, int isAdmin) throws SQLException, ConnectionException {
+			String password, int roomID, int isAdmin) throws SQLException, ConnectionException, DataNotFoundException {
 		EmployeeDB employeeDB = new EmployeeDBImpl();
 		Employee employee = new Employee(name, cpf, email, password, roomID, isAdmin);
 		employeeDB.insertEmployee(employee);

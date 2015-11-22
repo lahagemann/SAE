@@ -36,10 +36,10 @@ public interface AdminService extends EmployeeService {
 
 	public List<Goal> listAllGoals() throws SQLException, ConnectionException, DataNotFoundException;
 	
-	public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException;
+	public boolean createResource(String name, String type, float consumption, int roomID) throws SQLException, ConnectionException, DataNotFoundException;
 
 	public boolean createEmployee(String name, String cpf, String email, String password,
-			int roomID, int isAdmin) throws SQLException, ConnectionException;
+			int roomID, int isAdmin) throws SQLException, ConnectionException, DataNotFoundException;
 
 	public boolean promoteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
 

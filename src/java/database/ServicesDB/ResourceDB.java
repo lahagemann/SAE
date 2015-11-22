@@ -20,7 +20,7 @@ public interface ResourceDB {
     
     public void disconnect() throws SQLException;
     
-    public void insertResource(Resource r) throws SQLException, ConnectionException;
+    public void insertResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException;
     
     public void deleteResource(int resourceID) throws SQLException, ConnectionException;
     

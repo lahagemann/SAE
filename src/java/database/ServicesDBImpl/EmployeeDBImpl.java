@@ -21,6 +21,7 @@ import database.Connection.ConnectionFactory;
 import database.ServicesDB.CustomActionDB;
 import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.EmployeeDB;
+import database.ServicesDB.RoomDB;
 
 /**
  *
@@ -47,8 +48,16 @@ public class EmployeeDBImpl implements EmployeeDB {
 	}
 
 	@Override
-	public void insertEmployee(Employee e) throws SQLException, ConnectionException {
+	public void insertEmployee(Employee e) throws SQLException, ConnectionException, DataNotFoundException {
 		int isAdmin = 0;
+		RoomDB roomDB = new RoomDBImpl();	
+		if( !roomDB.hasRoom( e.getWorkRoomID() ) ){
+			throw new DataNotFoundException("A sala informada não existe.");
+		}
+		else{
+			System.out.println("aqqui " + e.getWorkRoomID());
+
+		}
 		if(e instanceof Admin){
 			isAdmin = 1;
 		}

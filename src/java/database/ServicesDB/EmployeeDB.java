@@ -21,7 +21,7 @@ public interface EmployeeDB {
     
     public void disconnect() throws SQLException;
     
-    public void insertEmployee(Employee e) throws SQLException, ConnectionException;
+    public void insertEmployee(Employee e) throws SQLException, ConnectionException, DataNotFoundException;
     
     public void deleteEmployee(int employeeID) throws SQLException, ConnectionException, DataNotFoundException;
     

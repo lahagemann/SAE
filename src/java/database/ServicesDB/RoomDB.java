@@ -29,4 +29,6 @@ public interface RoomDB {
     public List<Room> getRoomList() throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
     
     public Room findRoomByID(int id) throws SQLException, ConnectionException, InconsistentDBException, DataNotFoundException;
+
+	boolean hasRoom(int idRoom) throws SQLException, ConnectionException;
 }

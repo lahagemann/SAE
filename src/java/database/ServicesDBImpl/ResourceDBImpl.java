@@ -11,6 +11,8 @@ import database.Connection.ConnectionFactory;
 import database.ServicesDB.CustomActionDB;
 import database.ServicesDB.DataNotFoundException;
 import database.ServicesDB.ResourceDB;
+import database.ServicesDB.RoomDB;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,10 +48,13 @@ public class ResourceDBImpl implements ResourceDB {
 	}
 
 	@Override
-	public void insertResource(Resource r) throws SQLException, ConnectionException {
+	public void insertResource(Resource r) throws SQLException, ConnectionException, DataNotFoundException {
 		String DateTime = null;
 		String query;
-
+		RoomDB roomDB = new RoomDBImpl();	
+		if( !roomDB.hasRoom( r.getLocationID() ) ){
+			throw new DataNotFoundException("A sala informada não existe.");
+		}
 		if (r.isOn()) {
 			DateTime = DateConversion.DateConvert(r.getTurnOnTime()) + " " + DateConversion.TimeConvert(r.getTurnOnTime());
 			query = "INSERT INTO resource (name, type, consumption, resourceOn, resourceBroken, turnOnTime, idRoom) VALUES "

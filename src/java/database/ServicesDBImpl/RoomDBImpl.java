@@ -34,7 +34,7 @@ public class RoomDBImpl implements RoomDB {
 	private Statement statement = null;
 
 	@Override
-	public void connect() throws SQLException, ConnectionException {
+	public void connect() throws ConnectionException, SQLException {
 		connection = ConnectionFactory.getConnection();
 		statement = connection.createStatement();
 	}
@@ -43,6 +43,25 @@ public class RoomDBImpl implements RoomDB {
 	public void disconnect() throws SQLException {
 		statement.close();
 		connection.close();
+	}
+	
+	@Override
+	public boolean hasRoom(int idRoom) throws ConnectionException, SQLException{
+		ResultSet resultset = null;
+		String query = "SELECT * FROM room WHERE identifier = " + idRoom + ";";
+		int identifier;
+		connect(); 
+
+		try{
+			resultset = statement.executeQuery(query);
+			resultset.next();
+			identifier = resultset.getInt("identifier");
+			System.out.println("aqquui " + identifier);
+
+			return identifier == idRoom;
+		} catch(SQLException exp){
+			return false;
+		}
 	}
 
 	@Override
