@@ -34,7 +34,7 @@ public class AddGoalServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] date = request.getParameter("date").split("\\-");
         Date day = new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
-        int value = Integer.parseInt("value");
+        float value = Float.parseFloat(request.getParameter("value"));
         
         AdminService service = new AdminServiceImpl();
         
@@ -51,6 +51,6 @@ public class AddGoalServlet extends HttpServlet {
             Logger.getLogger(AddGoalServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);
+        request.getRequestDispatcher("/AdminManage.jsp").forward(request, response);
     }
 }

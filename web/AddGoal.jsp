@@ -55,9 +55,9 @@
             <div class="col-md-6">
                 <form class="form-horizontal" role="form" method="post" action="./add_goal">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="day">Data:</label>
+                        <label class="control-label col-sm-2" for="date">Data:</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" placeholder="Digite o dia da meta" name="day">
+                            <input type="date" class="form-control" placeholder="Digite o dia da meta" name="date">
                         </div>
                     </div>
                     <div class="form-group">
