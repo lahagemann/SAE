@@ -100,6 +100,8 @@ public class AdminServiceImpl extends EmployeeServiceImpl implements AdminServic
 
 	@Override
 	public boolean createGoal(Date day, float value) throws SQLException, ConnectionException, InvalidGoalException {
+		System.out.println(day.toString());
+
 		GoalDB goalDB = new GoalDBImpl();
 		Goal goal = new Goal(day, value);
 		goalDB.insertGoal(goal);

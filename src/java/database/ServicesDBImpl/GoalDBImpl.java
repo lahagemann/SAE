@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
+/*
  * @author Jessica
  */
+
 public class GoalDBImpl implements GoalDB{
 
 	private Connection connection = null;
@@ -217,6 +217,8 @@ public class GoalDBImpl implements GoalDB{
 		ResultSet resultset = null;
 		try{
 			resultset = statement.executeQuery(query);	
+			resultset.next();
+			resultset.getInt("identifier");
 		} catch(SQLException exp){
 			if( today.getMonth() != dateOfGoal.getMonth() ){
 				return true;

@@ -8,10 +8,12 @@ package application.Domain;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import database.Connection.ConnectionException;
 import database.ServicesDB.DataNotFoundException;
+import database.ServicesDB.InvalidGoalException;
 import database.ServicesDB.ReportOnOffDB;
 
 import application.Impl.AdminServiceImpl;
