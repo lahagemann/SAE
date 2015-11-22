@@ -21,19 +21,29 @@
             <br>
             <br>
             <br>
-            <form method="post" action="./login">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Email:</span>
-                    <input type="text" class="form-control" placeholder="Digite seu email" name="email">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon2">Senha:</span>
-                    <input type="password" class="form-control" placeholder="Digite sua senha" name="password">
-                </div>
-                <div>
-                    <input type="submit" class="btn btn-danger" id="btn2" value="Login">
-                </div>
-            </form>   
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form class="form-horizontal" role="form" method="post" action="./login">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Digite seu email" name="email" id="login_text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="password">Senha:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" placeholder="Digite sua senha" name="password" id="login_text">
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default" style="width: 100%;">Login</button>
+                        </div>
+                    </div>
+                </form>   
+            </div>
+            <div class="col-md-3"></div>
         </div>
     </body>
 </html>

@@ -19,6 +19,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SAE</title>
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="css/sae.css" rel="stylesheet">
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -55,9 +56,10 @@
         
         <% List<Room> rooms = service.listAllRooms(); %>
         
-        <% for(Room room : rooms) { %>
+        <% for(Room room : rooms) { 
+            if(room.getIdentifier() != 0) { %>
 
-        <h3 align="center"><%= room.getName()%> <%= room.getIdentifier()%></h3>
+        <h3 align="center"><b><%= room.getName()%></b></h3>
 
         <div class="container">
             <div align="center" id="block">
@@ -81,24 +83,25 @@
                                 </td>
                             
                                 <% if(resource.isOn()) { %>
-                                    <td>
-                                        <button type="button" class="btn btn-success" disabled="disabled"><b>ON</b></button>
+                                    <td style="width: 70px;">
+                                        <button type="button" class="btn btn-success" disabled="disabled" id="action_btn"><b>ON</b></button>
+                                    
                                     </td>
-                                    <td>
+                                    <td style="width: 70px;">
                                         <form action=" ./turn_off_all" method="post">
                                             <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                            <button type="submit" class="btn btn-danger"><b>OFF</b></button>
+                                            <button type="submit" class="btn btn-danger" id="action_btn"><b>OFF</b></button>
                                         </form>
                                     </td>
                                 <% } else { %>
-                                    <td>
+                                    <td style="width: 70px;">
                                         <form action=" ./turn_on_all" method="post">
                                             <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                            <button type="submit" class="btn btn-success" ><b>ON</b></button>
+                                            <button type="submit" class="btn btn-success" id="action_btn"><b>ON</b></button>
                                         </form>
                                     </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" disabled="disabled"><b>OFF</b></button>
+                                    <td style="width: 70px;">
+                                        <button type="button" class="btn btn-danger" disabled="disabled" id="action_btn"><b>OFF</b></button>
                                     </td>
                                 <% } %>
                             
@@ -111,9 +114,7 @@
             </div>
         </div>
         <br>
-        <% } %>
+        <%      } 
+            } %>
     </body>
-    
-    
-        
 </html>

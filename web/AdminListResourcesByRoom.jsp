@@ -17,6 +17,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SAE</title>
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="css/sae.css" rel="stylesheet">
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -74,29 +75,29 @@
                             </td>
                             
                             <% if(resource.isOn()) { %>
-                                <td>
-                                    <button type="button" class="btn btn-success" disabled="disabled"><b>ON</b></button>
+                                <td style="width: 70px;">
+                                    <button type="button" class="btn btn-success" disabled="disabled" id="action_btn"><b>ON</b></button>
                                 </td>
-                                <td>
+                                <td style="width: 70px;">
                                     <form action=" ./turn_off_by_room" method="post">
                                         <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                        <button type="submit" class="btn btn-danger"><b>OFF</b></button>
+                                        <button type="submit" class="btn btn-danger" id="action_btn"><b>OFF</b></button>
                                     </form>
                                 </td>
                             <% } else { %>
-                                <td>
+                                <td style="width: 70px;">
                                     <form action=" ./turn_on_by_room" method="post">
                                         <input type="hidden" name="id" value="<%= resource.getIdentifier() %>">
-                                        <button type="submit" class="btn btn-success" ><b>ON</b></button>
+                                        <button type="submit" class="btn btn-success" id="action_btn"><b>ON</b></button>
                                     </form>
                                 </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" disabled="disabled"><b>OFF</b></button>
+                                <td style="width: 70px;">
+                                    <button type="button" class="btn btn-danger" disabled="disabled" id="action_btn"><b>OFF</b></button>
                                 </td>
                             <% } %>
                             
                             <td>    
-                                <button type="button" class="btn btn-warning"><b>Solicitar</b></button>
+                                <button type="button" class="btn btn-warning" ><b>Solicitar</b></button>
                             </td>
                         </tr>
                     <% } %>

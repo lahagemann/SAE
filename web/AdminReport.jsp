@@ -67,7 +67,12 @@
                     <tr>
                         <td><%= report.getResourceName() %></td>
                         <td><%= report.getRoomName() %></td>
-                        <td><%= report.secondsTurnedOn()/60 %> minutos</td>
+                        <% if(report.secondsTurnedOn()/60 == 0) %> 
+                            <td><%= report.secondsTurnedOn() %> segundos</td>
+                        <% else if(report.secondsTurnedOn()/60 > 59) %>
+                            <td><%= report.secondsTurnedOn()/3600 %> horas</td>
+                        <% else %>
+                            <td><%= report.secondsTurnedOn()/60 %> minutos</td>
                         <td><%= report.getInitialTime().toString() %></td>
                     </tr>
                     <% } %>

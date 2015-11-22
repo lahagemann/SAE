@@ -52,8 +52,8 @@
             <div align="center" id="block">
                     <h3>Listar recursos:</h3>
                     <div class="btn-group" align="center">
-                        <a href="AdminListAllResources.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-th-list"></span><b>&nbsp;&nbsp;Todos os recursos</b></a>
-                        <a href="AdminListRooms.jsp" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span><b>&nbsp;&nbsp;Escolher sala</b></a>
+                        <a href="AdminListAllResources.jsp" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span><b>&nbsp;&nbsp;Todos os recursos</b></a>
+                        <a href="AdminListRooms.jsp" class="btn btn-default"><span class="glyphicon glyphicon-search"></span><b>&nbsp;&nbsp;Escolher sala</b></a>
                     </div>
             </div>
         </div>

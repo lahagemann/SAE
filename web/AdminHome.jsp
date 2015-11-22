@@ -16,6 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SAE</title>
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="css/sae.css" rel="stylesheet">
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -52,48 +53,56 @@
         <br>
 
         <!-- /container -->
-        <div class="container">
+        <div class="container" align="center">
             <div align="center" id="block">
-                <table>
-                    <colgroup> 
-                        <col span="2">
-                    </colgroup>
-                    <tbody>
+                <table class="button_table" align="center">
                         <tr>
-                            <td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2">
                                 <form method="post" action="AdminActionMenu.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-off"></span><b>&nbsp;&nbsp;Ligar/Desligar Recursos</b></button>
+                                    <button type="submit" class="btn btn-default" id="home_btn"><span class="glyphicon glyphicon-off"></span><b>&nbsp;&nbsp;Ligar/Desligar Recursos</b></button>
                                 </form>
                             </td>
-                            <td>
+                            <td class="col-md-2">
                                 <form action="AdminManageCustomAction.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-user"></span><b>&nbsp;&nbsp;Ações Personalizadas</b></button>
+                                    <button type="submit" class="btn btn-default" id="home_btn"><span class="glyphicon glyphicon-user"></span><b>&nbsp;&nbsp;Ações Personalizadas</b></button>
                                 </form>
                                 
                             </td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2"></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2">
                                 <form action="AdminSelectReportDate.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-file"></span><b>&nbsp;&nbsp;Relatórios</b></button>
+                                    <button type="submit" class="btn btn-default" id="home_btn"><span class="glyphicon glyphicon-file"></span><b>&nbsp;&nbsp;Relatórios</b></button>
                                 </form>
                                 
                             </td>
-                            <td>
-                                <button type="button" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-wrench"></span><b>&nbsp;&nbsp;Atualizar Manutenção</b></button>
+                            <td class="col-md-2">
+                                <button type="button" class="btn btn-default" id="home_btn"><span class="glyphicon glyphicon-wrench"></span><b>&nbsp;&nbsp;Atualizar Manutenção</b></button>
                             </td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2"></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2">
                                 <form action="AdminManage.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-cog"></span><b>&nbsp;&nbsp;Gerenciar Dados</button>
+                                    <button type="submit" class="btn btn-default" id="home_btn"><span class="glyphicon glyphicon-cog"></span><b>&nbsp;&nbsp;Gerenciar Dados</button>
                                 </form>  
                             </td>
-                            <td>
+                            <td class="col-md-2">
                                 <form action="AdminAddBonus.jsp">
-                                    <button type="submit" class="btn btn-primary" id="btn"><span class="glyphicon glyphicon-gift"></span><b>&nbsp;&nbsp;Atribuir Bônus</b></button>
+                                    <button type="submit" class="btn btn-default" id="home_btn"><span class="glyphicon glyphicon-gift"></span><b>&nbsp;&nbsp;Atribuir Bônus</b></button>
                                 </form>
                             </td>
+                            <td class="col-md-2"></td>
+                            <td class="col-md-2"></td>
                         </tr>
                 </table>
             </div>

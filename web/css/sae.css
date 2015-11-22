@@ -1,0 +1,29 @@
+.button_table {
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+#action_btn {
+    width: 55px;
+    text-align: center; 
+}
+
+#home_btn {
+    height: 75px;
+    white-space: normal;
+    width: 200px;
+    text-align: center;
+}
+
+#login_span {
+    float: left;
+}
+
+#login_text {
+    overflow: hidden;
+    float: right;
+}
+
+#login_text input {
+    width: 100%
+}

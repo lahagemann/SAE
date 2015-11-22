@@ -53,25 +53,27 @@
         <br>
         <br>
         <div class="container">
-            <div align="center" id="block">
+            <div class="col-md-3"></div>
+            <div class="col-md-6" align="center" id="block">
                 <table class="table table-hover" align="center">
                     <tr>
-                        <td><b>Número</b></td>
+                        <td><b>Nome da sala</b></td>
                         <td></td>
                     </tr>
                     <% for(Room room : rooms) { %>
                     <tr>
-                        <td><%= room.getIdentifier() %></td>
+                        <td><%= room.getName() %></td>
                         <td>
                             <form method="post" action="./list_by_room">
                                 <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                <button type="submit" class="btn btn-primary" ><b>Listar</b></button>
+                                <button type="submit" class="btn btn-default"><b>Listar</b></button>
                             </form>
                         </td>
                     </tr>
                     <% } %>
                 </table>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </body>
 </html>
