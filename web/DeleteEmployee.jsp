@@ -48,7 +48,7 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <h3 align="center">Excluir funcionário</h3>
+        <h2 align="center">Excluir funcionário</h2>
         <br>
         <br>
         <% List<Employee> employees = service.listAllEmployees(); %>

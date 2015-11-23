@@ -47,6 +47,9 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
+        <br>
+        <br>
+        <br>
         <div class="container">
             <div align="center" id="block">
                     <h3>Ação personalizada</h3>

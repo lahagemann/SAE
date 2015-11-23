@@ -52,6 +52,9 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
+        <br>
+        <br>
+        <br>
         <% List<CustomAction> actions = service.listCustomActions(e.getIdentifier()); %>
 
         <div class="container">

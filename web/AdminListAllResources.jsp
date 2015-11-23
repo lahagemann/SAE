@@ -53,6 +53,7 @@
         <br>
         <h2 align="center">Recursos</h2>
         <br>
+        <br>
         
         <% List<Room> rooms = service.listAllRooms(); %>
         

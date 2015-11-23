@@ -48,9 +48,12 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
+        <h2 align="center">Listar recursos:</h2>
+        <br>
+        <br>
         <div class="container">
             <div align="center" id="block">
-                    <h3>Listar recursos:</h3>
+                    
                     <div class="btn-group" align="center">
                         <a href="AdminListAllResources.jsp" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span><b>&nbsp;&nbsp;Todos os recursos</b></a>
                         <a href="AdminListRooms.jsp" class="btn btn-default"><span class="glyphicon glyphicon-search"></span><b>&nbsp;&nbsp;Escolher sala</b></a>

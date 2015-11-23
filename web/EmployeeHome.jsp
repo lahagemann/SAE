@@ -48,6 +48,9 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
+        <br>
+        <br>
+        <br>
         <!-- /container -->
         <div class="container" align="center">
             <div align="center" id="block">

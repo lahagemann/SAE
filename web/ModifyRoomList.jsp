@@ -48,6 +48,8 @@
         </div>
         <br>
         <h2 align="center">Escolher sala para alterar</h2>
+        <br>
+        <br>
         <% List<Room> rooms = service.listAllRooms(); %>
         
         <div class="container">
@@ -66,14 +68,14 @@
                         <td>
                             <form method="post" action="./modify_room_form">
                                     <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                    <button type="submit" class="btn btn-default" disabled="disabled"><b>Alterar</b></button>
+                                    <button type="submit" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></button>
                             </form>
                         </td>
                         <% } else { %>
                         <td>
                             <form method="post" action="./modify_room_form">
                                     <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
-                                    <button type="submit" class="btn btn-default"><b>Alterar</b></button>
+                                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span><b>&nbsp;&nbsp;Alterar</b></button>
                             </form>
                         </td>
                         <% } %>

@@ -48,6 +48,8 @@
         </div>
         <br>
         <h2 align="center">Adicionar bônus</h2>
+        <br>
+        <br>
         <% Room room = (Room) request.getAttribute("room");%>
 
         <div class="container">

@@ -50,6 +50,8 @@
         </div>
         <br>
         <h2 align="center">Alterar funcionário</h2>
+        <br>
+        <br>
         <% Employee employee = (Employee) request.getAttribute("employee");%>
 
         <div class="container">

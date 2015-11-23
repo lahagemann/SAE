@@ -68,7 +68,7 @@
                     </div>
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" style="width: 100%;">Criar</button>
+                            <button type="submit" class="btn btn-default" style="width: 100%;"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;<b>Criar</b></button>
                         </div>
                     </div>
                 </form>

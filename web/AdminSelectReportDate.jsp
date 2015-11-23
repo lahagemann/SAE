@@ -48,7 +48,6 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        
         <h2 align="center">Selecionar data para emitir relatório</h2>
         <br>
         <br>
@@ -64,7 +63,7 @@
                 </div>
                 <div class="form-group"> 
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default" style="width: 100%;">Go</button>
+                        <button type="submit" class="btn btn-default" style="width: 100%;"><span class="glyphicon glyphicon-list-alt"></span><b>&nbsp;&nbsp;Emitir</b></button>
                     </div>
                 </div>
             </form>

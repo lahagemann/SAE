@@ -51,6 +51,8 @@
         </div>
         <br>
         <h2 align="center">Alterar recurso</h2>
+        <br>
+        <br>
         <% Resource resource = (Resource) request.getAttribute("resource");%>
 
         <div class="container">
@@ -94,7 +96,7 @@
                     </div>
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" style="width: 100%;">Alterar</button>
+                            <button type="submit" class="btn btn-default" style="width: 100%;"><span class="glyphicon glyphicon-floppy-save"></span><b>&nbsp;&nbsp;Salvar</b></button>
                         </div>
                     </div>
                 </form>

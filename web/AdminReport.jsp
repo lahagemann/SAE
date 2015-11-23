@@ -48,8 +48,8 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        
         <h2 align="center">Relatório do dia <%= (String) request.getAttribute("day") %></h2>
+        <br>
         <br>
         
         <% List<TurnOnOrOffReport> reports = (List<TurnOnOrOffReport>) request.getAttribute("reports"); %>

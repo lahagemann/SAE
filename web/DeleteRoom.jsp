@@ -48,7 +48,7 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <h3 align="center">Excluir sala</h3>
+        <h2 align="center">Excluir sala</h2>
         <br>
         <br>
         <%  List<Room> rooms = service.listAllRooms(); %>

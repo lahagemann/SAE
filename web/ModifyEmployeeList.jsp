@@ -49,6 +49,8 @@
         </div>
         <br>
         <h2 align="center">Escolher funcionário para alterar</h2>
+        <br>
+        <br>
         <% List<Employee> employees = service.listAllEmployees(); %>
         
         <div class="container">

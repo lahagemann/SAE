@@ -49,7 +49,7 @@
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <h3 align="center">Excluir meta</h3>
+        <h2 align="center">Excluir meta</h2>
         <br>
         <br>
         <%  List<Goal> goals = service.listAllGoals(); %>

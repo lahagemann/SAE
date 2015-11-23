@@ -52,7 +52,7 @@
         <% int roomID = (Integer) session.getAttribute("searchedRoom");
            Room room = service.findRoom(roomID); %>
            
-           <h3 align="center"><b><%= room.getName()%></b></h3>
+        <h2 align="center"><b><%= room.getName()%></b></h2>
         <br>
         <br>
         <div class="container">
