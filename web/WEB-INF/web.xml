@@ -209,20 +209,36 @@
         <url-pattern>/set_bonus</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>custom_action_on</servlet-name>
-        <servlet-class>web_servlets.CustomActionOnServlet</servlet-class>
+        <servlet-name>admin_action_on</servlet-name>
+        <servlet-class>web_servlets.AdminCustomActionOnServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>custom_action_on</servlet-name>
-        <url-pattern>/custom_action_on</url-pattern>
+        <servlet-name>admin_action_on</servlet-name>
+        <url-pattern>/admin_action_on</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>custom_action_off</servlet-name>
-        <servlet-class>web_servlets.CustomActionOffServlet</servlet-class>
+        <servlet-name>admin_action_off</servlet-name>
+        <servlet-class>web_servlets.AdminCustomActionOffServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>custom_action_off</servlet-name>
-        <url-pattern>/custom_action_off</url-pattern>
+        <servlet-name>admin_action_off</servlet-name>
+        <url-pattern>/admin_action_off</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>employee_action_on</servlet-name>
+        <servlet-class>web_servlets.EmployeeCustomActionOnServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>employee_action_on</servlet-name>
+        <url-pattern>/employee_action_on</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>employee_action_off</servlet-name>
+        <servlet-class>web_servlets.EmployeeCustomActionOffServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>employee_action_off</servlet-name>
+        <url-pattern>/employee_action_off</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>admin_add_action</servlet-name>

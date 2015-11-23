@@ -42,14 +42,14 @@
             EmployeeService service = new EmployeeServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room room = service.findRoom(e.getWorkRoomID());
-            Goal g = service.findGoal(r.getDailyGoal().getIdentifier());           
+            Goal g = service.findGoal(room.getDailyGoal().getIdentifier());           
 %>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= room.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <font color="black" size="4"><b>Meta:</b> <%= g.getValue()%> </font>              
         </div>
         <br>
-        <h3 align="center">Adicionar ação personalizada</h3>
+        <h2 align="center">Adicionar ação personalizada</h2>
 
         <div class="container">
             <div class="col-md-3"></div>

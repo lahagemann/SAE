@@ -45,7 +45,7 @@
             EmployeeService service = new EmployeeServiceImpl();
             Employee e = (Employee) session.getAttribute("user");
             Room room = service.findRoom(e.getWorkRoomID());
-            Goal g = service.findGoal(r.getDailyGoal().getIdentifier());            
+            Goal g = service.findGoal(room.getDailyGoal().getIdentifier());            
         %>
         <div align="center" class="well">
             <font color="black" size="4"><b>Saldo:</b> <%= room.getCreditAmount()%></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -65,20 +65,27 @@
                     </tr>
                     <% for (CustomAction action : actions) {%>
                     <tr>
-                        <td><%= action.getIdentifier()%></td>
+                        <td><%= action.getName() %></td>
                         <td>
-                            <div class="panel-group">
-                                <div class="panel panel-default">
+                            <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;Recursos nesta ação:</a>
+                                            <a data-toggle="collapse" href="#collapse<%= action.getIdentifier()%>"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;Recursos nesta ação:</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse1" class="panel-collapse collapse">
+                                    <% String id = "collapse" + action.getIdentifier();%>
+                                    <div id="<%= id %>" class="panel-collapse collapse">
                                         <ul class="list-group">
-                                            <% for (Resource r : action.getResourceList()) {%>
-                                            <li class="list-group-item"><%= r.getName()%> &nbsp;&nbsp; (<%= r.getType()%>)</li>
-                                                <% }%>    
+                                            <% for (Resource r : action.getResourceList()) {
+                                                    String status = "";
+                                                    if (r.isOn()) {
+                                                        status = "ON";
+                                                    } else {
+                                                        status = "OFF";
+                                                    }
+                                            %>
+                                            <li class="list-group-item"><b><%= status%></b> <%="  " + r.getName() + " "%> (<%= r.getType()%>)</li>
+                                            <% }%>    
                                         </ul>
                                     </div>
                                 </div>
@@ -86,8 +93,8 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a href="./custom_action_on?id=<%=action.getIdentifier()%>" class="btn btn-success"><b>ON</b></a>
-                                <a href="./custom_action_off?id=<%=action.getIdentifier()%>" class="btn btn-danger"><b>OFF</b></a>
+                                <a href="./employee_action_on?id=<%=action.getIdentifier()%>" class="btn btn-success"><b>ON</b></a>
+                                <a href="./employee_action_off?id=<%=action.getIdentifier()%>" class="btn btn-danger"><b>OFF</b></a>
                             </div>
                         </td>
                     </tr>

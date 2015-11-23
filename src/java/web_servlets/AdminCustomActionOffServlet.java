@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Luiza
  */
-public class CustomActionOnServlet extends HttpServlet {
+public class AdminCustomActionOffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -35,17 +35,17 @@ public class CustomActionOnServlet extends HttpServlet {
         
         AdminService service = new AdminServiceImpl();
         try {
-            service.customActionTurnOn(id, user.getIdentifier());
+            service.customActionTurnOff(id, user.getIdentifier());
         } catch (SQLException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConnectionException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataNotFoundException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LicenceException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InconsistentDBException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminCustomActionOffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         request.getRequestDispatcher("/AdminViewCustomAction.jsp").forward(request, response);

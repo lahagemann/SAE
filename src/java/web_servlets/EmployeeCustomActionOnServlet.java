@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Luiza
  */
-public class CustomActionOffServlet extends HttpServlet {
+public class EmployeeCustomActionOnServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -35,19 +35,19 @@ public class CustomActionOffServlet extends HttpServlet {
         
         AdminService service = new AdminServiceImpl();
         try {
-            service.customActionTurnOff(id, user.getIdentifier());
+            service.customActionTurnOn(id, user.getIdentifier());
         } catch (SQLException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeeCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConnectionException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeeCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataNotFoundException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeeCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LicenceException ex) {
-            Logger.getLogger(CustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeeCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InconsistentDBException ex) {
-            Logger.getLogger(CustomActionOffServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeeCustomActionOnServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        request.getRequestDispatcher("/AdminViewCustomAction.jsp").forward(request, response);
+        request.getRequestDispatcher("/EmployeeViewCustomAction.jsp").forward(request, response);
     }
 }

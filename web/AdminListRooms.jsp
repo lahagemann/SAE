@@ -61,6 +61,18 @@
                         <td></td>
                     </tr>
                     <% for(Room room : rooms) { %>
+                    <% if(room.getIdentifier() == 0) { %>
+                    <tr>
+                        <td><%= room.getName() %></td>
+                        <td>
+                            <form method="post" action="./list_by_room">
+                                <input type="hidden" name="id" value="<%= room.getIdentifier() %>">
+                                <button type="submit" class="btn btn-default" disabled="disabled"><b>Listar</b></button>
+                            </form>
+                        </td>
+                    </tr>
+                    
+                    <% } else { %>
                     <tr>
                         <td><%= room.getName() %></td>
                         <td>
@@ -70,6 +82,8 @@
                             </form>
                         </td>
                     </tr>
+                    <% } %>
+                    
                     <% } %>
                 </table>
             </div>

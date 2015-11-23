@@ -97,8 +97,8 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a href="./custom_action_on?id=<%=action.getIdentifier()%>" class="btn btn-success"><b>ON</b></a>
-                                <a href="./custom_action_off?id=<%=action.getIdentifier()%>" class="btn btn-danger"><b>OFF</b></a>
+                                <a href="./admin_action_on?id=<%=action.getIdentifier()%>" class="btn btn-success"><b>ON</b></a>
+                                <a href="./admin_action_off?id=<%=action.getIdentifier()%>" class="btn btn-danger"><b>OFF</b></a>
                             </div>
                         </td>
                     </tr>

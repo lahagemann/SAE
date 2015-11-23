@@ -62,12 +62,22 @@
                     <% for (Room room : rooms) {%>
                     <tr>
                         <td><%= room.getName()%></td>
-                        <td>
-                            <form method="post" action="./set_bonus">
-                                <input type="hidden" name="id" value="<%= room.getIdentifier()%>">
-                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-usd"></span><b>&nbsp;&nbsp;Atribuir bônus</b></button>
-                            </form>
-                        </td>
+                        <% if(room.getIdentifier() == 0) { %>
+                            <td>
+                                <form method="post" action="./set_bonus">
+                                    <input type="hidden" name="id" value="<%= room.getIdentifier()%>">
+                                    <button type="submit" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-usd"></span><b>&nbsp;&nbsp;Atribuir bônus</b></button>
+                                </form>
+                            </td>
+                        <% } else { %>
+                            <td>
+                                <form method="post" action="./set_bonus">
+                                    <input type="hidden" name="id" value="<%= room.getIdentifier()%>">
+                                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-usd"></span><b>&nbsp;&nbsp;Atribuir bônus</b></button>
+                                </form>
+                            </td>
+                        <% } %>
+                        
                     </tr>
                     <% }%>
                 </table>
