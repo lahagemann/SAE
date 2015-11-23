@@ -50,7 +50,7 @@
         </div>
         <br>
         <% List<Resource> resources = r.getResourceList(); %>
-        <h3 align="center">Sala <%= e.getWorkRoomID() %></h3>
+        <h3 align="center"><%= r.getName() %></h3>
         <br>
         <br>
         <div class="container">

@@ -52,7 +52,7 @@
         <% int roomID = (Integer) session.getAttribute("searchedRoom");
            Room room = service.findRoom(roomID); %>
            
-        <h3 align="center"><%= room.getName()%> <%= room.getIdentifier()%></h3>
+           <h3 align="center"><b><%= room.getName()%></b></h3>
         <br>
         <br>
         <div class="container">
@@ -62,7 +62,6 @@
                             <td><b>Identificação</b></td>
                             <td><b>Tipo de recurso</b></td>
                             <td><b>Ação</b></td>
-                            <td></td>
                             <td><b>Manutenção</b></td>
                     </tr>
                     <% for(Resource resource : room.getResourceList()) { %>
